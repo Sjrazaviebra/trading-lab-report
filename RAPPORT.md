@@ -73,8 +73,8 @@ par un tiret.
 
 > ### Le test qui dit si un protocole est réel
 > **Est-ce qu'il vous a déjà empêché de publier quelque chose que vous vouliez publier ?**
-> Celui-ci l'a fait deux fois en une journée, sur deux idées que **déplacer un seuil de trois
-> centièmes aurait sauvées** — voir la section 5.
+> Celui-ci l'a fait **deux fois dans la même journée**, sur deux idées qu'une réécriture de seuil
+> aurait sauvées — dont une qui échouait **à cinq centièmes** du sien — voir la section 5.
 
 ---
 
@@ -445,7 +445,7 @@ inverser un verdict déjà rendu.**
 Si un seul point de ce rapport devait être retenu, ce serait celui-ci :
 
 > **Un protocole qui n'a jamais rien tué ne prouve rien.**
-> Celui-ci a tué cent dix idées, dont deux que déplacer un seuil de trois centièmes aurait sauvées.
+> Celui-ci a tué cent dix idées, dont deux qu'une réécriture de seuil aurait sauvées — l'une à **cinq centièmes** près.
 
 ---
 
