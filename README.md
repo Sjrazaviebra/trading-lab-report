@@ -7,7 +7,12 @@
 > **Aucune n'a démontré d'avantage.** Ce qui reste, ce ne sont pas des stratégies — ce sont
 > **21 règles de décision mesurées**, et **22 erreurs de ma part que le protocole a rattrapées**.
 
-## 📄 [Lire le rapport →](RAPPORT.md)
+## 🔎 [**Ouvrir le rapport interactif →**](https://sjrazaviebra.github.io/trading-lab-report/)
+
+*Neuf onglets, le registre des 110 idées avec recherche et filtres, les 21 règles et leurs
+mesures, la chronique du laboratoire. Thème clair et sombre. Rien à installer.*
+
+<sub>Vous préférez un seul fichier texte ? → [**RAPPORT.md**](RAPPORT.md)</sub>
 
 ---
 

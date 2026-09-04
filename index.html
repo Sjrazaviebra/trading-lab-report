@@ -1,0 +1,2277 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>110 idées de trading, zéro survivant — rapport de méthode</title>
+<meta name="description" content="Cent dix idées de trading instruites avec le critère de rejet écrit et scellé avant la première mesure. Aucune n'a survécu. Ce qui reste : 21 règles mesurées et 22 erreurs rattrapées.">
+<meta name="author" content="J. Razavi">
+<meta property="og:title" content="110 idées de trading, zéro survivant">
+<meta property="og:description" content="Le critère de rejet écrit et scellé AVANT la première mesure. Aucune idée n'a survécu. Ce qui reste : 21 règles de décision mesurées, et 22 erreurs que le protocole a rattrapées.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Jetons — palette sobre, un seul accent (l'or, l'actif étudié)
+   Source : CLI ui-ux-pro-max, style « Data-Dense Dashboard »
+   ============================================================ */
+:root{
+  --bg:#FAFAF9; --surface:#FFFFFF; --surface-2:#F5F5F4; --border:#E7E5E4;
+  --text:#1C1917; --muted:#57534E; --faint:#A8A29E;
+  --accent:#A16207; --accent-strong:#854D0E; --accent-soft:#FEF3C7;
+  --ok:#166534; --ok-soft:#DCFCE7; --bad:#9A3412; --bad-soft:#FFEDD5;
+  --cool:#1E40AF; --cool-soft:#DBEAFE; --violet:#5B21B6; --violet-soft:#EDE9FE;
+  --slate:#334155; --slate-soft:#E2E8F0;
+  --shadow:0 1px 2px rgba(28,25,23,.05), 0 1px 3px rgba(28,25,23,.06);
+  --shadow-lg:0 4px 6px -1px rgba(28,25,23,.07), 0 10px 20px -6px rgba(28,25,23,.10);
+  --r:6px; --gap:8px; --pad:12px;
+  --mono:'Roboto Mono',ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace;
+  --sans:'Exo',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C0A09; --surface:#1C1917; --surface-2:#231F1D; --border:#292524;
+    --text:#FAFAF9; --muted:#A8A29E; --faint:#78716C;
+    --accent:#EAB308; --accent-strong:#FACC15; --accent-soft:#292213;
+    --ok:#4ADE80; --ok-soft:#14261A; --bad:#FB923C; --bad-soft:#2A1B10;
+    --cool:#93C5FD; --cool-soft:#151E2E; --violet:#C4B5FD; --violet-soft:#1E1A2E;
+    --slate:#CBD5E1; --slate-soft:#1E232B;
+    --shadow:0 1px 2px rgba(0,0,0,.4); --shadow-lg:0 10px 30px -10px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C0A09; --surface:#1C1917; --surface-2:#231F1D; --border:#292524;
+  --text:#FAFAF9; --muted:#A8A29E; --faint:#78716C;
+  --accent:#EAB308; --accent-strong:#FACC15; --accent-soft:#292213;
+  --ok:#4ADE80; --ok-soft:#14261A; --bad:#FB923C; --bad-soft:#2A1B10;
+  --cool:#93C5FD; --cool-soft:#151E2E; --violet:#C4B5FD; --violet-soft:#1E1A2E;
+  --slate:#CBD5E1; --slate-soft:#1E232B;
+  --shadow:0 1px 2px rgba(0,0,0,.4); --shadow-lg:0 10px 30px -10px rgba(0,0,0,.7);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:var(--mono); font-size:14.5px; line-height:1.72;
+  font-weight:400; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--sans); font-weight:600; line-height:1.22; letter-spacing:-.01em; margin:0}
+strong,b{font-weight:700; color:var(--text)}
+em{font-style:italic; color:var(--muted)}
+a{color:var(--accent); text-underline-offset:3px; text-decoration-thickness:1px}
+a:hover{color:var(--accent-strong)}
+code{font-family:var(--mono); font-size:.9em; background:var(--surface-2); border:1px solid var(--border); border-radius:4px; padding:.08em .38em; white-space:nowrap}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:3px}
+hr{border:0; border-top:1px solid var(--border); margin:34px 0}
+::selection{background:var(--accent-soft); color:var(--text)}
+
+/* ============================ CHROME ============================ */
+.skip{position:absolute; left:-9999px; top:0; background:var(--accent); color:#fff; padding:10px 16px; z-index:100}
+.skip:focus{left:8px; top:8px}
+
+header.top{
+  border-bottom:1px solid var(--border); background:var(--surface);
+  position:relative; overflow:hidden;
+}
+header.top::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:2px;
+  background:linear-gradient(90deg,var(--accent) 0%,var(--accent) 22%,transparent 22%);
+}
+.wrap{max-width:1180px; margin:0 auto; padding:0 20px}
+.masthead{padding:38px 0 26px}
+.eyebrow{
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--faint); font-weight:500; margin:0 0 14px
+}
+h1.title{font-size:clamp(28px,5.2vw,50px); letter-spacing:-.025em; margin:0 0 10px}
+.subtitle{font-size:clamp(14px,2vw,17px); color:var(--muted); max-width:62ch; margin:0; line-height:1.6}
+.byline{
+  margin:18px 0 0; font-size:12px; color:var(--faint);
+  display:flex; flex-wrap:wrap; gap:6px 18px; align-items:center
+}
+.byline .dot{color:var(--border)}
+
+/* ---- onglets ---- */
+.tabbar{
+  position:sticky; top:0; z-index:40; background:var(--surface);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 1px 0 rgba(0,0,0,.02);
+}
+.tabbar-inner{max-width:1180px; margin:0 auto; padding:0 20px; display:flex; align-items:center; gap:10px}
+.tabs{
+  display:flex; gap:2px; overflow-x:auto; scrollbar-width:thin; flex:1;
+  scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
+}
+.tabs::-webkit-scrollbar{height:3px}
+.tabs::-webkit-scrollbar-thumb{background:var(--border); border-radius:3px}
+.tab{
+  appearance:none; background:none; border:0; cursor:pointer; scroll-snap-align:start;
+  font-family:var(--sans); font-size:13.5px; font-weight:500; color:var(--muted);
+  padding:14px 13px 12px; border-bottom:2px solid transparent; white-space:nowrap;
+  transition:color .18s ease, border-color .18s ease, background .18s ease;
+  display:flex; align-items:center; gap:7px; border-radius:4px 4px 0 0;
+}
+.tab:hover{color:var(--text); background:var(--surface-2)}
+.tab[aria-selected="true"]{color:var(--text); border-bottom-color:var(--accent); font-weight:600}
+.tab .tn{
+  font-family:var(--mono); font-size:10px; color:var(--faint);
+  border:1px solid var(--border); border-radius:3px; padding:1px 4px; line-height:1.4;
+}
+.tab[aria-selected="true"] .tn{color:var(--accent); border-color:var(--accent)}
+.themebtn{
+  appearance:none; cursor:pointer; background:var(--surface); color:var(--muted);
+  border:1px solid var(--border); border-radius:var(--r); width:34px; height:34px;
+  display:grid; place-items:center; flex-shrink:0; transition:all .18s ease;
+}
+.themebtn:hover{color:var(--text); border-color:var(--accent); background:var(--surface-2)}
+.themebtn svg{width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round}
+.ico-moon{display:block} .ico-sun{display:none}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .ico-moon{display:none}
+  :root:not([data-theme="light"]) .ico-sun{display:block}
+}
+:root[data-theme="dark"] .ico-moon{display:none}
+:root[data-theme="dark"] .ico-sun{display:block}
+:root[data-theme="light"] .ico-moon{display:block}
+:root[data-theme="light"] .ico-sun{display:none}
+
+/* ============================ PANNEAUX ============================ */
+main{max-width:1180px; margin:0 auto; padding:0 20px 90px}
+.panel{display:none; padding-top:40px; animation:fade .22s ease}
+.panel.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.panel-head{margin-bottom:30px; padding-bottom:20px; border-bottom:1px solid var(--border)}
+.panel-head .kicker{
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--accent); font-weight:600; margin:0 0 9px; font-family:var(--sans)
+}
+.panel-head h2{font-size:clamp(23px,3.6vw,34px); margin:0 0 12px}
+.panel-head .lede{font-size:15.5px; color:var(--muted); max-width:74ch; margin:0; line-height:1.7}
+
+.panel h3{font-size:19px; margin:38px 0 12px; letter-spacing:-.012em}
+.panel h4{font-size:15px; margin:26px 0 8px; color:var(--accent); font-family:var(--sans); font-weight:600}
+.panel p{margin:0 0 15px; max-width:76ch}
+.panel ul,.panel ol{margin:0 0 16px; padding-left:22px; max-width:76ch}
+.panel li{margin-bottom:8px}
+.panel li::marker{color:var(--faint)}
+.lede{font-size:15.5px; line-height:1.72}
+
+/* ---- blocs ---- */
+.card{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--r);
+  padding:18px 20px; box-shadow:var(--shadow);
+}
+/* premier et dernier enfant d'un bloc : pas de marge qui déborde */
+.card>:first-child,.pull>:first-child,.warn>:first-child,.note>:first-child{margin-top:0}
+.card>:last-child,.pull>:last-child,.warn>:last-child,.note>:last-child{margin-bottom:0}
+.card>h3,.card>h4{margin-top:20px}
+.grid{display:grid; gap:14px; margin:20px 0}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+.stat{
+  background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--accent);
+  border-radius:var(--r); padding:16px 18px; box-shadow:var(--shadow);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.stat:hover{transform:translateY(-2px); box-shadow:var(--shadow-lg)}
+.stat-v{
+  font-family:var(--sans); font-size:clamp(24px,3.6vw,33px); font-weight:700;
+  letter-spacing:-.03em; line-height:1.1; color:var(--text); margin-bottom:5px;
+  font-variant-numeric:tabular-nums;
+}
+.stat-k{font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:9px; font-family:var(--sans)}
+.stat-n{font-size:12.5px; color:var(--muted); margin:0!important; line-height:1.58}
+
+.pull{
+  border-left:3px solid var(--accent); background:var(--accent-soft);
+  padding:16px 20px; margin:24px 0; border-radius:0 var(--r) var(--r) 0;
+}
+.pull p{margin:0; font-size:16px; line-height:1.62}
+.pull p+p{margin-top:9px}
+.pull strong{color:var(--text)}
+
+.warn{
+  border:1px solid var(--border); border-left:3px solid var(--bad); background:var(--bad-soft);
+  padding:14px 18px; margin:20px 0; border-radius:0 var(--r) var(--r) 0; font-size:13.5px;
+}
+.warn p{margin:0} .warn p+p{margin-top:8px}
+.note{
+  border:1px solid var(--border); background:var(--surface-2);
+  padding:14px 18px; margin:20px 0; border-radius:var(--r); font-size:13.5px; color:var(--muted);
+}
+.note p{margin:0} .note p+p{margin-top:8px}
+
+.formula{
+  text-align:center; background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r); padding:24px 18px; margin:24px 0; box-shadow:var(--shadow);
+}
+.formula .f{font-family:var(--sans); font-size:clamp(19px,3.4vw,29px); font-weight:600; color:var(--accent); letter-spacing:-.01em}
+.formula .fl{font-size:12.5px; color:var(--muted); margin-top:11px; max-width:60ch; margin-left:auto; margin-right:auto}
+
+/* ---- lois ---- */
+.law{
+  display:grid; grid-template-columns:44px 1fr; gap:16px; align-items:start;
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--r);
+  padding:16px 18px; margin-bottom:12px; box-shadow:var(--shadow);
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+.law:hover{border-color:var(--accent); box-shadow:var(--shadow-lg)}
+.law-n{
+  font-family:var(--sans); font-size:22px; font-weight:700; color:var(--accent);
+  text-align:center; line-height:1; padding-top:3px; font-variant-numeric:tabular-nums;
+}
+.law-b h3{font-size:15.5px; margin:0 0 8px; line-height:1.44}
+.law-b p{margin:0 0 8px; font-size:13.8px; color:var(--muted)}
+.law-b p:last-child{margin-bottom:0}
+.law-m{
+  border-left:2px solid var(--accent); padding-left:12px;
+  font-size:13px!important; color:var(--muted)!important; font-style:italic;
+}
+.law-m strong{font-style:normal}
+
+/* ---- tableaux ---- */
+.tbl-wrap{overflow-x:auto; border:1px solid var(--border); border-radius:var(--r); margin:20px 0; background:var(--surface)}
+table.tbl{width:100%; border-collapse:collapse; font-size:13px; min-width:520px}
+table.tbl th{
+  position:sticky; top:0; background:var(--surface-2); text-align:left;
+  font-family:var(--sans); font-size:11px; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--muted); font-weight:600; padding:10px 12px; border-bottom:1px solid var(--border);
+  white-space:nowrap; z-index:2;
+}
+table.tbl th.sortable{cursor:pointer; user-select:none; transition:color .18s ease}
+table.tbl th.sortable:hover{color:var(--accent)}
+table.tbl th .ar{opacity:.35; font-size:9px; margin-left:4px}
+table.tbl th[aria-sort] .ar{opacity:1; color:var(--accent)}
+table.tbl td{padding:9px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.55}
+table.tbl tbody tr{transition:background .15s ease}
+table.tbl tbody tr:hover{background:var(--surface-2)}
+table.tbl tbody tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums; color:var(--faint); width:52px; white-space:nowrap}
+
+.badge{
+  display:inline-block; font-family:var(--sans); font-size:10.5px; font-weight:600;
+  letter-spacing:.05em; padding:2px 8px; border-radius:20px; white-space:nowrap;
+  border:1px solid transparent; line-height:1.6;
+}
+.b-classee{background:var(--surface-2); color:var(--muted); border-color:var(--border)}
+.b-nonmesurable{background:var(--slate-soft); color:var(--slate); border-color:var(--slate-soft)}
+.b-retenue,.b-gardee{background:var(--accent-soft); color:var(--accent-strong); border-color:var(--accent)}
+.b-suspendue{background:var(--accent-soft); color:var(--accent); border-color:var(--accent-soft)}
+.b-nepasconstruire{background:var(--bad-soft); color:var(--bad); border-color:var(--bad-soft)}
+.b-livree{background:var(--ok-soft); color:var(--ok); border-color:var(--ok-soft)}
+.b-temoin{background:var(--violet-soft); color:var(--violet); border-color:var(--violet-soft)}
+.b-enattente{background:var(--cool-soft); color:var(--cool); border-color:var(--cool-soft)}
+:root[data-theme="dark"] .b-retenue,:root[data-theme="dark"] .b-gardee{color:var(--accent-strong)}
+
+/* ---- filtres du registre ---- */
+.filters{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:22px 0 14px}
+.search{
+  flex:1; min-width:210px; position:relative; display:flex; align-items:center;
+}
+.search svg{position:absolute; left:11px; width:15px; height:15px; stroke:var(--faint); fill:none; stroke-width:1.6; pointer-events:none}
+.search input{
+  width:100%; font-family:var(--mono); font-size:13.5px; color:var(--text);
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--r);
+  padding:9px 12px 9px 33px; transition:border-color .18s ease;
+}
+.search input:focus{border-color:var(--accent); outline:none}
+.search input::placeholder{color:var(--faint)}
+.chip{
+  appearance:none; cursor:pointer; font-family:var(--sans); font-size:12px; font-weight:500;
+  background:var(--surface); color:var(--muted); border:1px solid var(--border);
+  border-radius:20px; padding:6px 13px; transition:all .18s ease; white-space:nowrap;
+}
+.chip:hover{border-color:var(--accent); color:var(--text)}
+.chip[aria-pressed="true"]{background:var(--accent); color:#fff; border-color:var(--accent)}
+:root[data-theme="dark"] .chip[aria-pressed="true"]{color:#0C0A09}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .chip[aria-pressed="true"]{color:#0C0A09}}
+.count{font-size:12.5px; color:var(--faint); margin:0 0 12px}
+.count strong{color:var(--text); font-variant-numeric:tabular-nums}
+
+/* ---- figures SVG ---- */
+figure.fig{margin:26px 0; background:var(--surface); border:1px solid var(--border); border-radius:var(--r); padding:20px; box-shadow:var(--shadow)}
+figure.fig svg{width:100%; height:auto; display:block; overflow:visible}
+figure.fig figcaption{font-size:12.5px; color:var(--muted); margin-top:14px; line-height:1.6; max-width:74ch}
+.fig-t{font-family:var(--sans); font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin:0 0 16px}
+.svg-lab{font-family:'Roboto Mono',monospace; font-size:10.5px; fill:var(--muted)}
+.svg-val{font-family:'Exo',sans-serif; font-size:13px; font-weight:700; fill:var(--text)}
+.svg-ax{stroke:var(--border); stroke-width:1}
+
+/* ---- pied ---- */
+footer.bot{border-top:1px solid var(--border); background:var(--surface); margin-top:40px; padding:34px 0 46px}
+footer.bot .wrap{font-size:12.5px; color:var(--muted)}
+footer.bot p{margin:0 0 10px; max-width:78ch}
+footer.bot .legal{font-size:11.5px; color:var(--faint); border-top:1px solid var(--border); padding-top:16px; margin-top:18px}
+
+/* ============================ RESPONSIVE ============================ */
+@media (max-width:1024px){ .g4{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:820px){
+  .g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:620px){
+  body{font-size:14px}
+  .wrap,.tabbar-inner,main{padding-left:14px; padding-right:14px}
+  .masthead{padding:26px 0 20px}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .law{grid-template-columns:32px 1fr; gap:11px; padding:14px}
+  .law-n{font-size:18px}
+  .panel{padding-top:28px}
+  .tab{font-size:12.5px; padding:12px 9px 10px}
+  .tab .tn{display:none}
+  .card,.stat{padding:14px 15px}
+}
+
+/* ============================ IMPRESSION ============================ */
+@media print{
+  :root{--bg:#fff;--surface:#fff;--surface-2:#fff;--border:#ccc;--text:#000;--muted:#333;--faint:#666;--accent:#8a6a00;--accent-soft:#fff;--shadow:none;--shadow-lg:none}
+  .tabbar,.themebtn,.filters,.skip{display:none!important}
+  .panel{display:block!important; page-break-before:always; padding-top:16px}
+  .panel:first-of-type{page-break-before:avoid}
+  body{font-size:10.5pt}
+  .card,.stat,.law,figure.fig,.tbl-wrap{break-inside:avoid; box-shadow:none}
+  a{color:#000; text-decoration:underline}
+  a[href^="http"]::after{content:" (" attr(href) ")"; font-size:8pt; color:#666}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<header class="top">
+  <div class="wrap masthead">
+    <p class="eyebrow">Rapport de méthode &middot; septembre 2026</p>
+    <h1 class="title">110 idées de trading,<br>zéro survivant</h1>
+    <p class="subtitle">Ce qu'on apprend quand on s'oblige à écrire le critère de rejet <strong>avant</strong> de mesurer — et que le protocole tue tout, y compris ce qu'on espérait garder.</p>
+    <p class="byline">
+      <span>J. Razavi</span><span class="dot">&middot;</span>
+      <span>Deux ans de données, un métal précieux, des barres de 15 minutes</span><span class="dot">&middot;</span>
+      <span>Texte sous licence CC&nbsp;BY&nbsp;4.0</span>
+    </p>
+  </div>
+</header>
+
+<nav class="tabbar" aria-label="Sections du rapport">
+  <div class="tabbar-inner">
+    <div class="tabs" role="tablist" aria-label="Sections du rapport">
+      <button class="tab" role="tab" id="t-synthese"  aria-controls="p-synthese"  aria-selected="true"><span class="tn">01</span>Synthèse</button>
+      <button class="tab" role="tab" id="t-protocole" aria-controls="p-protocole" aria-selected="false" tabindex="-1"><span class="tn">02</span>Protocole</button>
+      <button class="tab" role="tab" id="t-lois"      aria-controls="p-lois"      aria-selected="false" tabindex="-1"><span class="tn">03</span>Les 21 lois</button>
+      <button class="tab" role="tab" id="t-registre"  aria-controls="p-registre"  aria-selected="false" tabindex="-1"><span class="tn">04</span>Le registre</button>
+      <button class="tab" role="tab" id="t-autopsies" aria-controls="p-autopsies" aria-selected="false" tabindex="-1"><span class="tn">05</span>Sept autopsies</button>
+      <button class="tab" role="tab" id="t-erreurs"   aria-controls="p-erreurs"   aria-selected="false" tabindex="-1"><span class="tn">06</span>Mes 22 erreurs</button>
+      <button class="tab" role="tab" id="t-reste"     aria-controls="p-reste"     aria-selected="false" tabindex="-1"><span class="tn">07</span>Ce qui reste</button>
+      <button class="tab" role="tab" id="t-chronique" aria-controls="p-chronique" aria-selected="false" tabindex="-1"><span class="tn">08</span>Chronique</button>
+      <button class="tab" role="tab" id="t-limites"   aria-controls="p-limites"   aria-selected="false" tabindex="-1"><span class="tn">09</span>Limites</button>
+    </div>
+    <button class="themebtn" id="theme" type="button" aria-label="Basculer le thème clair ou sombre" title="Thème clair / sombre">
+      <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main id="contenu">
+<section class="panel on" id="p-synthese" role="tabpanel" aria-labelledby="t-synthese">
+  <div class="panel-head">
+    <p class="kicker">SECTION 01</p>
+    <h2>Synthèse</h2>
+    <p class="lede">Cent dix idées de trading instruites sur deux ans de données sur l'or, avec un critère de rejet scellé dans <code>git</code> avant chaque mesure&nbsp;: aucune n'a survécu. Cette section se lit seule&nbsp;— les chiffres qui comptent, ce que le travail a produit à la place d'une stratégie, et pourquoi il concerne aussi ceux qui ne tradent pas l'or.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Le résumé, en cinq lignes</h3>
+    <ol>
+      <li><strong>Le corpus.</strong> J'ai instruit 110 idées de trading sur deux ans de données.</li>
+      <li><strong>Le protocole.</strong> Pour chacune, la spécification <strong>et le critère de rejet</strong> sont écrits et horodatés dans <code>git</code> <strong>avant</strong> la première mesure.</li>
+      <li><strong>Le résultat.</strong> Aucune n'a démontré d'avantage.</li>
+      <li><strong>Ce qui reste.</strong> Pas une stratégie&nbsp;: <strong>21 règles de décision mesurées</strong>, dont plusieurs contredisent ce qu'on lit partout.</li>
+      <li><strong>Ce qui a été évité.</strong> <strong>22 erreurs de ma part</strong>, que le protocole a rattrapées avant qu'elles ne coûtent quelque chose.</li>
+    </ol>
+  </div>
+
+  <div class="grid g4">
+    <div class="stat">
+      <div class="stat-k">Idées instruites · survivantes</div>
+      <div class="stat-v">110&nbsp;/&nbsp;0</div>
+      <p class="stat-n">Deux ans de données, un critère de rejet écrit avant chaque mesure. Aucune idée n'a démontré d'avantage.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Seuil de rentabilité réel</div>
+      <div class="stat-v">p*&nbsp;=&nbsp;10,5&nbsp;%</div>
+      <p class="stat-n">Taux de réussite qu'exige un objectif à dix fois le risque une fois le péage compté&nbsp;— contre 9,09&nbsp;% sans frais.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Prix contre flux cumulé</div>
+      <div class="stat-v">+111&nbsp;% ·&nbsp;−628&nbsp;629</div>
+      <p class="stat-n">Sur 22 mois de contrats à terme, le prix monte de 111&nbsp;% pendant que le déséquilibre acheteur-vendeur cumulé perd 628&nbsp;629 contrats.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">ATR de MetaTrader&nbsp;5 contre Wilder</div>
+      <div class="stat-v">8,9&nbsp;%</div>
+      <p class="stat-n">Écart médian entre <code>iATR</code> et l'ATR de Wilder&nbsp;; 25&nbsp;% au 90ᵉ centile. Ce point concerne tout développeur MetaTrader.</p>
+    </div>
+  </div>
+
+  <h3>Pourquoi lire ceci si vous ne tradez pas l'or</h3>
+  <p>Ce rapport n'est pas un carnet de stratégies. C'est un <strong>compte rendu de méthode</strong>&nbsp;: ce qui se passe quand on applique à ses propres idées la discipline qu'on exige des autres.</p>
+  <p>La plupart des tests de stratégie échouent d'une façon particulière&nbsp;: <strong>ils ne peuvent pas échouer.</strong> Quatre échappatoires suffisent.</p>
+
+  <div class="grid g4">
+    <div class="card">
+      <h4 style="margin-top:0">Le critère vient après</h4>
+      <p>Il est choisi une fois les chiffres vus. Un critère qui arrive après le résultat ne peut plus rien rejeter.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">L'étalon est zéro</h4>
+      <p>Plutôt qu'une alternative réelle&nbsp;— ne rien faire, acheter et garder, tenir une position constante.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">Les frais arrivent en dernier</h4>
+      <p>Le péage est compté à la fin, alors que sur les échelles courtes il décide seul du signe du résultat.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">Les essais ne sont pas comptés</h4>
+      <p>Le nombre de variantes parcourues avant de trouver «&nbsp;la bonne&nbsp;» n'est jamais figé avant de regarder.</p>
+    </div>
+  </div>
+
+  <p>Le résultat a l'air d'un test. <strong>Ce n'en est pas un.</strong></p>
+  <p>J'ai voulu savoir ce qui survit quand on retire ces échappatoires une par une. <strong>La réponse est&nbsp;: rien.</strong> Et l'intérêt du rapport est dans le <em>comment</em>&nbsp;— chacune des 21 règles est née d'un moment où j'ai failli me tromper, avec le chiffre exact qui m'en a empêché.</p>
+
+  <figure class="fig">
+    <p class="fig-t">Le prix monte, le flux cumulé s'effondre</p>
+    <svg viewBox="0 0 700 262" role="img" style="max-width:760px;margin:0 auto" aria-label="Deux barres de part et d'autre d'un axe zéro. À gauche, vers le haut, le prix du contrat à terme sur l'or : plus 111 pour cent en 22 mois. À droite, vers le bas, le déséquilibre acheteur-vendeur cumulé : moins 628 629 contrats sur la même période. Les hauteurs sont illustratives, les unités ne sont pas comparables.">
+      <text x="70" y="18" class="svg-lab" style="font-size:12px">22 mois de contrats à terme sur l'or · 34,8 millions de contrats</text>
+
+      <!-- axe zéro -->
+      <line x1="70" y1="136" x2="650" y2="136" class="svg-ax" style="stroke:var(--muted);stroke-width:1.25"/>
+      <text x="58" y="140" class="svg-lab" style="font-size:12px" text-anchor="end">0</text>
+
+      <!-- barre 1 : le prix, vers le haut -->
+      <rect x="175" y="56" width="130" height="80" fill="var(--accent)"/>
+      <text x="240" y="46" class="svg-val" style="font-size:24px" text-anchor="middle">+111&#160;%</text>
+      <text x="240" y="157" class="svg-lab" style="font-size:12px" text-anchor="middle">Prix du contrat à terme</text>
+
+      <!-- barre 2 : le flux cumulé, vers le bas -->
+      <rect x="395" y="136" width="130" height="80" fill="var(--muted)"/>
+      <text x="460" y="126" class="svg-lab" style="font-size:12px" text-anchor="middle">Déséquilibre acheteur − vendeur, cumulé</text>
+      <text x="460" y="245" class="svg-val" style="font-size:24px" text-anchor="middle">−628&#160;629 contrats</text>
+    </svg>
+    <figcaption>Sur 22 mois de contrats à terme sur l'or, le prix a monté de 111&nbsp;% pendant que le déséquilibre acheteur-vendeur cumulé perdait 628&nbsp;629 contrats. Les deux barres n'ont pas d'unité commune&nbsp;: leur hauteur est illustrative, seul leur sens est la donnée. La lecture usuelle — «&nbsp;cumul négatif, donc baissier&nbsp;» — aurait été fausse pendant toute la période. La figure ne montre ni la trajectoire du prix ni celle du cumul&nbsp;: aucune série de marché n'est publiée.</figcaption>
+  </figure>
+
+  <div class="pull">
+    <p><strong>Un protocole qui n'a jamais rien tué ne prouve rien.</strong></p>
+    <p>Celui-ci a tué cent dix idées, dont deux qu'un seuil réécrit après coup aurait sauvées.</p>
+  </div>
+
+  <div class="note">
+    <p>La suite, onglet par onglet&nbsp;: le protocole en huit principes (02), les 21 lois avec le chiffre qui les établit (03), le registre des 110 idées (04), sept autopsies (05), mes 22 erreurs et comment chacune a été attrapée (06), ce qui reste et vaut indépendamment de tout ceci (07), la chronique (08) et les limites, auto-déclarées (09).</p>
+  </div>
+
+  <div class="warn">
+    <p><strong>Ceci n'est pas un conseil en investissement</strong>, ni une offre, ni une invitation à reproduire quoi que ce soit avec de l'argent réel. Ce sont des mesures sur des données historiques, avec les limites énumérées dans la section 09, Limites. Les performances passées, mesurées ou simulées, ne préjugent pas des performances futures&nbsp;; le trading à effet de levier comporte un risque de perte totale du capital.</p>
+  </div>
+</section>
+
+<section class="panel" id="p-protocole" role="tabpanel" aria-labelledby="t-protocole">
+  <div class="panel-head">
+    <p class="kicker">SECTION 02</p>
+    <h2>Le protocole</h2>
+    <p class="lede">Huit principes, écrits avant la première mesure et appliqués à chacune des 110 idées. Chacun retire une échappatoire précise&nbsp;— l'une de celles par lesquelles un test «&nbsp;qui ne peut pas échouer&nbsp;» finit par passer. Ils sont présentés dans l'ordre où ils interviennent&nbsp;: ce qui est scellé, ce qui est mesuré, ce qui est refusé à la publication.</p>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3 style="margin-top:0">1&nbsp;· Sceller avant de mesurer</h3>
+      <p>Pour chaque idée, un fichier écrit contient la spécification, le critère qui la tuerait, les seuils et les contrôles obligatoires&nbsp;— puis un commit. <strong>Le hash du commit est la preuve que rien n'a été choisi après coup.</strong></p>
+      <p>Les scripts de mesure relisent ce hash et refusent de tourner s'il ne correspond pas.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">2&nbsp;· Deux fenêtres, et une réserve</h3>
+      <p>Apprentissage du <strong>2024-01-01 au 2025-06-30</strong>. Vérification du <strong>2025-07-01 au 2025-12-31</strong>. Une troisième période est gardée vierge comme réserve&nbsp;: <strong>lue une seule fois, puis déclarée brûlée.</strong></p>
+      <p>Elle a rendu <strong>−0,06</strong>. Aucun nouveau test n'y est autorisé.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">3&nbsp;· Épuiser le gratuit d'abord</h3>
+      <p>Avant de dépenser une lecture de la fenêtre de vérification, on épuise tout ce qui se décide hors simulation&nbsp;: comptages, recouvrements, accords entre modules, arithmétique de coût.</p>
+      <p><strong>La plupart des idées meurent là, pour zéro.</strong></p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">4&nbsp;· Des placebos qui détruisent exactement ce qui est revendiqué</h3>
+      <p>Pas «&nbsp;un&nbsp;» témoin aléatoire&nbsp;: le témoin qui détruit <strong>précisément</strong> la propriété que l'idée prétend exploiter, en conservant tout le reste.</p>
+      <p>Une idée qui prétend lire la direction est confrontée à un tirage de direction, à durée et à amplitude conservées&nbsp;— <strong>16 à 200 tirages</strong> selon le cas.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">5&nbsp;· Un étalon qui existe</h3>
+      <p>Jamais zéro. Pour un suiveur de tendance sur un actif qui monte, l'étalon est <strong>acheter et garder</strong>. Pour un signal de direction, c'est la <strong>position constante</strong>.</p>
+      <p>Et l'étalon doit avoir <strong>la même exposition</strong>&nbsp;: comparer une stratégie investie 10&nbsp;% du temps à une stratégie investie en permanence n'est pas une comparaison, c'est une pénalité de construction.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">6&nbsp;· Compter les essais</h3>
+      <p>Le seuil de significativité est corrigé du nombre de cellules réellement parcourues, et ce nombre est figé <strong>avant</strong> de regarder. Une grille de décision est limitée à <strong>trois valeurs</strong>.</p>
+      <p>Un balayage non spécifié a été chiffré une fois à <strong>4&nbsp;×&nbsp;10²¹</strong> combinaisons possibles&nbsp;: à ce compte, <strong>aucune mesure ne pouvait franchir 10&nbsp;σ</strong>&nbsp;— l'idée a été gelée avant le premier chiffre.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">7&nbsp;· <code>N_eff</code>, pas <code>N</code></h3>
+      <p>Ce qui compte n'est pas le nombre de lignes mais le nombre d'observations <strong>effectivement indépendantes</strong>. Un jeu de <strong>12&nbsp;000</strong> lignes en valait <strong>707</strong>.</p>
+      <p>Un autre&nbsp;: <strong>8&nbsp;818</strong> au lieu de <strong>30&nbsp;643</strong>&nbsp;— assez pour faire passer un test de <strong>9,99</strong> (succès) à <strong>8,20</strong> (rejet).</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">8&nbsp;· Un plancher de 30</h3>
+      <p>Sous <strong>trente observations</strong>, aucune statistique n'est publiée. Elle est remplacée par un tiret.</p>
+      <p>Un chiffre qui n'a pas assez d'observations derrière lui n'est pas un chiffre faible&nbsp;: c'est un chiffre absent.</p>
+    </div>
+  </div>
+
+  <figure class="fig">
+    <p class="fig-t">L'enchaînement, pour chaque idée</p>
+    <svg viewBox="0 0 820 252" role="img" aria-label="Frise en six étapes : spécification et critère de rejet, commit horodaté, mesures hors simulation, fenêtre d'apprentissage, fenêtre de vérification, réserve lue une fois puis brûlée. Les deux premières étapes sont scellées avant toute mesure ; les quatre suivantes sont mesurées dans cet ordre.">
+      <defs>
+        <marker id="arr-proto" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"/>
+        </marker>
+      </defs>
+
+      <!-- étape 1 : spécification + critère de rejet (scellé) -->
+      <text x="63" y="50" class="svg-val" style="fill:var(--accent)" text-anchor="middle">01</text>
+      <rect x="4" y="62" width="118" height="84" rx="4" fill="var(--accent)" fill-opacity="0.12" stroke="var(--muted)" stroke-width="1"/>
+      <text class="svg-val" style="font-size:12px" text-anchor="middle">
+        <tspan x="63" y="94">Spécification</tspan>
+        <tspan x="63" y="110">+ critère</tspan>
+        <tspan x="63" y="126">de rejet</tspan>
+      </text>
+      <text class="svg-lab" text-anchor="middle">
+        <tspan x="63" y="166">écrits avant</tspan>
+        <tspan x="63" y="179">la première mesure</tspan>
+      </text>
+      <line x1="125" y1="104" x2="139" y2="104" stroke="var(--muted)" stroke-width="1" marker-end="url(#arr-proto)"/>
+
+      <!-- étape 2 : commit horodaté (scellé) -->
+      <text x="201" y="50" class="svg-val" style="fill:var(--accent)" text-anchor="middle">02</text>
+      <rect x="142" y="62" width="118" height="84" rx="4" fill="var(--accent)" fill-opacity="0.12" stroke="var(--muted)" stroke-width="1"/>
+      <text class="svg-val" style="font-size:12px" text-anchor="middle">
+        <tspan x="201" y="100">Commit</tspan>
+        <tspan x="201" y="116">horodaté</tspan>
+      </text>
+      <text class="svg-lab" text-anchor="middle">
+        <tspan x="201" y="166">le hash prouve que</tspan>
+        <tspan x="201" y="179">rien n'est choisi</tspan>
+        <tspan x="201" y="192">après coup</tspan>
+      </text>
+      <line x1="263" y1="104" x2="277" y2="104" stroke="var(--muted)" stroke-width="1" marker-end="url(#arr-proto)"/>
+
+      <!-- étape 3 : mesures hors simulation -->
+      <text x="339" y="50" class="svg-val" style="fill:var(--accent)" text-anchor="middle">03</text>
+      <rect x="280" y="62" width="118" height="84" rx="4" fill="none" stroke="var(--muted)" stroke-width="1"/>
+      <text class="svg-val" style="font-size:12px" text-anchor="middle">
+        <tspan x="339" y="100">Mesures</tspan>
+        <tspan x="339" y="116">hors simulation</tspan>
+      </text>
+      <text class="svg-lab" text-anchor="middle">
+        <tspan x="339" y="166">comptages, coûts,</tspan>
+        <tspan x="339" y="179">recouvrements —</tspan>
+        <tspan x="339" y="192">la plupart des idées</tspan>
+        <tspan x="339" y="205">meurent là, pour zéro</tspan>
+      </text>
+      <line x1="401" y1="104" x2="415" y2="104" stroke="var(--muted)" stroke-width="1" marker-end="url(#arr-proto)"/>
+
+      <!-- étape 4 : fenêtre d'apprentissage -->
+      <text x="477" y="50" class="svg-val" style="fill:var(--accent)" text-anchor="middle">04</text>
+      <rect x="418" y="62" width="118" height="84" rx="4" fill="none" stroke="var(--muted)" stroke-width="1"/>
+      <text class="svg-val" style="font-size:12px" text-anchor="middle">
+        <tspan x="477" y="100">Fenêtre</tspan>
+        <tspan x="477" y="116">d'apprentissage</tspan>
+      </text>
+      <text class="svg-lab" text-anchor="middle">
+        <tspan x="477" y="166">2024-01-01</tspan>
+        <tspan x="477" y="179">→ 2025-06-30</tspan>
+      </text>
+      <line x1="539" y1="104" x2="553" y2="104" stroke="var(--muted)" stroke-width="1" marker-end="url(#arr-proto)"/>
+
+      <!-- étape 5 : fenêtre de vérification -->
+      <text x="615" y="50" class="svg-val" style="fill:var(--accent)" text-anchor="middle">05</text>
+      <rect x="556" y="62" width="118" height="84" rx="4" fill="none" stroke="var(--muted)" stroke-width="1"/>
+      <text class="svg-val" style="font-size:12px" text-anchor="middle">
+        <tspan x="615" y="100">Fenêtre</tspan>
+        <tspan x="615" y="116">de vérification</tspan>
+      </text>
+      <text class="svg-lab" text-anchor="middle">
+        <tspan x="615" y="166">2025-07-01</tspan>
+        <tspan x="615" y="179">→ 2025-12-31</tspan>
+        <tspan x="615" y="192">chaque lecture</tspan>
+        <tspan x="615" y="205">se dépense</tspan>
+      </text>
+      <line x1="677" y1="104" x2="691" y2="104" stroke="var(--muted)" stroke-width="1" marker-end="url(#arr-proto)"/>
+
+      <!-- étape 6 : réserve, lue une fois, brûlée -->
+      <text x="753" y="50" class="svg-val" style="fill:var(--accent)" text-anchor="middle">06</text>
+      <rect x="694" y="62" width="118" height="84" rx="4" fill="none" stroke="var(--muted)" stroke-width="1" stroke-dasharray="5 4"/>
+      <text class="svg-val" style="font-size:12px" text-anchor="middle">
+        <tspan x="753" y="94">Réserve</tspan>
+        <tspan x="753" y="110">lue une fois,</tspan>
+        <tspan x="753" y="126">brûlée</tspan>
+      </text>
+      <text class="svg-lab" text-anchor="middle">
+        <tspan x="753" y="166">a rendu −0,06</tspan>
+        <tspan x="753" y="179">plus aucun test</tspan>
+      </text>
+
+      <!-- accolades : scellé / mesuré -->
+      <line x1="4" y1="216" x2="4" y2="222" class="svg-ax" style="stroke:var(--muted)"/>
+      <line x1="4" y1="222" x2="260" y2="222" class="svg-ax" style="stroke:var(--muted)"/>
+      <line x1="260" y1="216" x2="260" y2="222" class="svg-ax" style="stroke:var(--muted)"/>
+      <text x="132" y="240" class="svg-lab" text-anchor="middle">SCELLÉ — avant la première mesure</text>
+
+      <line x1="280" y1="216" x2="280" y2="222" class="svg-ax" style="stroke:var(--muted)"/>
+      <line x1="280" y1="222" x2="812" y2="222" class="svg-ax" style="stroke:var(--muted)"/>
+      <line x1="812" y1="216" x2="812" y2="222" class="svg-ax" style="stroke:var(--muted)"/>
+      <text x="546" y="240" class="svg-lab" text-anchor="middle">MESURÉ — du gratuit vers ce qui se dépense · la réserve en dernier, une seule fois</text>
+    </svg>
+    <figcaption>Les deux premières étapes sont scellées dans <code>git</code> avant la première mesure&nbsp;; les scripts refusent de tourner si le hash ne correspond pas. Les mesures gratuites viennent avant toute lecture de la fenêtre de vérification, et la réserve n'est lue qu'une fois. La frise ne montre pas les placebos, l'étalon, le comptage des essais ni le plancher de 30&nbsp;: ils s'appliquent à chaque mesure, pas à une étape.</figcaption>
+  </figure>
+
+  <div class="pull">
+    <p><strong>Le test qui dit si un protocole est réel&nbsp;: est-ce qu'il vous a déjà empêché de publier quelque chose que vous vouliez publier&nbsp;?</strong></p>
+    <p>Celui-ci l'a fait deux fois en une journée, sur deux idées qu'un seuil réécrit après coup aurait sauvées — le détail est dans la section 06, Mes 22 erreurs.</p>
+  </div>
+</section>
+
+<section class="panel" id="p-lois" role="tabpanel" aria-labelledby="t-lois">
+  <div class="panel-head">
+    <p class="kicker">SECTION 03</p>
+    <h2>Les 21 lois</h2>
+    <p class="lede">Chacune est née d'une mesure, pas d'une lecture. Aucune n'a été écrite avant d'avoir été payée par un chiffre&nbsp;: celui qui figure sous l'énoncé, en italique, est celui qui l'a fixée. Elles se rangent en quatre familles, qui répondent à quatre questions.</p>
+  </div>
+
+  <div class="grid g4">
+    <div class="stat">
+      <div class="stat-k">Sur l'étalon</div>
+      <div class="stat-v">1 – 4</div>
+      <p class="stat-n">«&nbsp;Comparé à quoi&nbsp;?&nbsp;» — le point zéro d'une stratégie n'est presque jamais zéro.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Sur ce qui détruit</div>
+      <div class="stat-v">5 – 10</div>
+      <p class="stat-n">Les couches ajoutées — bornes, sorties, garde-fous — et ce qu'elles coûtent réellement.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Sur les témoins</div>
+      <div class="stat-v">11 – 15</div>
+      <p class="stat-n">«&nbsp;Comment sait-on que ce n'est pas du hasard&nbsp;?&nbsp;» — ce qu'un témoin doit détruire pour valoir quelque chose.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Sur les instruments</div>
+      <div class="stat-v">16 – 21</div>
+      <p class="stat-n">«&nbsp;L'outil ment-il&nbsp;?&nbsp;» — quand la mesure décrit l'instrument plutôt que l'objet.</p>
+    </div>
+  </div>
+
+  <!-- ============================== FAMILLE 1 ============================== -->
+  <h3>Sur l'étalon — «&nbsp;comparé à quoi&nbsp;?&nbsp;»</h3>
+  <p>Une stratégie ne gagne jamais dans l'absolu&nbsp;: elle gagne <em>contre</em> quelque chose. Les quatre premières lois fixent ce quelque chose, et il est rarement zéro.</p>
+
+  <article class="law">
+    <div class="law-n">1</div>
+    <div class="law-b">
+      <h3>Pour un suiveur de tendance sur un actif qui monte, l'étalon est acheter-et-garder, jamais zéro.</h3>
+      <p>Toute stratégie qui «&nbsp;gagne&nbsp;» sur un actif en tendance doit d'abord prouver qu'elle bat le fait de ne rien faire. Comparée à zéro, elle gagne&nbsp;; comparée à l'inaction, elle peut perdre — et c'est la seconde comparaison qui compte.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> acheter et garder rendait <strong>+1&nbsp;767&nbsp;$</strong> là où la stratégie rendait <strong>+984&nbsp;$</strong> — soit <strong>80&nbsp;% de plus</strong>, sans aucune règle.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">2</div>
+    <div class="law-b">
+      <h3>Un critère fondé sur le signe s'ancre sur la position constante, pas sur 50&nbsp;%.</h3>
+      <p>Sur un actif qui dérive, 50&nbsp;% n'est pas le hasard — le hasard, c'est la dérive. Le point zéro d'un critère de signe est «&nbsp;toujours long&nbsp;», et c'est lui qu'il faut battre.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> écart apparié <code>z = −2,16</code> — le «&nbsp;toujours long&nbsp;» battait le critère testé.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">3</div>
+    <div class="law-b">
+      <h3>Un filtre ne vaut quelque chose que si le groupe qu'il bloque est négatif — pas seulement «&nbsp;moins bon&nbsp;».</h3>
+      <p>Trier n'est pas filtrer. Un filtre qui sépare bien les bons trades des moins bons retire quand même de l'argent si les trades écartés restaient gagnants.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> un filtre qui triait deux fois mieux détruisait quand même <strong>30&nbsp;% du résultat</strong>, parce que les trades bloqués valaient encore <strong>+259&nbsp;$</strong>.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">4</div>
+    <div class="law-b">
+      <h3>L'étalon doit être apparié sur l'exposition.</h3>
+      <p>Une stratégie qui n'est en position qu'une fraction du temps ne se compare qu'à un étalon exposé la même fraction du temps. Sinon l'écart mesure l'exposition, pas l'idée.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> comparer <strong>10&nbsp;%</strong> de temps investi à <strong>100&nbsp;%</strong> est une pénalité de construction, pas une comparaison.</p>
+    </div>
+  </article>
+
+  <!-- ============================== FAMILLE 2 ============================== -->
+  <h3>Sur ce qui détruit — les couches ajoutées</h3>
+  <p>Bornes, sorties anticipées, coupe-circuits, plafonds&nbsp;: chaque couche posée sur une stratégie est censée la protéger. Les six lois suivantes mesurent ce qu'elle coûte, et à quelle condition elle ne coûte pas.</p>
+
+  <article class="law">
+    <div class="law-n">5</div>
+    <div class="law-b">
+      <h3>Toute couche qui borne une position ampute un suiveur de tendance, quel que soit le sens du critère.</h3>
+      <p>Le gain vit dans une queue de positions très longues&nbsp;: tout ce qui la coupe coupe le gain. Peu importe que la borne soit «&nbsp;intelligente&nbsp;» — elle tranche là où se trouve le résultat.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> couper les <strong>24&nbsp;%</strong> de positions qui dépassaient 12 fois la volatilité quotidienne retirait <strong>64&nbsp;% du résultat net</strong> (de 526&nbsp;$ à 188&nbsp;$).</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">6</div>
+    <div class="law-b">
+      <h3>Un critère de structure n'échappe à la loi 5 que s'il est rare.</h3>
+      <p>Une sortie «&nbsp;quand le sens rapide s'inverse&nbsp;» se déclenchait sur <strong>90&nbsp;% des positions</strong>&nbsp;: c'est un plafonnement sous un autre nom. Un critère qui se déclenche presque toujours est une borne, quel que soit son habillage.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> <strong>+1&nbsp;125&nbsp;$ sauvés</strong> sur les petites perdantes contre <strong>−1&nbsp;601&nbsp;$ perdus</strong> sur les grosses gagnantes — <strong>1,42&nbsp;$ perdu par dollar sauvé</strong>.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">7</div>
+    <div class="law-b">
+      <h3>Une couche qui ne place aucun ordre peut détruire autant qu'un module perdant.</h3>
+      <p>Une règle de sortie ne trade pas&nbsp;; elle ne fait que fermer. Elle a pourtant coûté presque autant qu'un module qui, lui, plaçait des trades perdants.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> une règle de sortie a coûté <strong>−1&nbsp;022&nbsp;$</strong>&nbsp;; un module qui plaçait <strong>162 trades perdants</strong> en coûtait <strong>−1&nbsp;090&nbsp;$</strong>. Presque à égalité — et l'un des deux ne trade pas.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">8</div>
+    <div class="law-b">
+      <h3>Un coupe-circuit est un instrument de chute, pas de rendement.</h3>
+      <p>Il abaisse la chute. Sur le rendement, sans avantage il est neutre&nbsp;; avec un avantage, il en détruit une part. Il se juge sur ce qu'il fait, pas sur ce qu'on espère de lui.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> il abaisse la chute sur <strong>7 instruments sur 8</strong>.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">9</div>
+    <div class="law-b">
+      <h3>Pousser un garde-fou jusqu'à changer la nature de l'objet invalide la mesure.</h3>
+      <p>Un garde-fou réglé trop serré n'est plus un garde-fou&nbsp;: c'est une autre stratégie, et ce qu'on mesure alors n'est plus ce qu'on croyait tester.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> à <strong>35&nbsp;%</strong> de journées coupées, ce n'est plus un coupe-circuit, c'est un stop journalier serré. La passe entière a été invalidée.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">10</div>
+    <div class="law-b">
+      <h3>Aucune gestion du risque ne remplace un avantage.</h3>
+      <p>C'est la loi fondatrice&nbsp;: le risque protège un avantage, il n'en crée pas. Tous les plafonds du monde ne font que ralentir la chute d'une idée qui n'en a pas.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> un témoin qui entre au hasard, avec le coupe-circuit et tous les plafonds actifs, a vidé <strong>1&nbsp;900&nbsp;$</strong> d'un compte de <strong>2&nbsp;000&nbsp;$</strong>.</p>
+    </div>
+  </article>
+
+  <!-- ============================== FAMILLE 3 ============================== -->
+  <h3>Sur les témoins — «&nbsp;comment sait-on que ce n'est pas du hasard&nbsp;?&nbsp;»</h3>
+  <p>Un témoin est une version de l'idée à laquelle on a retiré ce qu'elle revendique. S'il fait aussi bien qu'elle, l'idée ne revendiquait rien. Les cinq lois suivantes disent ce qu'un bon témoin doit détruire — et ce qu'un mauvais laisse passer.</p>
+
+  <article class="law">
+    <div class="law-n">11</div>
+    <div class="law-b">
+      <h3>Le témoin doit détruire exactement ce que l'idée revendique.</h3>
+      <p>Un témoin qui détruit autre chose que la propriété revendiquée laisse passer l'idée — il ne teste rien. Le bon témoin est celui qui casse précisément le mécanisme dont l'idée se réclame.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> un témoin mal ciblé rendait <code>21,9 ± 6,3</code> là où l'observé valait <code>18</code> — l'idée semblait passer. Le témoin correct, qui détruisait la bonne propriété, l'a tuée.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">12</div>
+    <div class="law-b">
+      <h3>Toute statistique bâtie sur un maximum est surtout de la diffusion.</h3>
+      <p>Excursion maximale, plus haut atteint, meilleur gain latent&nbsp;: ce sont des maximums, et un maximum grandit tout seul avec le temps. Ce qui grandit sans signal ne prouve pas un signal.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> un tirage purement aléatoire capturait déjà <strong>86&nbsp;%</strong> de l'excursion favorable maximale observée.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">13</div>
+    <div class="law-b">
+      <h3>Toute statistique de déplacement signé sur un actif qui dérive mesure la dérive.</h3>
+      <p>Si l'actif monte, tout ce qui compte les hausses compte l'actif. Une fois la série détrendée, la statistique s'effondre et les positions longues redeviennent pile ou face.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> détrendée, la statistique tombait de <strong>−88&nbsp;%</strong> et la proportion de positions longues passait de <strong>70&nbsp;% à 53&nbsp;%</strong>. L'actif avait monté de <strong>+59,9&nbsp;%</strong> sur la période.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">14</div>
+    <div class="law-b">
+      <h3>Quand un critère pré-inscrit semble échouer, vérifier le témoin avant d'y toucher.</h3>
+      <p>Changer le critère parce qu'il échoue, c'est arrêter de tester. La première question est de savoir si le témoin est le bon — et souvent le bon témoin fait échouer le critère de toute façon.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> le bon témoin faisait échouer les <strong>12 cellules</strong> de toute façon.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">15</div>
+    <div class="law-b">
+      <h3>84&nbsp;% des grilles aléatoires passaient l'un de mes critères.</h3>
+      <p>Un critère qu'une grille au hasard franchit quatre fois sur cinq ne filtre rien du tout. Un seuil se calibre sur ce que le hasard obtient, pas sur ce qui paraît exigeant.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> <strong>84&nbsp;%</strong> des grilles aléatoires franchissaient le critère, mesuré sur <strong>20&nbsp;000 tirages</strong>.</p>
+    </div>
+  </article>
+
+  <!-- ============================== FAMILLE 4 ============================== -->
+  <h3>Sur les instruments de mesure — «&nbsp;l'outil ment-il&nbsp;?&nbsp;»</h3>
+  <p>Avant de croire un chiffre, il faut savoir ce que l'instrument qui l'a produit mesure réellement. Les six dernières lois sont celles où le chiffre décrivait l'outil, le courtier ou le bruit — pas la stratégie.</p>
+
+  <article class="law">
+    <div class="law-n">16</div>
+    <div class="law-b">
+      <h3>Sur un résultat net, un estimateur de rang mesure d'abord le régime de frais du courtier.</h3>
+      <p>On croit mesurer la stratégie&nbsp;; on mesure le spread. Le péage seul, sans aucune décision, porte déjà une structure que l'estimateur lit comme un signal.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> l'autocorrélation du <strong>péage seul</strong> valait <strong>+0,86</strong>.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">17</div>
+    <div class="law-b">
+      <h3>Face à un coût de queue, la médiane est l'instrument qui le cache.</h3>
+      <p>La médiane a répondu «&nbsp;aucun créneau cher sur 92&nbsp;» à une question dont la réponse était dans la queue. Quand le coût vit dans les extrêmes, c'est le centile élevé qu'il faut regarder.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> médiane du spread par créneau horaire plate entre <strong>20 et 31</strong> points&nbsp;; à 23&nbsp;h, le <strong>90ᵉ centile</strong> valait <strong>90</strong> et le <strong>99ᵉ</strong>, <strong>118</strong>.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">18</div>
+    <div class="law-b">
+      <h3>Un rapport dont le dénominateur n'est pas significativement différent de zéro n'est pas une mesure.</h3>
+      <p>C'était une division par du bruit. Avant de lire un rapport, on lit son dénominateur — et l'incertitude qui l'accompagne.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> un rapport de <strong>7,20</strong> paraissait franchir un seuil de 3 — jusqu'à son dénominateur&nbsp;: <code>+0,0128 ± 0,0129</code>, soit <code>t = 0,99</code>.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">19</div>
+    <div class="law-b">
+      <h3>Mesurer une redondance sur des positions au lieu d'avis gonfle l'accord.</h3>
+      <p>Deux idées peuvent tenir la même position pour des raisons différentes&nbsp;; compter les positions les fait paraître plus semblables qu'elles ne le sont. La redondance se mesure sur ce que chacune dit, pas sur ce qu'elle détient.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> <code>0,70</code> contre <code>0,60</code> — assez pour franchir ou non le seuil de redondance.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">20</div>
+    <div class="law-b">
+      <h3>Toute question portant sur l'état d'une position se règle en simulation complète, jamais par reconstruction hors ligne.</h3>
+      <p>Trois fuites successives, toutes favorables à l'idée testée&nbsp;: tronquer une perte en gardant la position, payer un écart de nuit à une position à plat, et laisser dériver l'objet mesuré.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> erreur mesurée, <strong>un facteur 100</strong>.</p>
+    </div>
+  </article>
+
+  <article class="law">
+    <div class="law-n">21</div>
+    <div class="law-b">
+      <h3>Un résultat qui contredit un fait déjà mesuré est un signal d'instrument, jamais une découverte.</h3>
+      <p>Avant de célébrer une découverte, on cherche le défaut de l'outil. Le réflexe a été appliqué trois fois en une journée&nbsp;; les trois fois, l'outil était en cause.</p>
+      <p class="law-m"><strong>La mesure&nbsp;:</strong> appliqué <strong>trois fois en une journée</strong>&nbsp;; les trois fois, le défaut était dans mon outil.</p>
+    </div>
+  </article>
+
+  <!-- ============================== LA RÈGLE LA PLUS DURE ============================== -->
+  <hr>
+
+  <h3>La règle la plus dure — et elle porte sur le protocole lui-même</h3>
+
+  <div class="pull">
+    <p><strong>Une seule convention non écrite suffit à inverser un verdict déjà rendu.</strong></p>
+    <p>Cinq verdicts sur cinq ont été retournés en un seul tour de contre-expertise, chacun par une seule convention que personne n'avait pensé à écrire&nbsp;: la phase d'un découpage temporel, la définition exacte d'un seuil, la taille d'une brique de comptage.</p>
+  </div>
+
+  <p>C'est la découverte la plus inconfortable de ce travail. Un protocole peut être rigoureux <strong>et faux</strong>, parce que la rigueur porte sur ce qui est écrit et que le décisif est souvent ce qui ne l'est pas.</p>
+
+  <div class="grid g3">
+    <div class="stat">
+      <div class="stat-k">Verdicts retournés</div>
+      <div class="stat-v">5 / 5</div>
+      <p class="stat-n">En un seul tour de contre-expertise, chacun par une seule convention non écrite.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Reproduction indépendante</div>
+      <div class="stat-v">161 / 161</div>
+      <p class="stat-n">Une série de signaux réimplémentée de l'autre côté de la frontière de langage, reproduite au bit près.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Référence contredite</div>
+      <div class="stat-v">162 ≠ 161</div>
+      <p class="stat-n">Un chiffre de référence utilisé pendant des semaines contredisait la pièce gelée qui en contenait 161.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4>La parade adoptée</h4>
+    <p>Un relecteur indépendant qui <strong>recalcule</strong> au lieu de relire, et qui <strong>franchit la frontière de langage</strong>&nbsp;: si la mesure est en Python, il la refait à partir du code de production, et inversement. Un relecteur qui relit retrouve les conventions écrites&nbsp;; un relecteur qui recalcule bute sur celles qui ne le sont pas.</p>
+    <p>La méthode tranche dans les deux sens. Une réimplémentation indépendante a reproduit une série de signaux <strong>161 sur 161, au bit près</strong>, ce qui a validé le harnais. Ailleurs, la même méthode a révélé qu'un chiffre de référence utilisé pendant des semaines (<code>162</code>) contredisait la pièce gelée qui en contenait <code>161</code>.</p>
+  </div>
+</section>
+
+<section class="panel" id="p-registre" role="tabpanel" aria-labelledby="t-registre">
+  <div class="panel-head">
+    <p class="kicker">SECTION 04</p>
+    <h2>Le registre</h2>
+    <p class="lede">Les <strong>110 id&eacute;es</strong> instruites, avec l'&eacute;tat dans lequel
+    chacune a &eacute;t&eacute; close. Le registre est <strong>sold&eacute;</strong>&nbsp;: il ne reste
+    aucune ligne &laquo;&nbsp;&agrave; construire&nbsp;&raquo;. Cherchez, filtrez, triez &mdash; rien
+    n'est cach&eacute; et rien n'a &eacute;t&eacute; retir&eacute; apr&egrave;s coup.</p>
+  </div>
+
+  <div class="grid g4">
+    <div class="stat"><div class="stat-k">Instruites</div><div class="stat-v">110</div>
+      <p class="stat-n">Chacune avec sa sp&eacute;cification et son crit&egrave;re de rejet
+      scell&eacute;s avant la premi&egrave;re mesure.</p></div>
+    <div class="stat"><div class="stat-k">Avantage d&eacute;montr&eacute;</div><div class="stat-v">0</div>
+      <p class="stat-n">Aucune n'a d&eacute;montr&eacute; d'avantage face &agrave; un &eacute;talon
+      appari&eacute; sur l'exposition.</p></div>
+    <div class="stat"><div class="stat-k">Closes</div><div class="stat-v">71</div>
+      <p class="stat-n">Le crit&egrave;re de rejet &eacute;crit &agrave; l'avance a &eacute;t&eacute;
+      atteint, sans &ecirc;tre renegoci&eacute;.</p></div>
+    <div class="stat"><div class="stat-k">Sans instrument</div><div class="stat-v">16</div>
+      <p class="stat-n">Aucun outil disponible ne pouvait trancher. Ce n'est pas un verdict sur
+      l'id&eacute;e.</p></div>
+  </div>
+
+  <figure class="fig">
+    <p class="fig-t">R&eacute;partition des 110 &eacute;tats</p>
+    <svg viewBox="0 0 700 130" role="img" aria-label="Repartition des 110 idees du registre par etat : CLASSÉE 71, NON MESURABLE 16, RETENUE 6, SUSPENDUE 5, GARDÉE 5, NE PAS CONSTRUIRE 3, LIVRÉE 2, TÉMOIN 1, EN ATTENTE 1."><rect x="0.0" y="0" width="450.3" height="34" rx="2" fill="var(--faint)" opacity=".88"><title>CLASSÉE : 71 idees</title></rect><text x="225.2" y="21" text-anchor="middle" class="svg-val" style="font-size:12px" fill="var(--bg)">71</text><rect x="451.8" y="0" width="100.3" height="34" rx="2" fill="var(--slate)" opacity=".88"><title>NON MESURABLE : 16 idees</title></rect><text x="502.0" y="21" text-anchor="middle" class="svg-val" style="font-size:12px" fill="var(--bg)">16</text><rect x="553.6" y="0" width="36.7" height="34" rx="2" fill="var(--accent)" opacity=".88"><title>RETENUE : 6 idees</title></rect><text x="572.0" y="21" text-anchor="middle" class="svg-val" style="font-size:12px" fill="var(--bg)">6</text><rect x="591.8" y="0" width="30.3" height="34" rx="2" fill="var(--accent)" opacity=".88"><title>SUSPENDUE : 5 idees</title></rect><rect x="623.6" y="0" width="30.3" height="34" rx="2" fill="var(--accent-strong)" opacity=".88"><title>GARDÉE : 5 idees</title></rect><rect x="655.5" y="0" width="17.6" height="34" rx="2" fill="var(--bad)" opacity=".88"><title>NE PAS CONSTRUIRE : 3 idees</title></rect><rect x="674.5" y="0" width="11.2" height="34" rx="2" fill="var(--ok)" opacity=".88"><title>LIVRÉE : 2 idees</title></rect><rect x="687.3" y="0" width="4.9" height="34" rx="2" fill="var(--violet)" opacity=".88"><title>TÉMOIN : 1 idees</title></rect><rect x="693.6" y="0" width="4.9" height="34" rx="2" fill="var(--cool)" opacity=".88"><title>EN ATTENTE : 1 idees</title></rect><rect x="6" y="52" width="9" height="9" rx="2" fill="var(--faint)" opacity=".88"/><text x="21" y="60" class="svg-lab">CLASSÉE <tspan class="svg-val" style="font-size:11px">71</tspan></text><rect x="239" y="52" width="9" height="9" rx="2" fill="var(--slate)" opacity=".88"/><text x="254" y="60" class="svg-lab">NON MESURABLE <tspan class="svg-val" style="font-size:11px">16</tspan></text><rect x="472" y="52" width="9" height="9" rx="2" fill="var(--accent)" opacity=".88"/><text x="487" y="60" class="svg-lab">RETENUE <tspan class="svg-val" style="font-size:11px">6</tspan></text><rect x="6" y="73" width="9" height="9" rx="2" fill="var(--accent)" opacity=".88"/><text x="21" y="81" class="svg-lab">SUSPENDUE <tspan class="svg-val" style="font-size:11px">5</tspan></text><rect x="239" y="73" width="9" height="9" rx="2" fill="var(--accent-strong)" opacity=".88"/><text x="254" y="81" class="svg-lab">GARDÉE <tspan class="svg-val" style="font-size:11px">5</tspan></text><rect x="472" y="73" width="9" height="9" rx="2" fill="var(--bad)" opacity=".88"/><text x="487" y="81" class="svg-lab">NE PAS CONSTRUIRE <tspan class="svg-val" style="font-size:11px">3</tspan></text><rect x="6" y="94" width="9" height="9" rx="2" fill="var(--ok)" opacity=".88"/><text x="21" y="102" class="svg-lab">LIVRÉE <tspan class="svg-val" style="font-size:11px">2</tspan></text><rect x="239" y="94" width="9" height="9" rx="2" fill="var(--violet)" opacity=".88"/><text x="254" y="102" class="svg-lab">TÉMOIN <tspan class="svg-val" style="font-size:11px">1</tspan></text><rect x="472" y="94" width="9" height="9" rx="2" fill="var(--cool)" opacity=".88"/><text x="487" y="102" class="svg-lab">EN ATTENTE <tspan class="svg-val" style="font-size:11px">1</tspan></text></svg>
+    <figcaption>Une id&eacute;e &laquo;&nbsp;non mesurable&nbsp;&raquo; n'est pas une id&eacute;e
+    r&eacute;fut&eacute;e&nbsp;: c'est une id&eacute;e dont aucun instrument disponible ne pouvait
+    d&eacute;cider. Les distinguer est pr&eacute;cis&eacute;ment ce qui &eacute;vite de compter un
+    &eacute;chec d'outillage comme une r&eacute;futation.</figcaption>
+  </figure>
+
+  <h3>Chercher dans le registre</h3>
+  <div class="filters">
+    <label class="search">
+      <span style="position:absolute;left:-9999px">Rechercher une id&eacute;e</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input type="search" id="reg-q" placeholder="Rechercher&nbsp;: volatilit&eacute;, sortie, r&eacute;gime, flux&hellip;" autocomplete="off">
+    </label>
+    <button class="chip" type="button" data-etat="b-classee" aria-pressed="false">CLASSÉE <span style="opacity:.55">71</span></button><button class="chip" type="button" data-etat="b-nonmesurable" aria-pressed="false">NON MESURABLE <span style="opacity:.55">16</span></button><button class="chip" type="button" data-etat="b-retenue" aria-pressed="false">RETENUE <span style="opacity:.55">6</span></button><button class="chip" type="button" data-etat="b-suspendue" aria-pressed="false">SUSPENDUE <span style="opacity:.55">5</span></button><button class="chip" type="button" data-etat="b-gardee" aria-pressed="false">GARDÉE <span style="opacity:.55">5</span></button><button class="chip" type="button" data-etat="b-nepasconstruire" aria-pressed="false">NE PAS CONSTRUIRE <span style="opacity:.55">3</span></button><button class="chip" type="button" data-etat="b-livree" aria-pressed="false">LIVRÉE <span style="opacity:.55">2</span></button><button class="chip" type="button" data-etat="b-temoin" aria-pressed="false">TÉMOIN <span style="opacity:.55">1</span></button><button class="chip" type="button" data-etat="b-enattente" aria-pressed="false">EN ATTENTE <span style="opacity:.55">1</span></button>
+  </div>
+  <p class="count" id="reg-count"><strong>110</strong> id&eacute;es affich&eacute;es sur <strong>110</strong></p>
+
+  <div class="tbl-wrap">
+    <table class="tbl" id="reg-tbl">
+      <thead><tr>
+        <th class="sortable" data-k="num" scope="col" aria-sort="ascending">N<span class="ar">&#9650;&#9660;</span></th>
+        <th class="sortable" data-k="etat" scope="col">&Eacute;tat<span class="ar">&#9650;&#9660;</span></th>
+        <th class="sortable" data-k="titre" scope="col">Intitul&eacute;<span class="ar">&#9650;&#9660;</span></th>
+      </tr></thead>
+      <tbody id="reg-body">
+        <tr data-num="1" data-etat="b-temoin" data-titre="Témoin : entrées aléatoires + disjoncteur + caps"><td class="num">001</td><td><span class="badge b-temoin">TÉMOIN</span></td><td>Témoin : entrées aléatoires + disjoncteur + caps</td></tr>
+        <tr data-num="2" data-etat="b-classee" data-titre="Kelly contraint · kill-switch · pyramidage · Monte-Carlo · HRP"><td class="num">002</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Kelly contraint · kill-switch · pyramidage · Monte-Carlo · HRP</td></tr>
+        <tr data-num="3" data-etat="b-retenue" data-titre="Sizing first-passage vs drawdown statique"><td class="num">003</td><td><span class="badge b-retenue">RETENUE</span></td><td>Sizing first-passage vs drawdown statique</td></tr>
+        <tr data-num="4" data-etat="b-classee" data-titre="Coûts + règles prop DANS le label"><td class="num">004</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Coûts + règles prop DANS le label</td></tr>
+        <tr data-num="5" data-etat="b-retenue" data-titre="IBS — force interne de bougie"><td class="num">005</td><td><span class="badge b-retenue">RETENUE</span></td><td>IBS — force interne de bougie</td></tr>
+        <tr data-num="6" data-etat="b-classee" data-titre="CRT — Candle Range Theory multi-timeframe"><td class="num">006</td><td><span class="badge b-classee">CLASSÉE</span></td><td>CRT — Candle Range Theory multi-timeframe</td></tr>
+        <tr data-num="7" data-etat="b-retenue" data-titre="Gap-fill du lundi"><td class="num">007</td><td><span class="badge b-retenue">RETENUE</span></td><td>Gap-fill du lundi</td></tr>
+        <tr data-num="8" data-etat="b-gardee" data-titre="EWMAC multi-vitesse vol-normalisé"><td class="num">008</td><td><span class="badge b-gardee">GARDÉE</span></td><td>EWMAC multi-vitesse vol-normalisé</td></tr>
+        <tr data-num="9" data-etat="b-classee" data-titre="Connors RSI(2) + moyenne 200"><td class="num">009</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Connors RSI(2) + moyenne 200</td></tr>
+        <tr data-num="10" data-etat="b-classee" data-titre="Turtle S1/S2"><td class="num">010</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Turtle S1/S2</td></tr>
+        <tr data-num="11" data-etat="b-gardee" data-titre="Squeeze de volatilité (BB-width) -&gt; expansion"><td class="num">011</td><td><span class="badge b-gardee">GARDÉE</span></td><td>Squeeze de volatilité (BB-width) -&gt; expansion</td></tr>
+        <tr data-num="12" data-etat="b-classee" data-titre="Noise-Area intraday + VWAP trailing"><td class="num">012</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Noise-Area intraday + VWAP trailing</td></tr>
+        <tr data-num="13" data-etat="b-nonmesurable" data-titre="Dual Momentum composite 4 sleeves"><td class="num">013</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>Dual Momentum composite 4 sleeves</td></tr>
+        <tr data-num="14" data-etat="b-classee" data-titre="ORB — Opening Range Breakout 5 min, cible 10R"><td class="num">014</td><td><span class="badge b-classee">CLASSÉE</span></td><td>ORB — Opening Range Breakout 5 min, cible 10R</td></tr>
+        <tr data-num="15" data-etat="b-classee" data-titre="Sweep-and-reject (balayage de liquidité)"><td class="num">015</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Sweep-and-reject (balayage de liquidité)</td></tr>
+        <tr data-num="16" data-etat="b-classee" data-titre="Flag / pennant breakout"><td class="num">016</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Flag / pennant breakout</td></tr>
+        <tr data-num="17" data-etat="b-classee" data-titre="Order Blocks / BOS / Inducement / FVG"><td class="num">017</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Order Blocks / BOS / Inducement / FVG</td></tr>
+        <tr data-num="18" data-etat="b-classee" data-titre="Weinstein stage gate + Wyckoff spring/upthrust"><td class="num">018</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Weinstein stage gate + Wyckoff spring/upthrust</td></tr>
+        <tr data-num="19" data-etat="b-classee" data-titre="Filtre session + régime + alignement HTF"><td class="num">019</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Filtre session + régime + alignement HTF</td></tr>
+        <tr data-num="20" data-etat="b-classee" data-titre="Cycle FOMC — semaines paires"><td class="num">020</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Cycle FOMC — semaines paires</td></tr>
+        <tr data-num="21" data-etat="b-nonmesurable" data-titre="Momentum intraday les jours CPI / NFP / FOMC"><td class="num">021</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>Momentum intraday les jours CPI / NFP / FOMC</td></tr>
+        <tr data-num="22" data-etat="b-nonmesurable" data-titre="Market Regime MQL5"><td class="num">022</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>Market Regime MQL5</td></tr>
+        <tr data-num="23" data-etat="b-nonmesurable" data-titre="Entropie de Shannon (trend / transition / chaos)"><td class="num">023</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>Entropie de Shannon (trend / transition / chaos)</td></tr>
+        <tr data-num="24" data-etat="b-nonmesurable" data-titre="Pente de la structure par terme du VIX"><td class="num">024</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>Pente de la structure par terme du VIX</td></tr>
+        <tr data-num="25" data-etat="b-retenue" data-titre="Grey Model GM(1,1)"><td class="num">025</td><td><span class="badge b-retenue">RETENUE</span></td><td>Grey Model GM(1,1)</td></tr>
+        <tr data-num="26" data-etat="b-classee" data-titre="Théorie des graphes : A* / BFS / DFS / Dijkstra"><td class="num">026</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Théorie des graphes : A* / BFS / DFS / Dijkstra</td></tr>
+        <tr data-num="27" data-etat="b-classee" data-titre="Tempered Fractional Differencing"><td class="num">027</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Tempered Fractional Differencing</td></tr>
+        <tr data-num="28" data-etat="b-classee" data-titre="FFDAutoTune"><td class="num">028</td><td><span class="badge b-classee">CLASSÉE</span></td><td>FFDAutoTune</td></tr>
+        <tr data-num="29" data-etat="b-classee" data-titre="AFD — d adaptatif par Hurst wavelet"><td class="num">029</td><td><span class="badge b-classee">CLASSÉE</span></td><td>AFD — d adaptatif par Hurst wavelet</td></tr>
+        <tr data-num="30" data-etat="b-nonmesurable" data-titre="Triple-Barrier Labeling"><td class="num">030</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>Triple-Barrier Labeling</td></tr>
+        <tr data-num="31" data-etat="b-classee" data-titre="Delta / CVD + déséquilibres empilés"><td class="num">031</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Delta / CVD + déséquilibres empilés</td></tr>
+        <tr data-num="32" data-etat="b-classee" data-titre="Absorption + footprint"><td class="num">032</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Absorption + footprint</td></tr>
+        <tr data-num="33" data-etat="b-classee" data-titre="POC / Value Area + échelle DOM"><td class="num">033</td><td><span class="badge b-classee">CLASSÉE</span></td><td>POC / Value Area + échelle DOM</td></tr>
+        <tr data-num="34" data-etat="b-nonmesurable" data-titre="HMM régimes cachés -&gt; CatBoost -&gt; ONNX"><td class="num">034</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>HMM régimes cachés -&gt; CatBoost -&gt; ONNX</td></tr>
+        <tr data-num="35" data-etat="b-nonmesurable" data-titre="Statistical Jump Model (porte de régime)"><td class="num">035</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>Statistical Jump Model (porte de régime)</td></tr>
+        <tr data-num="36" data-etat="b-nonmesurable" data-titre="Markov 3x3 + MLP, ré-entraînement 48 h"><td class="num">036</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>Markov 3x3 + MLP, ré-entraînement 48 h</td></tr>
+        <tr data-num="37" data-etat="b-nonmesurable" data-titre="Régression causale + méta-modèle"><td class="num">037</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>Régression causale + méta-modèle</td></tr>
+        <tr data-num="38" data-etat="b-nonmesurable" data-titre="SMC + XGBoost + ONNX"><td class="num">038</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>SMC + XGBoost + ONNX</td></tr>
+        <tr data-num="39" data-etat="b-nonmesurable" data-titre="FD-LSTM"><td class="num">039</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>FD-LSTM</td></tr>
+        <tr data-num="40" data-etat="b-nonmesurable" data-titre="NeuroPredictor (Hidformer / LSTM+PCA / TimesFM)"><td class="num">040</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>NeuroPredictor (Hidformer / LSTM+PCA / TimesFM)</td></tr>
+        <tr data-num="41" data-etat="b-nonmesurable" data-titre="Méta-modèle comme calculateur de TAILLE"><td class="num">041</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>Méta-modèle comme calculateur de TAILLE</td></tr>
+        <tr data-num="42" data-etat="b-classee" data-titre="COT positioning / rendement réel DFII10"><td class="num">042</td><td><span class="badge b-classee">CLASSÉE</span></td><td>COT positioning / rendement réel DFII10</td></tr>
+        <tr data-num="43" data-etat="b-classee" data-titre="Trailing stop (suiveur de stop)"><td class="num">043</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Trailing stop (suiveur de stop)</td></tr>
+        <tr data-num="44" data-etat="b-classee" data-titre="Règle de restitution (give-back du MFE)"><td class="num">044</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Règle de restitution (give-back du MFE)</td></tr>
+        <tr data-num="45" data-etat="b-classee" data-titre="Prise de bénéfice partielle"><td class="num">045</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Prise de bénéfice partielle</td></tr>
+        <tr data-num="46" data-etat="b-gardee" data-titre="Frein sur serie de pertes consecutives"><td class="num">046</td><td><span class="badge b-gardee">GARDÉE</span></td><td>Frein sur serie de pertes consecutives</td></tr>
+        <tr data-num="47" data-etat="b-classee" data-titre="Garde-fou CUMULATIF (chute depuis le sommet)"><td class="num">047</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Garde-fou CUMULATIF (chute depuis le sommet)</td></tr>
+        <tr data-num="48" data-etat="b-classee" data-titre="Scalp « premiere bougie en profit »"><td class="num">048</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Scalp « premiere bougie en profit »</td></tr>
+        <tr data-num="49" data-etat="b-classee" data-titre="Filtre de REGIME (porte melangeable)"><td class="num">049</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Filtre de REGIME (porte melangeable)</td></tr>
+        <tr data-num="50" data-etat="b-nepasconstruire" data-titre="Detecteur de cycle par Fourier (DFT)"><td class="num">050</td><td><span class="badge b-nepasconstruire">NE PAS CONSTRUIRE</span></td><td>Detecteur de cycle par Fourier (DFT)</td></tr>
+        <tr data-num="51" data-etat="b-classee" data-titre="Porte d&#x27;ACCUMULATION de conviction (LIF)"><td class="num">051</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Porte d&#x27;ACCUMULATION de conviction (LIF)</td></tr>
+        <tr data-num="52" data-etat="b-classee" data-titre="CONFLUENCE : vote de K modules sur N"><td class="num">052</td><td><span class="badge b-classee">CLASSÉE</span></td><td>CONFLUENCE : vote de K modules sur N</td></tr>
+        <tr data-num="53" data-etat="b-nepasconstruire" data-titre="Recovery par PANIER (grid) — a MESURER"><td class="num">053</td><td><span class="badge b-nepasconstruire">NE PAS CONSTRUIRE</span></td><td>Recovery par PANIER (grid) — a MESURER</td></tr>
+        <tr data-num="54" data-etat="b-classee" data-titre="VARIANTE DE L&#x27;AUTEUR : sortie au point mort sur bougie fine"><td class="num">054</td><td><span class="badge b-classee">CLASSÉE</span></td><td>VARIANTE DE L&#x27;AUTEUR : sortie au point mort sur bougie fine</td></tr>
+        <tr data-num="55" data-etat="b-retenue" data-titre="SORTIE CROISEE : sortir sur l&#x27;avis contraire d&#x27;un AUTRE module"><td class="num">055</td><td><span class="badge b-retenue">RETENUE</span></td><td>SORTIE CROISEE : sortir sur l&#x27;avis contraire d&#x27;un AUTRE module</td></tr>
+        <tr data-num="56" data-etat="b-livree" data-titre="TAILLE par CONFLUENCE : pondere au lieu de filtrer"><td class="num">056</td><td><span class="badge b-livree">LIVRÉE</span></td><td>TAILLE par CONFLUENCE : pondere au lieu de filtrer</td></tr>
+        <tr data-num="57" data-etat="b-classee" data-titre="TAILLE PROGRESSIVE SUR PROFIT"><td class="num">057</td><td><span class="badge b-classee">CLASSÉE</span></td><td>TAILLE PROGRESSIVE SUR PROFIT</td></tr>
+        <tr data-num="58" data-etat="b-classee" data-titre="DIVERGENCE DE PENTE prix vs oscillateur, NORMALISEE"><td class="num">058</td><td><span class="badge b-classee">CLASSÉE</span></td><td>DIVERGENCE DE PENTE prix vs oscillateur, NORMALISEE</td></tr>
+        <tr data-num="59" data-etat="b-classee" data-titre="THROTTLE PAR BUDGET DE CHUTE"><td class="num">059</td><td><span class="badge b-classee">CLASSÉE</span></td><td>THROTTLE PAR BUDGET DE CHUTE</td></tr>
+        <tr data-num="60" data-etat="b-classee" data-titre="REGLE DU SAUT de Turtle (skip rule du Systeme 1)"><td class="num">060</td><td><span class="badge b-classee">CLASSÉE</span></td><td>REGLE DU SAUT de Turtle (skip rule du Systeme 1)</td></tr>
+        <tr data-num="61" data-etat="b-classee" data-titre="FORCE RELATIVE OR/ARGENT (GS-Ratio) — NOUVELLE, pas un remplacement de la 24"><td class="num">061</td><td><span class="badge b-classee">CLASSÉE</span></td><td>FORCE RELATIVE OR/ARGENT (GS-Ratio) — NOUVELLE, pas un remplacement de la 24</td></tr>
+        <tr data-num="62" data-etat="b-enattente" data-titre="OTHELLO : residus M1 sous quotas — VERROU N°1 = temoin de structure"><td class="num">062</td><td><span class="badge b-enattente">EN ATTENTE</span></td><td>OTHELLO : residus M1 sous quotas — VERROU N°1 = temoin de structure</td></tr>
+        <tr data-num="63" data-etat="b-classee" data-titre="Bibliotheque de sorties « Othello » appliquee aux signaux VALIDES"><td class="num">063</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Bibliotheque de sorties « Othello » appliquee aux signaux VALIDES</td></tr>
+        <tr data-num="64" data-etat="b-retenue" data-titre="Carte de probabilite d&#x27;amplitude par percentiles de rendement (article 19797)"><td class="num">064</td><td><span class="badge b-retenue">RETENUE</span></td><td>Carte de probabilite d&#x27;amplitude par percentiles de rendement (article 19797)</td></tr>
+        <tr data-num="65" data-etat="b-gardee" data-titre="VERROU ETAPE 0 de la famille H : prouver qu&#x27;un modele APPREND avant de le juger"><td class="num">065</td><td><span class="badge b-gardee">GARDÉE</span></td><td>VERROU ETAPE 0 de la famille H : prouver qu&#x27;un modele APPREND avant de le juger</td></tr>
+        <tr data-num="66" data-etat="b-classee" data-titre="Barres a NOMBRE DE TICKS constant (echantillonnage Lopez de Prado)"><td class="num">066</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Barres a NOMBRE DE TICKS constant (echantillonnage Lopez de Prado)</td></tr>
+        <tr data-num="67" data-etat="b-classee" data-titre="Estimateurs de volatilite OHLC : Parkinson, Garman-Klass, Yang-Zhang"><td class="num">067</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Estimateurs de volatilite OHLC : Parkinson, Garman-Klass, Yang-Zhang</td></tr>
+        <tr data-num="68" data-etat="b-classee" data-titre="Exposant de Hurst comme PORTE de regime (H &gt; 0,55 tendance / H &lt; 0,45 reversion)"><td class="num">068</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Exposant de Hurst comme PORTE de regime (H &gt; 0,55 tendance / H &lt; 0,45 reversion)</td></tr>
+        <tr data-num="69" data-etat="b-classee" data-titre="Refutation des depots open-source XAUUSD (methode article 22607, appliquee au code)"><td class="num">069</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Refutation des depots open-source XAUUSD (methode article 22607, appliquee au code)</td></tr>
+        <tr data-num="70" data-etat="b-classee" data-titre="Barres Renko-ATR et Heikin-Ashi (cousines de l&#x27;idee 66)"><td class="num">070</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Barres Renko-ATR et Heikin-Ashi (cousines de l&#x27;idee 66)</td></tr>
+        <tr data-num="71" data-etat="b-classee" data-titre="RECALCULER le plafond de l&#x27;oracle a l&#x27;horizon 30 MINUTES (et non 1 minute)"><td class="num">071</td><td><span class="badge b-classee">CLASSÉE</span></td><td>RECALCULER le plafond de l&#x27;oracle a l&#x27;horizon 30 MINUTES (et non 1 minute)</td></tr>
+        <tr data-num="72" data-etat="b-classee" data-titre="Correlations croisees glissantes or/DXY et or/USDJPY (60 min)"><td class="num">072</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Correlations croisees glissantes or/DXY et or/USDJPY (60 min)</td></tr>
+        <tr data-num="73" data-etat="b-classee" data-titre="Etiquetage PREDICTIF : separer temporellement les features et la zone etiquetee"><td class="num">073</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Etiquetage PREDICTIF : separer temporellement les features et la zone etiquetee</td></tr>
+        <tr data-num="74" data-etat="b-gardee" data-titre="Le harnais ML du banc : le HARNAIS d&#x27;entrainement ML du banc (Python -&gt; ONNX) + le module S74 qui consomme le modele"><td class="num">074</td><td><span class="badge b-gardee">GARDÉE</span></td><td>Le harnais ML du banc : le HARNAIS d&#x27;entrainement ML du banc (Python -&gt; ONNX) + le module S74 qui consomme le modele</td></tr>
+        <tr data-num="75" data-etat="b-classee" data-titre="PRE-ENTRAINEMENT CONTRASTIF de l&#x27;encodeur le harnais ML du banc (auto-supervise, SANS etiquettes)"><td class="num">075</td><td><span class="badge b-classee">CLASSÉE</span></td><td>PRE-ENTRAINEMENT CONTRASTIF de l&#x27;encodeur le harnais ML du banc (auto-supervise, SANS etiquettes)</td></tr>
+        <tr data-num="76" data-etat="b-classee" data-titre="SOM (carte de Kohonen) comme CARTE DE REGIME — feature de contexte, PAS predicteur"><td class="num">076</td><td><span class="badge b-classee">CLASSÉE</span></td><td>SOM (carte de Kohonen) comme CARTE DE REGIME — feature de contexte, PAS predicteur</td></tr>
+        <tr data-num="77" data-etat="b-livree" data-titre="Rapport HTML interactif du banc (heatmap / visualisation autonome)"><td class="num">077</td><td><span class="badge b-livree">LIVRÉE</span></td><td>Rapport HTML interactif du banc (heatmap / visualisation autonome)</td></tr>
+        <tr data-num="78" data-etat="b-classee" data-titre="La bougie SANS MECHE d&#x27;un cote, puis retour toucher son open (idée de l&#x27;auteur)"><td class="num">078</td><td><span class="badge b-classee">CLASSÉE</span></td><td>La bougie SANS MECHE d&#x27;un cote, puis retour toucher son open (idée de l&#x27;auteur)</td></tr>
+        <tr data-num="79" data-etat="b-classee" data-titre="Encodeur d&#x27;etat BINAIRE 32 bits (11 indicateurs stationnaires -&gt; code de Hamming)"><td class="num">079</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Encodeur d&#x27;etat BINAIRE 32 bits (11 indicateurs stationnaires -&gt; code de Hamming)</td></tr>
+        <tr data-num="80" data-etat="b-suspendue" data-titre="Memoire d&#x27;etats par PLUS PROCHE VOISIN de Hamming - le temoin TRIVIAL de la famille H"><td class="num">080</td><td><span class="badge b-suspendue">SUSPENDUE</span></td><td>Memoire d&#x27;etats par PLUS PROCHE VOISIN de Hamming - le temoin TRIVIAL de la famille H</td></tr>
+        <tr data-num="81" data-etat="b-suspendue" data-titre="Vote PONDERE par performance - extension de la porte S52 Confluence"><td class="num">081</td><td><span class="badge b-suspendue">SUSPENDUE</span></td><td>Vote PONDERE par performance - extension de la porte S52 Confluence</td></tr>
+        <tr data-num="82" data-etat="b-classee" data-titre="Poids ADAPTATIF de module par mise a jour incrementale (q = q + a x (recompense - q))"><td class="num">082</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Poids ADAPTATIF de module par mise a jour incrementale (q = q + a x (recompense - q))</td></tr>
+        <tr data-num="83" data-etat="b-classee" data-titre="Correcteur de BIAIS DIRECTIONNEL (equilibrage de classes en surcouche)"><td class="num">083</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Correcteur de BIAIS DIRECTIONNEL (equilibrage de classes en surcouche)</td></tr>
+        <tr data-num="84" data-etat="b-classee" data-titre="Reproduction AUDITEE de BrainRL sous le verrou d&#x27;apprentissage S65"><td class="num">084</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Reproduction AUDITEE de BrainRL sous le verrou d&#x27;apprentissage S65</td></tr>
+        <tr data-num="85" data-etat="b-suspendue" data-titre="BANDE MORTE (hysteresis) de k x ATR(D1) en surcouche d&#x27;un module existant"><td class="num">085</td><td><span class="badge b-suspendue">SUSPENDUE</span></td><td>BANDE MORTE (hysteresis) de k x ATR(D1) en surcouche d&#x27;un module existant</td></tr>
+        <tr data-num="86" data-etat="b-classee" data-titre="Vote directionnel MULTI-UNITES-DE-TEMPS (K sur N) sur un seul module"><td class="num">086</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Vote directionnel MULTI-UNITES-DE-TEMPS (K sur N) sur un seul module</td></tr>
+        <tr data-num="87" data-etat="b-classee" data-titre="PRIX COMPOSITE pondere multi-UT a franchissement de seuil"><td class="num">087</td><td><span class="badge b-classee">CLASSÉE</span></td><td>PRIX COMPOSITE pondere multi-UT a franchissement de seuil</td></tr>
+        <tr data-num="88" data-etat="b-classee" data-titre="A/B : meme regle sur serie DISCRETISEE contre serie BRUTE"><td class="num">088</td><td><span class="badge b-classee">CLASSÉE</span></td><td>A/B : meme regle sur serie DISCRETISEE contre serie BRUTE</td></tr>
+        <tr data-num="89" data-etat="b-classee" data-titre="Entree a la Nieme TRANSITION CONSECUTIVE (longueur de serie de franchissements)"><td class="num">089</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Entree a la Nieme TRANSITION CONSECUTIVE (longueur de serie de franchissements)</td></tr>
+        <tr data-num="90" data-etat="b-classee" data-titre="CASSURE APRES ALTERNANCE (consolidation detectee par le motif des franchissements)"><td class="num">090</td><td><span class="badge b-classee">CLASSÉE</span></td><td>CASSURE APRES ALTERNANCE (consolidation detectee par le motif des franchissements)</td></tr>
+        <tr data-num="91" data-etat="b-classee" data-titre="TAILLE DE POSITION pilotee par la force du signal (distance / seuil)"><td class="num">091</td><td><span class="badge b-classee">CLASSÉE</span></td><td>TAILLE DE POSITION pilotee par la force du signal (distance / seuil)</td></tr>
+        <tr data-num="92" data-etat="b-suspendue" data-titre="ARBITRAGE DE RETARD entre instruments correles"><td class="num">092</td><td><span class="badge b-suspendue">SUSPENDUE</span></td><td>ARBITRAGE DE RETARD entre instruments correles</td></tr>
+        <tr data-num="93" data-etat="b-classee" data-titre="Le carnet de cas — décision par MÉMOIRE D&#x27;ANALOGUES sur état DISCRET, sans formule ni gradient"><td class="num">093</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Le carnet de cas — décision par MÉMOIRE D&#x27;ANALOGUES sur état DISCRET, sans formule ni gradient</td></tr>
+        <tr data-num="94" data-etat="b-suspendue" data-titre="Quorum d&#x27;echelles sur serie quantifiee — une meme regle vote contre elle-meme a travers les echelles, sur un prix discretise par bande morte adaptative"><td class="num">094</td><td><span class="badge b-suspendue">SUSPENDUE</span></td><td>Quorum d&#x27;echelles sur serie quantifiee — une meme regle vote contre elle-meme a travers les echelles, sur un prix discretise par bande morte adaptative</td></tr>
+        <tr data-num="95" data-etat="b-nonmesurable" data-titre="TimesFM pour prevoir la VOLATILITE et dimensionner le disjoncteur (idée de l&#x27;auteur)"><td class="num">095</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>TimesFM pour prevoir la VOLATILITE et dimensionner le disjoncteur (idée de l&#x27;auteur)</td></tr>
+        <tr data-num="96" data-etat="b-classee" data-titre="SORTIE sur retournement RAPIDE, decouplee du signal d&#x27;entree"><td class="num">096</td><td><span class="badge b-classee">CLASSÉE</span></td><td>SORTIE sur retournement RAPIDE, decouplee du signal d&#x27;entree</td></tr>
+        <tr data-num="97" data-etat="b-classee" data-titre="Report d&#x27;execution hors des minutes cheres du profil horaire du spread"><td class="num">097</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Report d&#x27;execution hors des minutes cheres du profil horaire du spread</td></tr>
+        <tr data-num="98" data-etat="b-nonmesurable" data-titre="Report des ordres hors de la fenetre news +/- 5 minutes"><td class="num">098</td><td><span class="badge b-nonmesurable">NON MESURABLE</span></td><td>Report des ordres hors de la fenetre news +/- 5 minutes</td></tr>
+        <tr data-num="99" data-etat="b-classee" data-titre="Entree PASSIVE a cours limite, avec repli au marche apres 1 barre"><td class="num">099</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Entree PASSIVE a cours limite, avec repli au marche apres 1 barre</td></tr>
+        <tr data-num="100" data-etat="b-classee" data-titre="La minute de reglement 13:29-13:30 ET comme fenetre d&#x27;execution du signal lent"><td class="num">100</td><td><span class="badge b-classee">CLASSÉE</span></td><td>La minute de reglement 13:29-13:30 ET comme fenetre d&#x27;execution du signal lent</td></tr>
+        <tr data-num="101" data-etat="b-classee" data-titre="Flux SURPRISE : le residu du flux signe contre sa propre memoire longue"><td class="num">101</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Flux SURPRISE : le residu du flux signe contre sa propre memoire longue</td></tr>
+        <tr data-num="102" data-etat="b-classee" data-titre="Toxicite EXACTE du flux (drapeaux de bourse) pour PREVOIR la volatilite"><td class="num">102</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Toxicite EXACTE du flux (drapeaux de bourse) pour PREVOIR la volatilite</td></tr>
+        <tr data-num="103" data-etat="b-classee" data-titre="L&#x27;horloge du FIX de Londres et la decomposition JOUR / NUIT de l&#x27;or"><td class="num">103</td><td><span class="badge b-classee">CLASSÉE</span></td><td>L&#x27;horloge du FIX de Londres et la decomposition JOUR / NUIT de l&#x27;or</td></tr>
+        <tr data-num="104" data-etat="b-classee" data-titre="SAUT DE PRIX comme declencheur, sans calendrier — la forme MESURABLE de l&#x27;idee 21"><td class="num">104</td><td><span class="badge b-classee">CLASSÉE</span></td><td>SAUT DE PRIX comme declencheur, sans calendrier — la forme MESURABLE de l&#x27;idee 21</td></tr>
+        <tr data-num="105" data-etat="b-classee" data-titre="Desaisonnaliser la volatilite intrajournaliere AVANT le percentile de compression de S11"><td class="num">105</td><td><span class="badge b-classee">CLASSÉE</span></td><td>Desaisonnaliser la volatilite intrajournaliere AVANT le percentile de compression de S11</td></tr>
+        <tr data-num="106" data-etat="b-nepasconstruire" data-titre="Regroupement des prix sur l&#x27;OR (Ball, Torous &amp; Tschoegl 1985) — la BONNE source"><td class="num">106</td><td><span class="badge b-nepasconstruire">NE PAS CONSTRUIRE</span></td><td>Regroupement des prix sur l&#x27;OR (Ball, Torous &amp; Tschoegl 1985) — la BONNE source</td></tr>
+        <tr data-num="107" data-etat="b-classee" data-titre="H1 — LE BETA SE SOUSTRAIT : S08 contre le placebo de direction sur barres DE-MOYENNEES"><td class="num">107</td><td><span class="badge b-classee">CLASSÉE</span></td><td>H1 — LE BETA SE SOUSTRAIT : S08 contre le placebo de direction sur barres DE-MOYENNEES</td></tr>
+        <tr data-num="108" data-etat="b-classee" data-titre="H2 — La loi n.1 a une IDENTITE COMPTABLE, et une couche PAUSE plutot que COUPE"><td class="num">108</td><td><span class="badge b-classee">CLASSÉE</span></td><td>H2 — La loi n.1 a une IDENTITE COMPTABLE, et une couche PAUSE plutot que COUPE</td></tr>
+        <tr data-num="109" data-etat="b-classee" data-titre="H3 — Rejuger les portes de regime sur le SIGNE du groupe bloque"><td class="num">109</td><td><span class="badge b-classee">CLASSÉE</span></td><td>H3 — Rejuger les portes de regime sur le SIGNE du groupe bloque</td></tr>
+        <tr data-num="110" data-etat="b-classee" data-titre="H4 — Le facteur x1,8 entre chute reconstruite et chute payee n&#x27;est PAS etabli"><td class="num">110</td><td><span class="badge b-classee">CLASSÉE</span></td><td>H4 — Le facteur x1,8 entre chute reconstruite et chute payee n&#x27;est PAS etabli</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <p><strong>Les intitul&eacute;s sont reproduits tels qu'ils ont &eacute;t&eacute; inscrits au
+    registre</strong>, y compris leur ponctuation et leur accentuation irr&eacute;guli&egrave;res.
+    Les r&eacute;&eacute;crire aujourd'hui reviendrait &agrave; retoucher la pi&egrave;ce&nbsp;: ils
+    sont laiss&eacute;s dans leur &eacute;tat d'origine.</p>
+  </div>
+
+  <h3>Ce que veut dire chaque &eacute;tat</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th scope="col">&Eacute;tat</th><th scope="col">N</th><th scope="col">Ce qu'il signifie</th></tr></thead>
+      <tbody>
+        <tr><td style="white-space:nowrap"><span class="badge b-classee">CLASSÉE</span></td><td class="num" style="width:44px">71</td><td>instruite et close : le critere de rejet pre-inscrit a ete atteint</td></tr>
+        <tr><td style="white-space:nowrap"><span class="badge b-nonmesurable">NON MESURABLE</span></td><td class="num" style="width:44px">16</td><td>aucun instrument disponible ne pouvait trancher &mdash; ce n'est pas un verdict sur l'idee</td></tr>
+        <tr><td style="white-space:nowrap"><span class="badge b-retenue">RETENUE</span></td><td class="num" style="width:44px">6</td><td>a passe un etage, reste a instruire plus loin</td></tr>
+        <tr><td style="white-space:nowrap"><span class="badge b-suspendue">SUSPENDUE</span></td><td class="num" style="width:44px">5</td><td>gelee : sa mesure depend d'une autre idee non tranchee</td></tr>
+        <tr><td style="white-space:nowrap"><span class="badge b-gardee">GARDÉE</span></td><td class="num" style="width:44px">5</td><td>conservee comme brique de travail, sans avantage demontre</td></tr>
+        <tr><td style="white-space:nowrap"><span class="badge b-nepasconstruire">NE PAS CONSTRUIRE</span></td><td class="num" style="width:44px">3</td><td>ecartee avant tout code, sur arithmetique ou sur piece</td></tr>
+        <tr><td style="white-space:nowrap"><span class="badge b-livree">LIVRÉE</span></td><td class="num" style="width:44px">2</td><td>construite et livree comme outil, pas comme avantage</td></tr>
+        <tr><td style="white-space:nowrap"><span class="badge b-temoin">TÉMOIN</span></td><td class="num" style="width:44px">1</td><td>n'est pas une idee : c'est le placebo qui sert d'etalon</td></tr>
+        <tr><td style="white-space:nowrap"><span class="badge b-enattente">EN ATTENTE</span></td><td class="num" style="width:44px">1</td><td>instruite, en attente d'un arbitrage de conception</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warn">
+    <p><strong>Une id&eacute;e absente de cette liste n'est pas r&eacute;fut&eacute;e par ce
+    travail.</strong> 110 id&eacute;es test&eacute;es, ce n'est pas &laquo;&nbsp;les march&eacute;s
+    sont efficients&nbsp;&raquo;&nbsp;: c'est &laquo;&nbsp;ces 110 id&eacute;es-l&agrave;,
+    mesur&eacute;es ainsi, sur ces donn&eacute;es-l&agrave;, ne montrent pas d'avantage&nbsp;&raquo;.</p>
+  </div>
+</section>
+
+<section class="panel" id="p-autopsies" role="tabpanel" aria-labelledby="t-autopsies">
+  <div class="panel-head">
+    <p class="kicker">SECTION 05</p>
+    <h2>Sept autopsies</h2>
+    <p class="lede">Sept idées parmi cent dix, choisies parce que chacune est morte d'un piège différent. Pour chacune&nbsp;: ce qu'elle promettait, le chiffre qui l'a tuée, et le piège — nommé.</p>
+  </div>
+
+  <div class="note">
+    <p>Aucune de ces sept idées n'a été rejetée sur une opinion. Chacune a été tuée par un chiffre — mesuré après une spécification figée d'avance ou, pour la dernière, simplement calculé à partir des unités de sa propre source.</p>
+  </div>
+
+  <h3>Les sept pièges, d'un coup d'œil</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead>
+        <tr><th>L'idée</th><th>Le piège</th><th>Le chiffre qui tranche</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>L'or déguisé en signal</td><td>Un témoin qui effaçait la dérive</td><td>Avantage −88&nbsp;% une fois la série détrendée</td></tr>
+        <tr><td>La médiane qui cachait la note</td><td>Un instrument qui répond à côté de la question</td><td>99ᵉ centile du spread à 118 points à 23&nbsp;h, médiane plate</td></tr>
+        <tr><td>Le seuil qui exigeait l'impossible</td><td>Un critère pré-inscrit presque inatteignable — et refusé de le réécrire</td><td>«&nbsp;2 fois l'attente&nbsp;» = 85&nbsp;% des signaux la nuit</td></tr>
+        <tr><td>La cassure d'ouverture</td><td>Les frais comptés en dernier</td><td>Seuil 9,09&nbsp;% sans frais, 10,5&nbsp;% avec&nbsp;; mesuré 9,59&nbsp;% et 9,16&nbsp;%</td></tr>
+        <tr><td>L'indicateur de flux</td><td>Une lecture usuelle jamais confrontée à la donnée réelle</td><td>Prix +111&nbsp;%, cumul −628&nbsp;629 contrats</td></tr>
+        <tr><td>La famille qu'on voit partout</td><td>Un critère qui se déclenche partout</td><td>6&nbsp;725 événements sur 34&nbsp;762 barres</td></tr>
+        <tr><td>L'idée tuée par une division</td><td>Mesurer avant d'avoir pesé</td><td>0,0022&nbsp;% par million de dollars, pour une once à ≈&nbsp;3&nbsp;000&nbsp;$</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>L'or déguisé en signal</h3>
+    <h4>Le piège&nbsp;: un témoin qui effaçait la dérive</h4>
+    <p>Une règle multi-échelles semblait porter une vraie information directionnelle&nbsp;: sur <strong>200 tirages</strong>, son témoin ne l'égalait <strong>jamais</strong>. Elle passait.</p>
+    <p>Elle ne passait que parce que le témoin effaçait la dérive. L'actif avait monté de <strong>59,9&nbsp;%</strong> sur la période, et la règle partait à l'achat <strong>70&nbsp;% du temps</strong>. Sur la série détrendée, l'avantage tombait de <strong>88&nbsp;%</strong> et la proportion de positions longues descendait à <strong>53&nbsp;%</strong> — pile ou face.</p>
+    <div class="grid g3">
+      <div class="stat">
+        <div class="stat-k">HAUSSE DE L'ACTIF</div>
+        <div class="stat-v">+59,9&nbsp;%</div>
+        <p class="stat-n">Sur la période mesurée. C'est cette dérive que le témoin ne conservait pas.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-k">POSITIONS LONGUES, SÉRIE DÉTRENDÉE</div>
+        <div class="stat-v">53&nbsp;%</div>
+        <p class="stat-n">Contre 70&nbsp;% sur la série brute. À 53&nbsp;%, la règle tire à pile ou face.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-k">AVANTAGE, SÉRIE DÉTRENDÉE</div>
+        <div class="stat-v">−88&nbsp;%</div>
+        <p class="stat-n">Ce que perd l'avantage une fois la dérive retirée.</p>
+      </div>
+    </div>
+    <p><em>Le couperet mesurait le marché, pas la règle.</em> C'est la règle&nbsp;13 du rapport&nbsp;: toute statistique de déplacement signé sur un actif qui dérive mesure la dérive.</p>
+  </div>
+
+  <div class="card">
+    <h3>La médiane qui cachait la note</h3>
+    <h4>Le piège&nbsp;: un instrument qui répond à côté de la question</h4>
+    <p>L'idée&nbsp;: retarder les ordres qui tombent aux minutes où le spread est cher. Premier calcul&nbsp;: <strong>aucun créneau cher sur 92</strong>. L'idée semblait sans objet.</p>
+    <p>Mais ce résultat contredisait un fait déjà mesuré — le spread de nuit est nettement plus élevé. J'ai donc vérifié mon instrument avant de publier. <strong>La médiane par créneau était plate&nbsp;; la queue ne l'était pas.</strong></p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th>Créneau</th><th>Médiane du spread</th><th>90ᵉ centile</th><th>99ᵉ centile</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>23&nbsp;h</td><td rowspan="2">plate, entre 20 et 31 points sur tous les créneaux</td><td><strong>90</strong> points</td><td><strong>118</strong> points</td></tr>
+          <tr><td>Pleine séance</td><td>53 points</td><td>72 points</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><em>La bonne réponse était dans la queue, et je regardais le milieu.</em> Deux règles s'appliquent ici&nbsp;: face à un coût de queue, la médiane est l'instrument qui le cache (règle&nbsp;17)&nbsp;; et un résultat qui contredit un fait déjà mesuré est un signal d'instrument, jamais une découverte (règle&nbsp;21).</p>
+  </div>
+
+  <div class="card">
+    <h3>Le seuil qui exigeait l'impossible</h3>
+    <h4>Le piège&nbsp;: un critère pré-inscrit presque inatteignable — et la tentation de le réécrire</h4>
+    <p>Un déclencheur de compression de volatilité tire <strong>59,4&nbsp;%</strong> de ses signaux la nuit, contre <strong>42,4&nbsp;%</strong> attendus&nbsp;: un biais de <strong>+40&nbsp;%</strong>, causé par le simple fait qu'un creux nocturne <em>ressemble</em> à une compression. Le correctif existe, et il change <strong>41 à 47&nbsp;%</strong> des décisions.</p>
+    <p>Mon critère pré-inscrit exigeait une concentration nocturne d'«&nbsp;au moins 2 fois&nbsp;» l'attente. Or la nuit représente déjà 42&nbsp;% des barres&nbsp;: «&nbsp;2 fois&nbsp;» aurait exigé <strong>85&nbsp;%</strong> des signaux la nuit — un quasi-maximum. Le critère était arithmétiquement presque impossible à satisfaire.</p>
+    <div class="grid g3">
+      <div class="stat">
+        <div class="stat-k">SIGNAUX TIRÉS LA NUIT</div>
+        <div class="stat-v">59,4&nbsp;%</div>
+        <p class="stat-n">Mesuré. Un creux nocturne ressemble à une compression.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-k">ATTENDUS</div>
+        <div class="stat-v">42,4&nbsp;%</div>
+        <p class="stat-n">La part des barres qui tombent la nuit. Le biais réel vaut +40&nbsp;%.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-k">CE QU'EXIGEAIT «&nbsp;2 FOIS&nbsp;»</div>
+        <div class="stat-v">85&nbsp;%</div>
+        <p class="stat-n">Un quasi-maximum, inscrit dans le critère avant de mesurer.</p>
+      </div>
+    </div>
+    <p><strong>Je l'ai appliqué quand même, et l'idée est classée.</strong> Réécrire un seuil après avoir vu le résultat est exactement ce qui rend un test inutile — y compris quand le résultat vous plairait. C'est le premier des deux refus racontés dans «&nbsp;Mes 22 erreurs&nbsp;».</p>
+  </div>
+
+  <div class="card">
+    <h3>La cassure d'ouverture qui meurt sur les frais, pas sur le signal</h3>
+    <h4>Le piège&nbsp;: les frais comptés en dernier</h4>
+    <p>Une cassure de la première bougie de séance, stop de l'autre côté, objectif dix fois le risque. Pour être rentable <strong>sans aucun frais</strong>, il faut réussir <code>1/11 = 9,09&nbsp;%</code> du temps.</p>
+    <p>Mesuré sur <strong>1&nbsp;034 cassures</strong>&nbsp;: <strong>9,59&nbsp;%</strong> sur la première période, <strong>9,16&nbsp;%</strong> sur la seconde. Elle franchit la barre — deux fois.</p>
+    <p>Les frais déplacent la barre à <strong>10,5&nbsp;%</strong>. Elle tombe pile dans l'intervalle — deux fois.</p>
+    <div class="grid g3">
+      <div class="stat">
+        <div class="stat-k">CASSURES MESURÉES</div>
+        <div class="stat-v">1&nbsp;034</div>
+        <p class="stat-n">Sur deux périodes distinctes.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-k">SEUIL SANS FRAIS</div>
+        <div class="stat-v">9,09&nbsp;%</div>
+        <p class="stat-n">1/11&nbsp;: la barre que les deux mesures franchissent.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-k">SEUIL RÉEL, FRAIS COMPTÉS</div>
+        <div class="stat-v">10,5&nbsp;%</div>
+        <p class="stat-n">La barre que les deux mesures manquent.</p>
+      </div>
+    </div>
+    <div class="formula">
+      <div class="f">p* = (R + c) / ((n + 1) &times; R)</div>
+      <p class="fl"><code>p*</code> est le taux de réussite minimal pour être rentable&nbsp;; <code>R</code> le risque par position, <code>c</code> le coût aller-retour, <code>n</code> l'objectif en multiples du risque. Avec <code>c = 0</code> et <code>n = 10</code>, on retrouve 1/11.</p>
+    </div>
+    <figure class="fig">
+      <p class="fig-t">DEUX MESURES ENTRE DEUX SEUILS</p>
+      <svg viewBox="0 0 700 230" role="img" aria-label="Règle graduée de 9,0 % à 10,8 %. Le seuil sans frais est à 9,09 %, le seuil réel une fois le péage compté à 10,5 %. Les deux taux mesurés, 9,59 % et 9,16 %, tombent tous deux entre ces deux seuils.">
+        <rect x="90" y="58" width="470" height="62" fill="var(--accent)" fill-opacity="0.10"/>
+        <text class="svg-lab" x="325" y="84" text-anchor="middle" fill="var(--muted)" font-size="12">entre les deux seuils&#160;: l'idée semble passer,</text>
+        <text class="svg-lab" x="325" y="100" text-anchor="middle" fill="var(--muted)" font-size="12">mais ne paie pas son aller-retour</text>
+
+        <line class="svg-ax" x1="60" y1="120" x2="660" y2="120" stroke="var(--text)" stroke-width="1.5"/>
+        <g stroke="var(--muted)" stroke-width="1">
+          <line x1="60" y1="120" x2="60" y2="132"/>
+          <line x1="93.3" y1="120" x2="93.3" y2="126"/>
+          <line x1="126.7" y1="120" x2="126.7" y2="126"/>
+          <line x1="160" y1="120" x2="160" y2="126"/>
+          <line x1="193.3" y1="120" x2="193.3" y2="126"/>
+          <line x1="226.7" y1="120" x2="226.7" y2="132"/>
+          <line x1="260" y1="120" x2="260" y2="126"/>
+          <line x1="293.3" y1="120" x2="293.3" y2="126"/>
+          <line x1="326.7" y1="120" x2="326.7" y2="126"/>
+          <line x1="360" y1="120" x2="360" y2="126"/>
+          <line x1="393.3" y1="120" x2="393.3" y2="132"/>
+          <line x1="426.7" y1="120" x2="426.7" y2="126"/>
+          <line x1="460" y1="120" x2="460" y2="126"/>
+          <line x1="493.3" y1="120" x2="493.3" y2="126"/>
+          <line x1="526.7" y1="120" x2="526.7" y2="126"/>
+          <line x1="560" y1="120" x2="560" y2="132"/>
+          <line x1="593.3" y1="120" x2="593.3" y2="126"/>
+          <line x1="626.7" y1="120" x2="626.7" y2="126"/>
+          <line x1="660" y1="120" x2="660" y2="132"/>
+        </g>
+        <g class="svg-lab" fill="var(--muted)" font-size="12" text-anchor="middle">
+          <text x="60" y="150">9,0&#160;%</text>
+          <text x="226.7" y="150">9,5&#160;%</text>
+          <text x="393.3" y="150">10,0&#160;%</text>
+          <text x="560" y="150">10,5&#160;%</text>
+          <text x="660" y="150">10,8&#160;%</text>
+        </g>
+
+        <line x1="90" y1="58" x2="90" y2="120" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <text class="svg-val" x="90" y="46" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">9,09&#160;%</text>
+        <text class="svg-lab" x="90" y="28" text-anchor="middle" fill="var(--muted)" font-size="12">seuil sans frais (1/11)</text>
+
+        <line x1="560" y1="58" x2="560" y2="120" stroke="var(--accent)" stroke-width="2.5"/>
+        <text class="svg-val" x="560" y="46" text-anchor="middle" fill="var(--accent)" font-size="14" font-weight="600">10,5&#160;%</text>
+        <text class="svg-lab" x="560" y="28" text-anchor="middle" fill="var(--muted)" font-size="12">seuil réel, péage compté</text>
+
+        <line x1="113.3" y1="126" x2="113.3" y2="168" stroke="var(--muted)" stroke-width="1"/>
+        <line x1="256.7" y1="126" x2="256.7" y2="168" stroke="var(--muted)" stroke-width="1"/>
+        <circle cx="113.3" cy="120" r="6" fill="var(--accent)" stroke="var(--border)" stroke-width="1.5"/>
+        <circle cx="256.7" cy="120" r="6" fill="var(--accent)" stroke="var(--border)" stroke-width="1.5"/>
+        <text class="svg-val" x="113.3" y="188" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">9,16&#160;%</text>
+        <text class="svg-lab" x="113.3" y="206" text-anchor="middle" fill="var(--muted)" font-size="12">2ᵉ période</text>
+        <text class="svg-val" x="256.7" y="188" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="600">9,59&#160;%</text>
+        <text class="svg-lab" x="256.7" y="206" text-anchor="middle" fill="var(--muted)" font-size="12">1ʳᵉ période</text>
+      </svg>
+      <figcaption>Ce que la figure montre&nbsp;: sur 1&nbsp;034 cassures, les deux taux de réussite mesurés (9,59&nbsp;% et 9,16&nbsp;%) dépassent le seuil théorique de 9,09&nbsp;% mais restent sous le seuil de 10,5&nbsp;% qui compte le coût aller-retour. Ce qu'elle ne montre pas&nbsp;: l'incertitude autour de chaque taux, que le rapport ne publie pas ici, ni le résultat en monnaie.</figcaption>
+    </figure>
+    <div class="pull">
+      <p>Un objectif à 10R n'exige pas 9,1&nbsp;% de réussite. Il en exige 10,5&nbsp;% une fois le spread compté. Aucun outil grand public n'affiche cette correction.</p>
+    </div>
+    <p>C'est la formule la plus utile de tout ce travail, et elle vaut pour n'importe qui&nbsp;: sur les échelles courtes, cette seule correction décide du signe du résultat.</p>
+  </div>
+
+  <div class="card">
+    <h3>L'indicateur de flux qui aurait dit de vendre pendant que l'or doublait</h3>
+    <h4>Le piège&nbsp;: une lecture usuelle jamais confrontée à la donnée réelle</h4>
+    <p>Le déséquilibre acheteur-vendeur cumulé — l'indicateur central de toute une école d'analyse — a pu être calculé sur des données réelles de contrats à terme&nbsp;: <strong>22 mois</strong>, <strong>34,8 millions de contrats</strong>, avec le sens de l'agresseur donné par la place de marché et non deviné.</p>
+    <div class="grid g2">
+      <div class="stat">
+        <div class="stat-k">LE PRIX, SUR 22 MOIS</div>
+        <div class="stat-v">+111&nbsp;%</div>
+        <p class="stat-n">L'actif a plus que doublé sur la période couverte.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-k">LE DÉSÉQUILIBRE CUMULÉ</div>
+        <div class="stat-v">−628&nbsp;629</div>
+        <p class="stat-n">Contrats. Le cumul a perdu pendant que le prix montait.</p>
+      </div>
+    </div>
+    <p>La lecture usuelle — «&nbsp;cumul négatif, donc baissier&nbsp;» — aurait été fausse <strong>vingt-deux mois d'affilée</strong>. Ce n'est pas une surprise théorique&nbsp;: la littérature prédit exactement cela. Le flux brut est dominé par sa part <em>prévisible</em>, celle que la liquidité absorbe et qui ne déplace pas le prix.</p>
+  </div>
+
+  <div class="card">
+    <h3>La famille qu'on voit partout, mesurée pour la première fois</h3>
+    <h4>Le piège&nbsp;: un critère qui se déclenche partout — et un classement rendu sur une lecture</h4>
+    <p>Blocs d'ordres, ruptures de structure, écarts de valeur&nbsp;: une famille très diffusée, que j'avais classée en juillet <strong>sur une revue de littérature</strong> — donc mal. Cette fois&nbsp;: définitions figées d'avance, sans adjectif, puis mesure.</p>
+    <div class="grid g3">
+      <div class="stat">
+        <div class="stat-k">CELLULES OÙ UN AVANTAGE APPARAÎT</div>
+        <div class="stat-v">0 / 6</div>
+        <p class="stat-n">Avantage contre la position constante négatif dans les six.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-k">LE t LE PLUS DÉFAVORABLE</div>
+        <div class="stat-v">−6,5</div>
+        <p class="stat-n">Mais ce n'est pas le <code>t</code> qui tranche.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-k">OCCURRENCES D'UN SEUL MOTIF</div>
+        <div class="stat-v">6&nbsp;725</div>
+        <p class="stat-n">Sur 34&nbsp;762 barres&nbsp;: un événement toutes les cinq bougies.</p>
+      </div>
+    </div>
+    <p>C'est le comptage qui tranche. Un motif qui apparaît toutes les cinq bougies n'est pas une détection&nbsp;: c'est une description de l'action des prix ordinaire.</p>
+    <div class="pull">
+      <p>Un critère qui se déclenche partout n'est pas un critère. Et on ne le répare pas en ajoutant des filtres&nbsp;: filtrer 6&nbsp;725 événements jusqu'à en garder 50, c'est choisir 50 événements après coup.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>L'idée tuée par une division</h3>
+    <h4>Le piège&nbsp;: mesurer avant d'avoir pesé</h4>
+    <p>Une proposition suggérait d'exécuter pendant la minute où l'impact de marché est mesuré le plus faible&nbsp;: <strong>0,0022&nbsp;%</strong> par <strong>million de dollars</strong> échangés.</p>
+    <p>La taille réellement tradée était <strong>une once</strong>, soit environ <strong>3&nbsp;000&nbsp;$</strong>. L'effet recherché est <strong>mille fois plus petit</strong> que les frais ordinaires. Il n'y avait rien à mesurer&nbsp;: le poids de l'idée était écrit dans les <strong>unités</strong> de sa propre source.</p>
+    <div class="grid g3">
+      <div class="stat">
+        <div class="stat-k">L'EFFET REVENDIQUÉ</div>
+        <div class="stat-v">0,0022&nbsp;%</div>
+        <p class="stat-n">Par million de dollars échangés.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-k">LA TAILLE RÉELLEMENT TRADÉE</div>
+        <div class="stat-v">≈&nbsp;3&nbsp;000&nbsp;$</div>
+        <p class="stat-n">Une once.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-k">RAPPORT AUX FRAIS ORDINAIRES</div>
+        <div class="stat-v">1/1&nbsp;000</div>
+        <p class="stat-n">L'effet est mille fois plus petit que ce qu'un aller-retour coûte déjà.</p>
+      </div>
+    </div>
+    <p><em>Cinq idées de la même famille sont mortes ainsi, pour le prix d'une division.</em></p>
+  </div>
+
+  <div class="note">
+    <p>Sept pièges, sept mécanismes différents&nbsp;: un témoin mal ciblé, un instrument qui regarde le milieu, un seuil inatteignable, des frais comptés trop tard, une lecture jamais confrontée, un comptage jamais fait, une unité jamais lue. Dans les sept cas, ce qui a tranché n'est pas une opinion sur le signal, mais un défaut dans la façon de le juger — ou de le compter.</p>
+  </div>
+</section>
+
+<section class="panel" id="p-erreurs" role="tabpanel" aria-labelledby="t-erreurs">
+  <div class="panel-head">
+    <p class="kicker">SECTION 06</p>
+    <h2>Mes 22 erreurs</h2>
+    <p class="lede">Cette section est la raison d'être du rapport. Vingt-deux fois, je me suis trompé&nbsp;; vingt-deux fois, le protocole m'a rattrapé avant que l'erreur ne coûte quelque chose. Voici chacune, et ce qui l'a attrapée.</p>
+  </div>
+
+  <div class="pull">
+    <p>Un protocole ne se juge pas sur ce qu'il valide, mais sur ce qu'il a empêché son auteur de croire.</p>
+  </div>
+
+  <div class="grid g4">
+    <div class="stat">
+      <div class="stat-k">ONT FAILLI PASSER</div>
+      <div class="stat-v">5</div>
+      <p class="stat-n">Des conclusions déjà écrites, rattrapées avant qu'elles ne coûtent.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">ERREURS D'OUTIL</div>
+      <div class="stat-v">4</div>
+      <p class="stat-n">L'instrument mentait&nbsp;; la mesure l'a montré.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">REFUS QUI COÛTENT</div>
+      <div class="stat-v">2</div>
+      <p class="stat-n">Deux idées qu'un seuil réécrit aurait sauvées. Deux fois, non.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">VERDICTS RETOURNÉS</div>
+      <div class="stat-v">11</div>
+      <p class="stat-n">Rendus, puis inversés sur pièce. Le fonctionnement normal du dispositif.</p>
+    </div>
+  </div>
+  <div class="note">
+    <p>Cinq, quatre, deux et onze&nbsp;: vingt-deux. Aucune n'a coûté quoi que ce soit&nbsp;: chacune a été rattrapée avant.</p>
+  </div>
+
+  <h3>Les cinq qui ont failli passer</h3>
+  <p>Cinq conclusions que j'avais déjà écrites — et, pour l'une d'elles, publiée — avant que le protocole ne les rattrape. Pour chacune&nbsp;: ce que j'avais écrit, ce qui était vrai, et ce qui l'a attrapée.</p>
+
+  <div class="card">
+    <h4>01 — Un facteur 4 qui en valait 44</h4>
+    <p><strong>Ce que j'avais écrit&nbsp;:</strong> il manquait «&nbsp;environ 4 fois&nbsp;» plus d'historique pour conclure.</p>
+    <p><strong>Ce qui était vrai&nbsp;:</strong> le chiffre, dans mon propre journal du matin, était <strong>44</strong>. Onze fois pire — et la conclusion opposée.</p>
+    <p><strong>Attrapée par&nbsp;:</strong> la relecture de mon propre journal.</p>
+  </div>
+
+  <div class="card">
+    <h4>02 — Le meilleur tirage pris pour la moyenne</h4>
+    <p><strong>Ce que j'avais écrit&nbsp;:</strong> un résultat publié comme s'il était la performance typique.</p>
+    <p><strong>Ce qui était vrai&nbsp;:</strong> c'était <strong>le meilleur de seize tirages</strong>.</p>
+    <p><strong>Attrapée par&nbsp;:</strong> ma propre consigne, écrite d'avance, qui disait de lire les deux chiffres — je ne l'avais pas suivie.</p>
+  </div>
+
+  <div class="card">
+    <h4>03 — Un positif qui n'existait qu'en unités de frais</h4>
+    <p><strong>Ce que j'avais écrit&nbsp;:</strong> une stratégie «&nbsp;gagnait&nbsp;» sur trois instruments, comptée en multiples du spread.</p>
+    <p><strong>Ce qui était vrai&nbsp;:</strong> convertie en monnaie, le troisième instrument valait <strong>+45&nbsp;$</strong> sur deux ans — économiquement nul. <strong>Elle ne gagnait que sur deux.</strong></p>
+    <p><strong>Attrapée par&nbsp;:</strong> la conversion en monnaie.</p>
+  </div>
+
+  <div class="card">
+    <h4>04 — Un résultat trop propre</h4>
+    <p><strong>Ce que j'avais écrit&nbsp;:</strong> une identité comptable vérifiée — exactement <strong>+0,00&nbsp;$</strong> sur 49 positions.</p>
+    <p><strong>Ce qui était vrai&nbsp;:</strong> <strong>121 sorties sur 123</strong> ne portaient aucune étiquette de module&nbsp;; mon appariement associait des sorties aux mauvaises entrées. Le «&nbsp;résultat&nbsp;» était un artefact de mon propre code.</p>
+    <p><strong>Attrapée par&nbsp;:</strong> la méfiance envers un chiffre trop parfait pour être vrai, et la vérification qui a suivi.</p>
+  </div>
+
+  <div class="card">
+    <h4>05 — Une idée déclarée autorisée alors que je l'avais réfutée</h4>
+    <p><strong>Ce que j'avais écrit&nbsp;:</strong> un matin, «&nbsp;prête à être construite, la seule à passer tous ses contrôles&nbsp;».</p>
+    <p><strong>Ce qui était vrai&nbsp;:</strong> sa réfutation, que j'avais publiée <strong>trois jours plus tôt</strong>, était dans mon propre journal. Elle avait passé quatre contrôles — tous vérifiaient qu'elle était <em>différente</em> des autres, <strong>aucun ne vérifiait qu'elle prédisait quoi que ce soit</strong>.</p>
+    <p><strong>Attrapée par&nbsp;:</strong> le passage obligé par la spécification avant d'écrire la première ligne de code.</p>
+  </div>
+
+  <div class="note">
+    <p>Trois relectures, une conversion d'unités, une vérification déclenchée par un chiffre trop exact&nbsp;: le protocole attrape surtout par ce qu'il oblige à relire.</p>
+  </div>
+
+  <h3>Les erreurs d'outil</h3>
+  <p>Quatre fois, l'erreur n'était pas dans le raisonnement mais dans l'instrument — une fonction, une règle, un encodage, un témoin. La mesure de l'écart est ce qui l'a révélée.</p>
+
+  <div class="warn">
+    <p><strong>Ce point concerne tout développeur MetaTrader.</strong> <code>iATR</code> n'est pas l'ATR de Wilder&nbsp;: c'est une moyenne simple glissante des <em>true ranges</em>. Écart médian <strong>8,9&nbsp;%</strong>, <strong>25&nbsp;%</strong> au 90ᵉ centile. Tout seuil calibré «&nbsp;en Wilder&nbsp;» avec cette fonction est calibré sur autre chose.</p>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h4>06 — <code>iATR</code> n'est pas l'ATR de Wilder</h4>
+      <p>La fonction d'ATR de MetaTrader&nbsp;5 est une moyenne simple glissante des <em>true ranges</em>, pas le lissage de Wilder. J'ai construit des seuils pendant des semaines en croyant faire du Wilder.</p>
+      <p><strong>Ce que la mesure a montré&nbsp;:</strong> écart médian <strong>8,9&nbsp;%</strong>, <strong>25&nbsp;%</strong> au 90ᵉ centile.</p>
+    </div>
+    <div class="card">
+      <h4>07 — Un plancher de perte pris pour un pourcentage</h4>
+      <p>La règle d'une société de financement est un <strong>montant fixe</strong> sous le plus haut solde réalisé, jamais réinitialisé — pas un pourcentage de l'équité flottante.</p>
+      <p><strong>Ce que la correction a montré&nbsp;:</strong> la marge de survie était multipliée par <strong>huit</strong>.</p>
+    </div>
+    <div class="card">
+      <h4>08 — Une erreur d'algèbre sur un seuil</h4>
+      <p>Un encodage <code>f ≥ 0</code> que je lisais comme «&nbsp;indice ≥ 25&nbsp;» codait en réalité «&nbsp;≥ 50&nbsp;».</p>
+      <p><strong>Ce que la mesure a montré&nbsp;:</strong> le bit s'activait sur <strong>3&nbsp;%</strong> des barres au lieu de <strong>43&nbsp;%</strong>. Le verdict s'est inversé.</p>
+    </div>
+    <div class="card">
+      <h4>09 — Un témoin qui détruisait la mauvaise propriété</h4>
+      <p>Mon témoin cassait l'autocorrélation de la série alors que la propriété testée, elle, restait intacte. Il ne prouvait rien.</p>
+      <p><strong>Ce que la mesure a montré&nbsp;:</strong> autocorrélation <strong>0,73 → 0,13</strong> — sur la mauvaise grandeur.</p>
+    </div>
+  </div>
+
+  <h3>Les deux refus qui coûtent</h3>
+  <p>Deux fois dans la même journée, <strong>réécrire un seuil aurait sauvé une idée</strong>. Deux fois, refusé. Refuser le matin de déplacer un seuil quand cela jouait <em>contre</em> une idée interdisait de l'accepter l'après-midi quand cela jouait <em>pour</em>. L'erreur, ici, aurait été de céder.</p>
+
+  <div class="pull">
+    <p>La cohérence de la règle <em>est</em> la règle. J'avais refusé le matin de déplacer un seuil quand cela jouait <em>contre</em> une idée. Je ne pouvais pas l'accepter l'après-midi parce que cela jouait <em>pour</em>.</p>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h4>10 — Premier refus&nbsp;: «&nbsp;2 fois l'attente&nbsp;»</h4>
+      <p>Le critère exigeait une concentration nocturne d'au moins deux fois l'attente, là où la grandeur ne pouvait presque pas l'atteindre&nbsp;: la nuit faisant déjà 42&nbsp;% des barres, «&nbsp;2 fois&nbsp;» exigeait 85&nbsp;% des signaux. Le biais réel était pourtant confirmé, à <strong>+40&nbsp;%</strong>.</p>
+      <p><strong>Idée classée.</strong></p>
+    </div>
+    <div class="card">
+      <h4>11 — Second refus&nbsp;: un rapport de 3</h4>
+      <p>Le critère exigeait un rapport de 3 sur les deux moitiés de l'échantillon. Mesuré&nbsp;: <strong>2,95</strong> — à cinq centièmes. Le mécanisme était par ailleurs confirmé, avec des <code>t</code> allant jusqu'à <strong>+56</strong>.</p>
+      <p><strong>Idée classée.</strong></p>
+    </div>
+  </div>
+
+  <div class="grid g3">
+    <div class="stat">
+      <div class="stat-k">LE BIAIS, CONFIRMÉ</div>
+      <div class="stat-v">+40&nbsp;%</div>
+      <p class="stat-n">Réel, mesuré — et l'idée classée, parce que le critère écrit disait autre chose.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">MESURÉ, POUR 3 EXIGÉ</div>
+      <div class="stat-v">2,95</div>
+      <p class="stat-n">Cinq centièmes sous le seuil — et l'idée classée.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">LE t DU MÉCANISME</div>
+      <div class="stat-v">+56</div>
+      <p class="stat-n">Un mécanisme confirmé ne dispense pas du critère pré-inscrit.</p>
+    </div>
+  </div>
+
+  <h3>Onze verdicts retournés</h3>
+  <div class="card">
+    <p>Onze fois, un verdict déjà rendu a été inversé — parfois deux fois de suite pour la même idée. La trajectoire documentée de l'une d'elles&nbsp;:</p>
+    <ol>
+      <li><strong>Rendue close</strong> — le verdict initial.</li>
+      <li><strong>Rouverte</strong> par une erreur d'algèbre découverte après coup.</li>
+      <li><strong>Refermée</strong> sur un motif neuf, après lecture d'une pièce jointe.</li>
+    </ol>
+    <p>Un verdict n'est jamais acquis&nbsp;: il tient tant qu'aucune pièce ne le contredit. C'est ce qui le rend révocable — et c'est ce qui le rend crédible.</p>
+  </div>
+  <div class="pull">
+    <p>C'est le fonctionnement normal du dispositif, pas son échec.</p>
+  </div>
+  <div class="note">
+    <p>Voir aussi la règle la plus dure du rapport&nbsp;: une seule convention non écrite suffit à inverser un verdict déjà rendu — cinq verdicts sur cinq, retournés en un seul tour de contre-expertise.</p>
+  </div>
+
+  <h3>Les vingt-deux, en une table</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead>
+        <tr><th>N°</th><th>L'erreur</th><th>Ce que je croyais — ou voulais</th><th>Ce que la mesure a dit</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Un facteur 4 qui en valait 44</td><td>Il manquait «&nbsp;environ 4 fois&nbsp;» plus d'historique</td><td>44 fois. Conclusion opposée.</td></tr>
+        <tr><td>2</td><td>Le meilleur tirage pris pour la moyenne</td><td>Une performance typique</td><td>Le meilleur de 16 tirages</td></tr>
+        <tr><td>3</td><td>Un positif en unités de frais</td><td>Un gain sur 3 instruments</td><td>+45&nbsp;$ sur deux ans pour le troisième&nbsp;: gain sur 2</td></tr>
+        <tr><td>4</td><td>Un résultat trop propre</td><td>Une identité vérifiée à +0,00&nbsp;$</td><td>121 sorties sur 123 sans étiquette&nbsp;: artefact</td></tr>
+        <tr><td>5</td><td>Une idée autorisée alors que réfutée</td><td>«&nbsp;La seule à passer tous ses contrôles&nbsp;»</td><td>Réfutée 3 jours plus tôt&nbsp;; 4 contrôles, aucun test de prédiction</td></tr>
+        <tr><td>6</td><td><code>iATR</code> pris pour Wilder</td><td>Des seuils calibrés en Wilder</td><td>Écart médian 8,9&nbsp;%, 25&nbsp;% au 90ᵉ centile</td></tr>
+        <tr><td>7</td><td>Un plancher pris pour un pourcentage</td><td>Un pourcentage de l'équité flottante</td><td>Un montant fixe&nbsp;; marge de survie ×&nbsp;8</td></tr>
+        <tr><td>8</td><td>Une erreur d'algèbre sur un seuil</td><td>«&nbsp;Indice ≥ 25&nbsp;»</td><td>«&nbsp;≥ 50&nbsp;»&nbsp;: 3&nbsp;% des barres au lieu de 43&nbsp;%. Verdict inversé.</td></tr>
+        <tr><td>9</td><td>Un témoin visant la mauvaise propriété</td><td>Un témoin probant</td><td>Autocorrélation 0,73 → 0,13, propriété testée intacte</td></tr>
+        <tr><td>10</td><td>Premier refus</td><td>Sauver l'idée en réécrivant «&nbsp;2 fois l'attente&nbsp;»</td><td>Biais confirmé à +40&nbsp;%&nbsp;; idée classée</td></tr>
+        <tr><td>11</td><td>Second refus</td><td>Sauver l'idée en réécrivant le rapport de 3</td><td>2,95 mesuré&nbsp;; t jusqu'à +56&nbsp;; idée classée</td></tr>
+        <tr><td>12–22</td><td>Onze verdicts retournés</td><td>Un verdict rendu était acquis</td><td>Onze fois inversé sur pièce, parfois deux fois pour la même idée</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <div class="pull">
+    <p>Le test qui dit si un protocole est réel&nbsp;: est-ce qu'il vous a déjà empêché de publier quelque chose que vous vouliez publier&nbsp;? Celui-ci l'a fait deux fois en une journée.</p>
+  </div>
+  <p>Un protocole qui n'a jamais rien tué ne prouve rien. Celui-ci a tué cent dix idées — dont deux qu'un seuil déplacé aurait sauvées.</p>
+</section>
+
+<section class="panel" id="p-reste" role="tabpanel" aria-labelledby="t-reste">
+  <div class="panel-head">
+    <p class="kicker">SECTION 07</p>
+    <h2>Ce qui reste</h2>
+    <p class="lede">Aucune des 110 idées n'a survécu. Ce qui suit, en revanche, ne dépend d'aucune d'elles&nbsp;: une correction de rentabilité, une façon de dimensionner, trois faits techniques et le coût réel d'un aller-retour. Chaque point vaut pour n'importe qui, indépendamment du reste de ce travail.</p>
+  </div>
+
+  <h3>1. La correction de rentabilité</h3>
+  <p>Le taux de réussite minimal d'une règle à objectif fixe se calcule sans frais dans les outils grand public. Or le coût aller-retour entre dans la formule, et sur les échelles courtes il en change le résultat à lui seul.</p>
+
+  <div class="formula">
+    <div class="f">p* = (R + c) / ((n + 1) &times; R)</div>
+    <p class="fl"><code>p*</code> est le taux de réussite au seuil de rentabilité&nbsp;; <code>R</code> le risque par position, <code>c</code> le coût aller-retour (spread et frais), <code>n</code> l'objectif exprimé en multiples du risque.</p>
+  </div>
+
+  <div class="grid g2">
+    <div class="stat">
+      <div class="stat-k">Objectif à 10 fois le risque, sans frais</div>
+      <div class="stat-v">9,1&nbsp;%</div>
+      <p class="stat-n">Le chiffre que rend le calcul naïf&nbsp;: une réussite sur onze.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Le même objectif, spread payé</div>
+      <div class="stat-v">10,5&nbsp;%</div>
+      <p class="stat-n">Le taux réellement exigé une fois le coût aller-retour compté. Aucun outil grand public n'affiche cette correction.</p>
+    </div>
+  </div>
+
+  <p><strong>Sur les échelles courtes, cette correction décide seule du signe du résultat.</strong> Une idée de ce travail est morte exactement là&nbsp;: une cassure de la première bougie de séance, mesurée sur <strong>1&nbsp;034</strong> cassures, réussissait <strong>9,59&nbsp;%</strong> puis <strong>9,16&nbsp;%</strong> du temps sur les deux périodes — au-dessus de la barre sans frais les deux fois, en dessous de la barre corrigée les deux fois. Le signal n'était pas en cause&nbsp;; le spread l'était.</p>
+
+  <h3>2. Le dimensionnement — la chute est un montant, pas un pourcentage</h3>
+  <p>Une stratégie donnée produit une chute d'un <strong>nombre fixe de monnaie par unité de taille minimale</strong>. Ce nombre ne dépend pas du compte&nbsp;; c'est le compte qui varie autour de lui.</p>
+
+  <div class="grid g2">
+    <div class="stat">
+      <div class="stat-k">Le même module, sur un petit compte</div>
+      <div class="stat-v">21&nbsp;%</div>
+      <p class="stat-n">La chute du module, rapportée au capital d'un petit compte.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Le même module, compte cinq fois plus grand</div>
+      <div class="stat-v">4&nbsp;%</div>
+      <p class="stat-n">Même stratégie, même taille minimale, même chute en monnaie. Seul le dénominateur a changé.</p>
+    </div>
+  </div>
+
+  <p>Deux conséquences que personne n'affiche&nbsp;:</p>
+  <div class="grid g2">
+    <div class="card">
+      <h4>Les deux contraintes ne mordent pas sur les mêmes stratégies</h4>
+      <p>La contrainte journalière mord sur les stratégies <strong>rapides</strong>. La contrainte totale mord sur les <strong>lentes</strong>, dont la chute quotidienne médiane est faible mais s'accumule sur des semaines. Il faut calculer les deux et <strong>prendre le minimum</strong>.</p>
+    </div>
+    <div class="card">
+      <h4>Un calculateur de taille doit pouvoir répondre «&nbsp;non&nbsp;»</h4>
+      <p>À la taille minimale imposée par le courtier, avec une marge de sécurité raisonnable, certaines stratégies exigent un compte plusieurs fois plus gros que celui de l'utilisateur. <strong>Un calculateur qui rend toujours un nombre ment.</strong></p>
+    </div>
+  </div>
+
+  <h3>3. Trois faits techniques, hors stratégie</h3>
+  <p>Ces trois points ne dépendent d'aucune idée testée. Ils portent sur l'instrument de mesure lui-même&nbsp;; le premier concerne tout développeur MetaTrader.</p>
+
+  <div class="grid g3">
+    <div class="stat">
+      <div class="stat-k">La fonction iATR n'est pas Wilder</div>
+      <div class="stat-v">8,9&nbsp;%</div>
+      <p class="stat-n">Écart médian entre <code>iATR</code> et l'ATR de Wilder&nbsp;; <strong>25&nbsp;%</strong> au 90ᵉ centile.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Appels au carnet d'ordres en simulation</div>
+      <div class="stat-v">139&nbsp;440</div>
+      <p class="stat-n">Zéro retour non vide. Le carnet n'est jamais archivé&nbsp;: la donnée n'existe nulle part a posteriori.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Événements de carnet sans changement de prix</div>
+      <div class="stat-v">51,9&nbsp;%</div>
+      <p class="stat-n">Invisibles dans un flux de ticks. Une étude de carnet reconstruite depuis des ticks en ignore la moitié.</p>
+    </div>
+  </div>
+
+  <ul>
+    <li><strong><code>iATR</code> est une moyenne simple glissante des <em>true ranges</em></strong>, pas la moyenne lissée de Wilder. Tout seuil calibré sur l'une en croyant utiliser l'autre est décalé de 8,9&nbsp;% en médiane, et d'un quart dans un cas sur dix.</li>
+    <li><strong>Le carnet d'ordres n'est pas une question d'abonnement.</strong> Sur 139&nbsp;440 appels en simulation, aucun n'a rendu de carnet non vide&nbsp;: la donnée n'est archivée nulle part, elle ne peut donc pas être étudiée a posteriori.</li>
+    <li><strong>Plus de la moitié des événements du carnet ne déplacent aucun prix.</strong> Un flux de ticks ne les voit pas&nbsp;; toute étude de carnet reconstruite depuis des ticks travaille sur la moitié visible et ignore l'autre.</li>
+  </ul>
+
+  <h3>4. Le coût réel d'un aller-retour</h3>
+  <p>Sur l'instrument étudié, le spread se lit d'habitude par sa médiane. Sa queue, et le coût de portage, racontent autre chose.</p>
+
+  <div class="grid g4">
+    <div class="stat">
+      <div class="stat-k">Spread médian</div>
+      <div class="stat-v">23</div>
+      <p class="stat-n">points — le chiffre que tout le monde regarde.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Spread, 99ᵉ centile</div>
+      <div class="stat-v">90</div>
+      <p class="stat-n">points — la queue de la même distribution.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Spread maximum</div>
+      <div class="stat-v">259</div>
+      <p class="stat-n">points — le pire aller-retour observé sur la période.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Portage d'une nuit</div>
+      <div class="stat-v">58</div>
+      <p class="stat-n">points — plus du double du spread médian, et triplé un jour par semaine.</p>
+    </div>
+  </div>
+
+  <figure class="fig">
+    <p class="fig-t">SPREAD ET PORTAGE, EN POINTS</p>
+    <svg viewBox="0 0 700 220" role="img" aria-label="Échelle horizontale de 0 à 100 points portant trois barres : le spread médian à 23 points, le portage d'une nuit à 58 points et le 99e centile du spread à 90 points. Une ligne pointillée marque le double de la médiane ; la barre du portage la dépasse. Le maximum observé, 259 points, est signalé hors échelle.">
+      <line class="svg-ax" x1="190" y1="182" x2="640" y2="182"/>
+      <line class="svg-ax" x1="190" y1="178" x2="190" y2="186"/>
+      <line class="svg-ax" x1="302.5" y1="178" x2="302.5" y2="186"/>
+      <line class="svg-ax" x1="415" y1="178" x2="415" y2="186"/>
+      <line class="svg-ax" x1="527.5" y1="178" x2="527.5" y2="186"/>
+      <line class="svg-ax" x1="640" y1="178" x2="640" y2="186"/>
+      <text class="svg-lab" x="190" y="202" text-anchor="middle">0</text>
+      <text class="svg-lab" x="302.5" y="202" text-anchor="middle">25</text>
+      <text class="svg-lab" x="415" y="202" text-anchor="middle">50</text>
+      <text class="svg-lab" x="527.5" y="202" text-anchor="middle">75</text>
+      <text class="svg-lab" x="640" y="202" text-anchor="middle">100 pts</text>
+
+      <line x1="397" y1="30" x2="397" y2="182" stroke="var(--accent)" stroke-width="1" stroke-dasharray="4 3"/>
+      <text class="svg-lab" x="402" y="176">2 &times; médiane</text>
+
+      <text class="svg-lab" x="180" y="55" text-anchor="end">Spread médian</text>
+      <rect x="190" y="38" width="103.5" height="26" rx="3" fill="var(--muted)"/>
+      <text class="svg-val" x="301" y="56">23</text>
+
+      <text class="svg-lab" x="180" y="105" text-anchor="end">Portage d'une nuit</text>
+      <rect x="190" y="88" width="261" height="26" rx="3" fill="var(--accent)"/>
+      <text class="svg-val" x="459" y="106">58</text>
+
+      <text class="svg-lab" x="180" y="155" text-anchor="end">Spread, 99ᵉ centile</text>
+      <rect x="190" y="138" width="405" height="26" rx="3" fill="var(--faint)"/>
+      <text class="svg-val" x="603" y="156">90</text>
+
+      <text class="svg-lab" x="640" y="22" text-anchor="end">maximum observé&nbsp;: 259, hors échelle &rarr;</text>
+    </svg>
+    <figcaption>Le portage d'une nuit, 58 points, dépasse le double du spread médian, 23 points. Le maximum observé du spread, 259 points, est hors échelle. La figure montre trois repères d'une même distribution, pas la distribution entière&nbsp;; elle ne montre pas non plus le jour de portage triplé.</figcaption>
+  </figure>
+
+  <p>Le portage est <strong>triplé un jour par semaine</strong> — le mercredi pour les métaux et les devises, le vendredi pour les indices. <strong>Une stratégie qui garde ses positions la nuit paie son portage plusieurs fois le prix de son spread, et presque personne ne l'affiche.</strong></p>
+</section>
+
+<section class="panel" id="p-chronique" role="tabpanel" aria-labelledby="t-chronique">
+  <div class="panel-head">
+    <p class="kicker">SECTION 08</p>
+    <h2>Chronique</h2>
+    <p class="lede">Les autres onglets disent ce que le laboratoire a trouvé&nbsp;; celui-ci raconte le chemin, d'avril à septembre 2026&nbsp;: la chasse au signal, la construction du banc, puis les campagnes qui ont vidé le registre. Les chiffres, les retournements et les corrections sont gardés&nbsp;; les redites et l'outillage sont coupés.</p>
+  </div>
+
+  <div class="grid g4">
+    <div class="stat">
+      <div class="stat-k">Vagues de recherche</div>
+      <div class="stat-v">9</div>
+      <p class="stat-n">Avant le banc&nbsp;: 43 hypothèses neuves, puis 348, puis jusqu'à 109 programmes en parallèle. Zéro candidat.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Idées au catalogue</div>
+      <div class="stat-v">54 → 110</div>
+      <p class="stat-n">54 en juillet, 94 le 18 août, 110 écartées au 4 septembre. Aucune retenue comme signal.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Argent réel engagé</div>
+      <div class="stat-v">0&nbsp;$</div>
+      <p class="stat-n">Aucun ordre réel d'un bout à l'autre&nbsp;: simulateur, données gelées, comptages.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Verdicts retournés</div>
+      <div class="stat-v">8 / 10</div>
+      <p class="stat-n">Par le relecteur adverse, sur une seule campagne. Sans contradicteur, une conclusion se trompe quatre fois sur cinq.</p>
+    </div>
+  </div>
+
+  <figure class="fig">
+    <p class="fig-t">FRISE — DU 27 JUIN AU 4 SEPTEMBRE 2026</p>
+    <svg viewBox="0 0 700 230" role="img" aria-label="Frise chronologique&nbsp;: la lecture d'avril à juin, puis neuf jalons du 27 juin (première vague de l'Edge-Lab) au 4 septembre (registre vide), en passant par la vague 9 le 17 juillet, le banc du 20 au 23 juillet, la réserve qui dit non les 29 et 30 juillet, les sorties et le modèle du 5 au 7 août, la relecture du 18 août, l'idée 88 le 27 août et les verdicts sans un dollar du 31 août au 1er septembre.">
+      <text x="10" y="104" class="svg-lab">avril–juin</text>
+      <text x="10" y="117" class="svg-lab">la lecture</text>
+      <line x1="14" y1="125" x2="60" y2="125" class="svg-ax" stroke-dasharray="3 4"/>
+      <line x1="60" y1="125" x2="684" y2="125" stroke="var(--border)" stroke-width="2"/>
+
+      <line x1="147" y1="125" x2="147" y2="133" class="svg-ax"/>
+      <text x="147" y="147" class="svg-lab" text-anchor="middle">1er juil.</text>
+      <line x1="394" y1="125" x2="394" y2="133" class="svg-ax"/>
+      <text x="394" y="147" class="svg-lab" text-anchor="middle">1er août</text>
+      <line x1="640" y1="125" x2="640" y2="133" class="svg-ax"/>
+      <text x="640" y="147" class="svg-lab" text-anchor="middle">1er sept.</text>
+
+      <line x1="116" y1="72" x2="116" y2="120" class="svg-ax"/>
+      <circle cx="116" cy="125" r="4" fill="var(--accent)"/>
+      <text x="116" y="52" class="svg-val" text-anchor="middle">27 juin</text>
+      <text x="116" y="66" class="svg-lab" text-anchor="middle">Edge-Lab, vague 1</text>
+
+      <line x1="275" y1="130" x2="275" y2="166" class="svg-ax"/>
+      <circle cx="275" cy="125" r="4" fill="var(--accent)"/>
+      <text x="275" y="178" class="svg-val" text-anchor="middle">17 juil.</text>
+      <text x="275" y="192" class="svg-lab" text-anchor="middle">vague 9 · 8 IA</text>
+
+      <line x1="306" y1="72" x2="306" y2="120" class="svg-ax"/>
+      <circle cx="306" cy="125" r="4" fill="var(--accent)"/>
+      <text x="306" y="52" class="svg-val" text-anchor="middle">20–23 juil.</text>
+      <text x="306" y="66" class="svg-lab" text-anchor="middle">le banc</text>
+
+      <line x1="370" y1="130" x2="370" y2="196" class="svg-ax"/>
+      <circle cx="370" cy="125" r="4" fill="var(--accent)"/>
+      <text x="370" y="208" class="svg-val" text-anchor="middle">29–30 juil.</text>
+      <text x="370" y="222" class="svg-lab" text-anchor="middle">la réserve dit non</text>
+
+      <line x1="434" y1="72" x2="434" y2="120" class="svg-ax"/>
+      <circle cx="434" cy="125" r="4" fill="var(--accent)"/>
+      <text x="434" y="52" class="svg-val" text-anchor="middle">5–7 août</text>
+      <text x="434" y="66" class="svg-lab" text-anchor="middle">sorties · modèle · articles</text>
+
+      <line x1="529" y1="130" x2="529" y2="166" class="svg-ax"/>
+      <circle cx="529" cy="125" r="4" fill="var(--accent)"/>
+      <text x="529" y="178" class="svg-val" text-anchor="middle">18 août</text>
+      <text x="529" y="192" class="svg-lab" text-anchor="middle">relecture du socle</text>
+
+      <line x1="601" y1="72" x2="601" y2="120" class="svg-ax"/>
+      <circle cx="601" cy="125" r="4" fill="var(--accent)"/>
+      <text x="601" y="52" class="svg-val" text-anchor="middle">27 août</text>
+      <text x="601" y="66" class="svg-lab" text-anchor="middle">idée 88</text>
+
+      <line x1="632" y1="130" x2="632" y2="196" class="svg-ax"/>
+      <circle cx="632" cy="125" r="4" fill="var(--accent)"/>
+      <text x="684" y="208" class="svg-val" text-anchor="end">31 août – 1er sept.</text>
+      <text x="684" y="222" class="svg-lab" text-anchor="end">verdicts sans un dollar</text>
+
+      <line x1="664" y1="50" x2="664" y2="120" class="svg-ax"/>
+      <circle cx="664" cy="125" r="4" fill="var(--accent)"/>
+      <text x="684" y="30" class="svg-val" text-anchor="end">4 sept.</text>
+      <text x="684" y="44" class="svg-lab" text-anchor="end">registre vide</text>
+    </svg>
+    <figcaption>Les jalons du récit, à l'échelle du temps. La densité de la fin n'est pas un effet de mise en page&nbsp;: à partir du 18 août, les idées meurent sur des comptages gratuits, sans essai ni fenêtre de marché.</figcaption>
+  </figure>
+
+  <!-- ============================== ÉPOQUE 1 ============================== -->
+  <h3>Avril – juin 2026 · Constituer une bibliothèque</h3>
+  <p>On ne part pas de rien&nbsp;: <strong>18 articles techniques</strong> lus en profondeur, <strong>584 autres</strong> indexés, des livres et des publications académiques. Chaque idée qui entrera au catalogue renverra à sa source — et cette lecture apprend à ouvrir un article jusqu'au code et aux captures d'écran, là où se cache le chiffre qui décide.</p>
+
+  <!-- ============================== ÉPOQUE 2 ============================== -->
+  <h3>27 juin – 17 juillet · Les neuf vagues de l'Edge-Lab</h3>
+  <p>Neuf vagues, chacune une petite armée de programmes qui inventent, attaquent et testent en parallèle. Point de départ&nbsp;: <strong>259 idées antérieures</strong> et un constat — presque tout avantage célèbre est mort, périmé, ou inaccessible à un petit compte une fois les coûts payés.</p>
+  <ul>
+    <li><strong>Vague 1 (27–28 juin)&nbsp;:</strong> 43 hypothèses neuves, construites à partir des premiers principes. Un tri adversarial en tue 29&nbsp;; les <strong>9 signaux testables</strong> meurent tous sur données réelles. La conclusion, posée dès ces deux jours, ne bougera plus&nbsp;: l'avantage durable est dans l'ingénierie du risque, pas dans le signal.</li>
+    <li><strong>Vague 2 (29 juin)&nbsp;:</strong> actions, ETF, options. Environ 350 programmes, <strong>348 idées</strong>, 42 testées, zéro candidat. Cause de décès numéro un&nbsp;: «&nbsp;une prime de risque déguisée en avantage&nbsp;», 49 cas.</li>
+    <li><strong>Vagues 4 à 8&nbsp;:</strong> «&nbsp;il existe forcément quelque chose&nbsp;». Jusqu'à <strong>109 programmes</strong>, 57 domaines, 22 sources vérifiables&nbsp;: zéro signal caché. Les vrais gagnants sont les grands fonds de tendance — 40 à 100 marchés, des décennies — hors de portée d'un compte individuel. On les achète via un fonds coté, on ne les copie pas.</li>
+    <li><strong>Vague 9 (17 juillet)&nbsp;:</strong> 10 familles d'effets, 32 variantes, hors échantillon avec les vrais coûts&nbsp;: <strong>31 tuées sur 32</strong>. Le demi-survivant échoue en robustesse et part sur papier.</li>
+  </ul>
+  <div class="pull">
+    <p><strong>L'audit des huit IA.</strong> La même question posée à huit assistants célèbres&nbsp;: huit stratégies «&nbsp;gagnantes&nbsp;» différentes, zéro exécutée sur de vraies données — l'une livrait le programme qui fabriquait sa courbe à partir de nombres aléatoires. Quand huit réponses divergent, c'est de la fiction&nbsp;; la réalité converge.</p>
+  </div>
+
+  <!-- ============================== ÉPOQUE 3 ============================== -->
+  <h3>17 – 23 juillet · Le cadre de risque, puis le banc</h3>
+  <p><strong>17 juillet.</strong> Le danger n'est pas dans les entrées mais dans la casse&nbsp;: un disjoncteur journalier et des plafonds de taille sont calés sur <strong>1&nbsp;021 trades réels</strong>, des semaines avant les tests. Ce sera le seul réglage du programme jamais ajusté sur les données.</p>
+  <p><strong>20–23 juillet.</strong> Le banc&nbsp;: un seul programme où chaque idée devient un module allumé seul et mesuré seul, <strong>54 idées</strong> au catalogue. Les règles précèdent tout résultat — temps coupé en trois à l'avance (50&nbsp;% apprendre, 25&nbsp;% vérifier, 25&nbsp;% de réserve scellée), témoin au hasard, test du sens, coûts réels, liste des trades ou rien, trois réglages au plus, robustesse de voisinage. Un seul signal survit&nbsp;: <strong>EWMAC</strong>, un suiveur de tendance classique. Premier résultat positif du programme.</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>EWMAC, apprentissage</th><th>Gain net</th><th>Échanges</th><th>Pire chute</th><th>Contre 16 versions «&nbsp;au hasard&nbsp;»</th></tr></thead>
+      <tbody><tr><td>Qualité 2,76</td><td>+791&nbsp;$</td><td>161</td><td>12,5&nbsp;%</td><td>16 / 16 battues</td></tr></tbody>
+    </table>
+  </div>
+
+  <!-- ============================== ÉPOQUE 4 ============================== -->
+  <h3>29 – 30 juillet · La réserve dit non</h3>
+  <p>Un second signal indépendant est trouvé et combiné&nbsp;: le meilleur résultat du programme sur les deux périodes d'essai. La période scellée est ouverte pour un test unique, sans retouche possible.</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>La meilleure combinaison</th><th>Apprentissage</th><th>Vérification</th><th>Période scellée (2026)</th></tr></thead>
+      <tbody>
+        <tr><td>Indicateur de qualité</td><td>4,25</td><td>3,54</td><td><strong>−0,06</strong></td></tr>
+        <tr><td>Gain</td><td>+1&nbsp;989&nbsp;$</td><td>+1&nbsp;698&nbsp;$</td><td><strong>−124&nbsp;$</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Ce n'est pas une baisse, c'est une disparition. Le signal de base seul meurt au même endroit&nbsp;: le marché de 2026 ne se laisse pas suivre, ses tendances avortent trois fois sur quatre. <strong>Onze examens</strong> sur la période de vérification avaient produit un chiffre qui ne valait rien&nbsp;; la réserve l'a dit en un essai. Sans elle, une stratégie perdante aurait été mise en service, chiffres à l'appui.</p>
+  <p><strong>Le test de transfert.</strong> Rejoué tel quel sur l'indice technologique américain, mêmes 31 mois, EWMAC rend <strong>−425&nbsp;$</strong>&nbsp;; le 30 juillet, l'indicateur y tombe à <strong>−0,66</strong> contre 2,76 sur l'or. Les +90&nbsp;% n'étaient pas une méthode, c'était le marché haussier de l'or 2024-2025. <strong>Le frein sur série.</strong> Toute la chute venait de <strong>14 pertes d'affilée</strong> en un mois&nbsp;; un frein après neuf pertes rend +817&nbsp;$ (chute 10,8&nbsp;%) en apprentissage, +906&nbsp;$ (11,8&nbsp;%) en vérification — la première surcouche à tenir hors échantillon — puis −46&nbsp;$ pour 52&nbsp;% de chute sur la réserve&nbsp;: son réglage dépend du régime.</p>
+  <div class="grid g3">
+    <div class="stat">
+      <div class="stat-k">Chute en 2026, sans tendance</div>
+      <div class="stat-v">~50&nbsp;%</div>
+      <p class="stat-n">À l'équilibre à la fin, la moitié du compte perdue en chemin. Le disjoncteur activé n'y change presque rien.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Chute avec tendance</div>
+      <div class="stat-v">12,5&nbsp;%</div>
+      <p class="stat-n">Même signal, même règle, période d'apprentissage.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Déclenchements en 2026</div>
+      <div class="stat-v">24</div>
+      <p class="stat-n">Contre 2 sur 18 mois porteurs et 3 sur 6 mois moyens. Sans lui, le compte simulé tombe à 1&nbsp;615&nbsp;$, sous un seuil d'élimination&nbsp;; avec lui, à 1&nbsp;868&nbsp;$.</p>
+    </div>
+  </div>
+  <p>Deux façons de se ruiner, pas une&nbsp;: le disjoncteur coupe la journée qui dérape, il ne voit jamais le mois qui grignote — vingt-cinq petites pertes sous le seuil, et chaque matin il oublie la veille. L'outil manquant est un garde-fou <em>cumulatif</em>, brique suivante de l'application de discipline développée en parallèle. Même semaine, une correction&nbsp;: le filtre de régime présenté comme <em>la</em> découverte est classé, son bon réglage sur une période étant le pire sur la suivante. Et une régularité, la seule qui ait voyagé d'une période à l'autre&nbsp;: les gains s'additionnent, les pertes non — les deux signaux ensemble rendent <strong>1&nbsp;520&nbsp;$</strong>, exactement la somme, pour <strong>58&nbsp;%</strong> de la perte attendue, et la qualité passe de 2,15 à 2,89. Quand les deux cessent ensemble, comme en 2026, elle ne protège de rien.</p>
+
+  <!-- ============================== ÉPOQUE 5 ============================== -->
+  <h3>5 – 7 août · Les sorties, le modèle, les articles</h3>
+  <p><strong>5 août.</strong> Quatre règles de sortie sur les mêmes 49 trades&nbsp;: <strong>−0,53 · 1,21 · 1,66 · 2,15</strong>, parfaitement ordonné — plus on coupe tôt, plus on perd. La famille est refermée avec son mécanisme. <strong>6 août.</strong> Un modèle d'apprentissage entraîné proprement converge vers le prédicteur constant&nbsp;: <strong>55,2&nbsp;%</strong>, zéro point de mieux que «&nbsp;toujours hausse&nbsp;»&nbsp;; un modèle mal optimisé faisait <strong>454 transactions</strong> pour pire que le hasard — l'agitation mesure un outil cassé. <strong>7 août.</strong> Un réseau à attention, cinq ans de données, cent mille itérations&nbsp;: <strong>50,7&nbsp;%</strong> hors échantillon. Cent mille fois plus gros que le modèle du banc, même résultat.</p>
+  <p><strong>Quatre articles publiés, ouverts.</strong> Les quatre s'effondrent, chaque fois parce que le chiffre décisif est dans une capture d'écran&nbsp;: sept opérations pour une série en quatre volets, 95&nbsp;% de gagnants dont chaque perte coûte 86&nbsp;$ pour 10&nbsp;$ de gain, des indicateurs trois à cinq fois ceux du banc sortis d'une machine à optimiser. Le quatrième est lancé tel quel&nbsp;: il se reproduit, <strong>278 opérations</strong> contre 266. Mais l'or a triplé sur sa période — ne rien faire rapportait 30&nbsp;100&nbsp;$, sa stratégie 19&nbsp;000 pour 26&nbsp;% de chute&nbsp;; sur quatre années neuves sans hausse, elle perd 2&nbsp;380&nbsp;$ là où ne rien faire rapportait 4&nbsp;272. La question «&nbsp;ça bat quoi&nbsp;?&nbsp;» a tué plus d'idées ici que toutes les statistiques, et aucun des quatre ne se la pose.</p>
+
+  <!-- ============================== ÉPOQUE 6 ============================== -->
+  <h3>Début août · Cinq IA, un seul cas au monde, une minute prise pour une loi</h3>
+  <p>Cinq assistants d'IA grand public reçoivent la même demande&nbsp;: une idée qui marche sur l'or, l'argent ou les indices. Les cinq rendent une architecture, pas un résultat mesuré&nbsp;; à la question plus dure — trois stratégies qui ont marché puis échoué, avec les chiffres —, réponse identique&nbsp;: «&nbsp;je n'ai pas de mesure, seulement de l'architecture&nbsp;». Deux citent un seul cas au monde&nbsp;: un développeur qui a figé son programme puis l'a testé treize mois. Lu en entier, il montre un rapport gain/risque qui passe de 11,6 à <strong>3,7</strong>, une régularité de <strong>13,9</strong> là où le meilleur fonds de l'histoire tourne autour de 2,5, <strong>722 opérations</strong> recomptées contre 1&nbsp;030 annoncées, et un identifiant d'article qui renvoie à «&nbsp;supplément d'un logiciel&nbsp;». Une erreur du laboratoire est corrigée en dix minutes&nbsp;: acheter et attendre ne rapportait pas «&nbsp;deux fois plus&nbsp;» — c'était un gain brut comparé à un rapport gain/chute&nbsp;; avec la bonne mesure, au mieux 3,2 contre 3,7, son système l'emporte. Sa méthode est sérieuse&nbsp;; ce sont ses chiffres qui ne tiennent pas.</p>
+  <p><strong>Le retournement.</strong> Ce développeur lit le marché à la minute mais garde ses positions une demi-heure, et cela rouvre une conclusion «&nbsp;définitive&nbsp;»&nbsp;: à une minute, un devin connaissant chaque direction ne gagne que 50,6&nbsp;% du temps, là où il faut 56,4&nbsp;% pour couvrir le péage. Le calcul est juste — mais le péage est fixe, et le mouvement grandit comme la racine carrée du temps&nbsp;: 39&nbsp;% du mouvement à une minute, 7&nbsp;% à trente.</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>Position gardée</th><th>Devin parfait</th><th>Requis pour couvrir les frais</th><th>Marge</th></tr></thead>
+      <tbody>
+        <tr><td>1 minute</td><td>50,6&nbsp;%</td><td>56,4&nbsp;%</td><td>−5,8</td></tr>
+        <tr><td>5 minutes</td><td>76,6&nbsp;%</td><td>52,9&nbsp;%</td><td>+23,8</td></tr>
+        <tr><td>15 minutes</td><td>86,4&nbsp;%</td><td>51,7&nbsp;%</td><td>+34,7</td></tr>
+        <tr><td>30 minutes</td><td>90,3&nbsp;%</td><td>51,2&nbsp;%</td><td>+39,2</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>L'impossibilité était une propriété de la minute, pas de l'idée. Ce calcul ne dit pas que ça marche — il faut toujours deviner juste plus de 51&nbsp;% du temps —, il dit que «&nbsp;démontré impossible&nbsp;» devient «&nbsp;je ne sais pas&nbsp;». Une conclusion se note désormais avec son périmètre.</p>
+
+  <!-- ============================== ÉPOQUE 7 ============================== -->
+  <h3>18 août · La relecture du socle</h3>
+  <p>Tout le socle est relu pièce par pièce. Déclencheur&nbsp;: une note désignait une «&nbsp;source de vérité&nbsp;» à une adresse qui n'existait plus — on continuait de mémoire sans s'en apercevoir, et trois renvois pointaient des lignes de code qui avaient bougé. Trois repères sont établis sur pièce, avec leur convention (or, quinze minutes, taille minimale, aucune couche de risque)&nbsp;:</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>Repère</th><th>Ce que c'est exactement</th><th>Profit</th><th>Chute</th><th>Trades</th></tr></thead>
+      <tbody>
+        <tr><td><strong>2,76</strong></td><td>Le signal de tendance seul, apprentissage</td><td>791&nbsp;$</td><td>12,5&nbsp;%</td><td>161</td></tr>
+        <tr><td><strong>2,15</strong></td><td>Le même signal seul, vérification</td><td>891&nbsp;$</td><td>415&nbsp;$</td><td>49</td></tr>
+        <tr><td><strong>2,89</strong></td><td>La paire — deux signaux, aucun filtrage</td><td>1&nbsp;520&nbsp;$</td><td>525&nbsp;$</td><td>123</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Une croyance tombe&nbsp;: le 2,15 ne vient pas d'un mélange mais d'un seul signal — trois preuves, dont une décomposition exacte au centime. Et 2,89 n'est pas le plafond&nbsp;: avec une sortie croisée la paire atteint 3,54 en vérification, la configuration qui a rendu −0,06 sur la réserve.</p>
+  <div class="warn">
+    <p><strong>Il n'existe plus de fenêtre vierge.</strong> La réserve est consommée, la période de vérification a été lue onze fois. Une idée qui entre doit dire, avant de commencer, sur quoi elle sera jugée.</p>
+  </div>
+  <p>Deux articles récents sont lus jusqu'au code&nbsp;: un système par renforcement annonçant +41&nbsp;% vaut <strong>1,75</strong> de qualité, sous le repère 2,15, avec 66 transactions pour un seuil annoncé à 150&nbsp;; un indicateur «&nbsp;supérieur à 15&nbsp;» est un artefact de 17 transactions sortant au même objectif. On retient leurs mécanismes, pas leurs scores, et le catalogue passe à <strong>94 idées</strong> — dix-sept entrées, deux familles neuves, zéro mesure&nbsp;: des dettes. Une règle proposée s'avère impossible sans aucune donnée, sa protection «&nbsp;au plus proche sommet&nbsp;» tombant au prix d'entrée.</p>
+  <div class="formula">
+    <div class="f">taux de réussite requis = (d + c) / (d &times; (R + 1))</div>
+    <p class="fl"><code>c</code> le coût d'un aller-retour, <code>d</code> la distance de protection, <code>R</code> le rapport gain/risque. Sans dérive, l'espérance vaut −<code>c</code> quel que soit <code>R</code>&nbsp;: une seule grandeur décide, <code>c/d</code>.</p>
+  </div>
+  <p><strong>Instruire avant de mesurer.</strong> Règle du jour&nbsp;: la condition d'abandon s'écrit avant le premier chiffre. Six idées y passent, aucune n'en ressort intacte, et leurs conditions se mesurent sans essai. Trois fois, on a failli mesurer un objet en croyant en mesurer un autre — un accord «&nbsp;3 sur 4&nbsp;» qui exigeait l'unanimité (zéro à trois occasions contre trente requises), une bande d'indifférence qui ne produit que du temps hors marché. Une phrase répétée était fausse&nbsp;: des opérations quadruplées venaient d'une boucle sortie/ré-entrée, pas d'une entrée mal placée. Et une relecture adverse corrige cinq réponses sur six aux idées bloquées «&nbsp;faute de données&nbsp;», toujours dans le même sens&nbsp;: trop favorables aux idées.</p>
+
+  <!-- ============================== ÉPOQUE 8 ============================== -->
+  <h3>19 – 27 août · La semaine du coût</h3>
+  <p>Huit jours sans tester une idée&nbsp;: le banc mesure son environnement. Quatre exports de prix sont gelés et identifiés par leur empreinte — deux exports faits à deux moments ne sont pas le même fichier. Trois idées de microstructure (31, 32, 33) meurent&nbsp;: sur les contrats pour différence, <strong>0 tick porteur d'un sens</strong> sur 5&nbsp;386, volume réel nul, carnet d'ordres refusé chez deux courtiers&nbsp;; la règle écrite avant («&nbsp;plus de 1&nbsp;% de ticks porteurs&nbsp;») n'est pas franchie de 0,000&nbsp;%. Sur des contrats à terme, <strong>23,7&nbsp;%</strong> de ticks porteurs, conservés par le simulateur&nbsp;: deux idées ressuscitent pour zéro euro. Le carnet, lui, n'est jamais archivé — rien à rejouer.</p>
+  <div class="grid g4">
+    <div class="stat">
+      <div class="stat-k">Péage en séance</div>
+      <div class="stat-v">45</div>
+      <p class="stat-n">points d'écart achat/vente, un soir de semaine.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Péage la nuit</div>
+      <div class="stat-v">133</div>
+      <p class="stat-n">D'abord lu comme un écart entre deux types de compte&nbsp;; c'était un écart entre deux heures.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Agitation, d'une période à l'autre</div>
+      <div class="stat-v">+47&nbsp;%</div>
+      <p class="stat-n">Au quotidien, +75&nbsp;% au quart d'heure. Une grille calibrée sur la première période est 47&nbsp;% trop serrée sur la seconde.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Ce que pèse le péage</div>
+      <div class="stat-v">1,5&nbsp;%</div>
+      <p class="stat-n">du gain moyen d'un trade (5,7&nbsp;% sur l'autre période). Écrit dans une fiche avant la semaine.</p>
+    </div>
+  </div>
+  <p>Chaque mesure renverse une croyance&nbsp;: le spread est un escalier dont le palier dépend de l'heure&nbsp;; la commission vaut 7&nbsp;$ par lot en devises mais 0,0016&nbsp;% du notionnel sur l'or, où elle a monté de 47&nbsp;% en deux ans&nbsp;; les indices n'en paient aucune. Le disjoncteur du banc, −40&nbsp;$ par jour, valait 37&nbsp;% d'une journée typique puis 25&nbsp;%&nbsp;: le même seuil s'est resserré d'un tiers tout seul.</p>
+  <div class="pull">
+    <p><strong>La leçon est contre le laboratoire.</strong> Huit jours sur un poste qui pèse 1,5&nbsp;%, alors que la fiche le disait. Le péage se mesure avec une sonde de quinze minutes&nbsp;; le poste qui mord — le retard entre la décision et l'entrée — exige de reconstruire deux versions d'une stratégie. La facilité de mesure a choisi la cible, et rien n'a alerté parce que chaque chiffre était juste. Remède&nbsp;: avant de construire une sonde, écrire ce que le poste pèse.</p>
+  </div>
+  <p>Le retard, mesuré, vaut 122 points puis 154 — <strong>0,37 fois l'agitation</strong> dans les deux périodes, à 1,1&nbsp;% près&nbsp;: l'agitation sous un autre nom. Une prédiction écrite d'avance («&nbsp;une transition arrive dans du plus violent&nbsp;») rend +6&nbsp;% puis −23&nbsp;%. Onze relecteurs, dont plusieurs chargés de démolir, font tomber <strong>quatre affirmations sur cinq</strong> sur un seuil, toutes de la même main. Bilan&nbsp;: dix idées débloquées par les données gelées, sept par l'agitation mesurée, quatre par la carte des coûts, trois closes, deux rouvertes, et le dossier «&nbsp;coût&nbsp;» fermé.</p>
+
+  <!-- ============================== ÉPOQUE 9 ============================== -->
+  <h3>27 août · L'idée 88 passe la porte — et retombe le soir même</h3>
+  <p>Une idée franchit enfin une porte&nbsp;: la même règle de tendance lisant soit le prix brut, soit le prix arrondi par paliers. Six tailles de marche, <strong>384 cellules</strong> comptées chez deux courtiers&nbsp;; une seule passe — 75 à 98 désaccords là où trente suffisaient, même verdict chez les deux courtiers — sans regarder un gain ni une perte. Sa prémisse tombe au passage&nbsp;: le déplacement médian entre les bras vaut <strong>zéro</strong>, l'arrondi ne retarde rien, il décide autrement.</p>
+  <p><strong>Deux verdicts contraires, une heure d'écart.</strong> Si le simple décalage de l'escalier déplace autant de décisions que l'arrondi, on mesure un réglage arbitraire. Première lecture, bruit <strong>0,4299</strong> contre effet <strong>0,4211</strong>&nbsp;: l'idée meurt. Seconde lecture, mêmes fichiers, effet <strong>0,8965</strong>&nbsp;: elle survit. Les deux nombres n'étaient pas la même mesure — l'un sans tolérance, l'autre avec un appariement qui absorbait ce qu'on cherchait. Le juge est figé avant l'essai&nbsp;: comparaison jour par jour appariée, pas le rendement global.</p>
+  <p><strong>Le soir même.</strong> Quatre lancements pour un essai propre — trois annoncent «&nbsp;terminé&nbsp;» au-dessus de rien, avec un code de succès&nbsp;; un statut n'est jamais une preuve. Puis deux chutes. Celle de l'instrument&nbsp;: un verrou écrit neuf jours plus tôt exigeait que le bras témoin reproduise la référence du banc — <strong>49 transactions contre 49</strong>, mais pas le même résultat, même cadence, pas les mêmes instants. Le verrou a coûté l'idée et évité un résultat faux. Celle du juge&nbsp;: au premier degré le bras arrondi est devant, <strong>2,50 contre 1,89</strong>&nbsp;; apparié jour par jour, l'indicateur vaut <strong>1,06</strong> où il faudrait 1,96. Le signe existe, la preuve non. Une clause «&nbsp;non mécaniste&nbsp;» se révèle vide sur un écart de 86 centimes (−1&nbsp;100&nbsp;% puis +3&nbsp;500&nbsp;%)&nbsp;: imprimée deux fois, écartée et écrite plutôt que lue. L'idée 88 est close, réserve intacte&nbsp;; ce qui est établi n'est pas que l'arrondi ne sert à rien, c'est que sous cette implémentation l'écart n'est pas démontrable.</p>
+
+  <!-- ============================== ÉPOQUE 10 ============================== -->
+  <h3>31 août – 1er septembre · Les journées sans un dollar</h3>
+  <div class="grid g4">
+    <div class="stat">
+      <div class="stat-k">31 août</div>
+      <div class="stat-v">11</div>
+      <p class="stat-n">idées tranchées en un jour, sans fenêtre de marché ni essai.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">31 août – 1er sept.</div>
+      <div class="stat-v">12</div>
+      <p class="stat-n">idées de stratégie jugées, zéro retenue&nbsp;; 8 conclusions sur 10 retournées.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">1er septembre</div>
+      <div class="stat-v">4</div>
+      <p class="stat-n">idées de plus, deux fausses réussites démasquées par «&nbsp;mieux que ne rien faire&nbsp;?&nbsp;»</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Conventions non écrites</div>
+      <div class="stat-v">14</div>
+      <p class="stat-n">en deux jours, chacune capable de changer un chiffre.</p>
+    </div>
+  </div>
+  <p><strong>31 août.</strong> Quatre couches de prudence par-dessus une règle de tendance perdent toutes, pour la même raison&nbsp;: la règle gagne parce que ses rares gagnantes durent, et toute couche muette sur la direction frappe celles qui durent. Le piège inverse&nbsp;: un seuil choisi sur la fenêtre chargée de le juger rend <strong>+57&nbsp;%</strong>, et −21&nbsp;% là où on l'aurait appris. Un «&nbsp;mot&nbsp;» de signes binaires censé changer toutes les cinquante barres change toutes les <strong>1,1 barre</strong>&nbsp;: un facteur quarante-quatre, et son propre critère le rejette. Le frais de nuit, cinq à six fois le coût d'entrée, ressort où personne ne l'attendait&nbsp;: un module «&nbsp;toujours à plat à la clôture&nbsp;» décide sa sortie sur la barre suivante, et <strong>327 trades sur 1&nbsp;483</strong> paient la nuit — +51 points bruts, +3,5 une fois tout compté (+11,5 avec la garde de fin de journée active, convention corrigée le soir même). Une idée de pondération meurt avant une ligne de code&nbsp;: la performance d'un module ne persiste pas, elle alterne — huit calculs, huit fois négatif.</p>
+  <p><strong>31 août – 1er septembre.</strong> Douze idées de stratégie, aucune survivante. Celle qui semblait tenir avait franchi quatre contrôles gratuits — aucun ne demandait si le signal indiquait la bonne direction. Le contrôle manquant passe&nbsp;; puis on retire la tendance&nbsp;: l'or a monté de 60&nbsp;%, la règle achète sept fois sur dix, et sans la pente son avantage perd <strong>88&nbsp;%</strong>. Le contrôle mesurait l'or, pas la règle&nbsp;; la période rare n'a pas été dépensée. Un relecteur adverse retourne <strong>huit conclusions sur dix</strong>&nbsp;: un seuil double de ce qu'il annonçait, un contrôle prévu et non appliqué, un chiffre cent fois trop petit — rien de visible de l'intérieur. Deux verdicts anciens sont rejoués&nbsp;: l'un retrouvé une fois deux conventions nommées, l'autre irreproductible à une unité près. Un rapport qui ne publie que ses conclusions ne se refait pas.</p>
+  <p><strong>1er septembre.</strong> Un accès d'une journée à un marché à terme livre <strong>14,1 millions de transactions</strong> sur 33 jours — une première. Une annonce du matin, «&nbsp;il manque un facteur 4, rien d'autre&nbsp;», devient deux heures plus tard un facteur <strong>44</strong>. Une idée d'étiquetage franchit son seuil de 52,3&nbsp;% avec 53,5&nbsp;% — mais acheter et ne rien faire obtient <strong>54,3&nbsp;%</strong>&nbsp;: la bonne référence n'est pas «&nbsp;mieux que le hasard&nbsp;», c'est «&nbsp;mieux que ne rien faire&nbsp;». Un lissage ne change que <strong>0,21&nbsp;%</strong> des décisions&nbsp;: il ne peut pas rapporter plus. Un détecteur de cycles rend 49,6 à 50,4&nbsp;% sur six réglages, symétrique — le hasard pur. Le registre ne contient plus aucune idée de signal.</p>
+
+  <!-- ============================== ÉPOQUE 11 ============================== -->
+  <h3>1er – 4 septembre · Les quatre jours qui ont tout soldé</h3>
+  <p>Les <strong>96 idées</strong> du banc reçoivent toutes un verdict, sur neuf instruments, sans un dollar réel. Le seul signal à avantage mesuré gagne sur deux instruments, l'or et l'argent, puis les deux tombent. Sur l'or, acheter et garder gagne <strong>80&nbsp;% de plus</strong> en net&nbsp;: la stratégie réduit la chute, elle ne crée pas de rendement. Sur l'argent, 2025 rendait +1&nbsp;230&nbsp;$ avec un métal en hausse de 147&nbsp;%&nbsp;; 2024, −330&nbsp;$. Une stratégie qui ne gagne que du côté où le marché monte ne prédit rien, elle suit.</p>
+  <p>La configuration «&nbsp;championne&nbsp;» perd sur un instrument neuf là où sa brique principale seule gagne, décomposition exacte au centime&nbsp;: le second signal coûte <strong>−1&nbsp;090&nbsp;$</strong>, la sortie anticipée <strong>−1&nbsp;022&nbsp;$</strong> sans passer un ordre, en mettant la stratégie hors marché 53&nbsp;% du temps. Mesuré six fois&nbsp;: une couche qui borne une position ampute un suiveur de tendance — couper les 24&nbsp;% de positions les plus longues retire 64&nbsp;% du résultat. Cinq programmes publics annoncés rentables sont examinés sans être exécutés&nbsp;: trois tombent sur l'arithmétique de leurs propres chiffres (un «&nbsp;facteur de profit 1,96&nbsp;» qui est un taux de réussite, trois indicateurs qui imposent 3,00 là où 2,57 est annoncé). Et trois fois l'outil du banc est le fautif — un garde-fou simulé qui ne pouvait pas perdre, des écarts de nuit offerts, un optimum au bord de la grille. Le plus parlant&nbsp;: une reconstruction hors moteur annonçait <strong>2&nbsp;396&nbsp;$</strong>&nbsp;; le moteur montre que le dispositif ne se déclenchait pas.</p>
+
+  <!-- ============================== ÉPOQUE 12 ============================== -->
+  <h3>4 septembre · Le registre soldé, et la dernière ligne</h3>
+  <p>Vingt-cinq lignes en une journée, une seule retenue — et elle est réelle&nbsp;: la théorie dit que les ordres arrivent en séries, et sur <strong>2,9 millions de transactions</strong> à terme c'est vrai, l'enchaînement décroît comme prévu, tandis que le même calcul sur des données au hasard ne voit rien. Une brique, pas une stratégie&nbsp;; cinq autres affirmations de la littérature meurent le même jour. Cinq idées sont tuées par une division&nbsp;: un effet d'exécution <strong>mille fois plus petit</strong> que les frais ordinaires pour un compte qui achète une once&nbsp;; trois idées de réduction des frais, qui totalisent <strong>5&nbsp;%</strong> du résultat quand un rapport promettait «&nbsp;+5 à 15&nbsp;%&nbsp;». Une piste jour/nuit, positive contre zéro, change de signe contre acheter-et-garder — «&nbsp;acheter la nuit vaut-il mieux que garder&nbsp;?&nbsp;» est exactement «&nbsp;la séance de jour est-elle perdante&nbsp;?&nbsp;», une soustraction.</p>
+  <p>Une question de l'auteur — sortir plus tôt des petites perdantes, quitte à perdre les gros gains&nbsp;? — est chiffrée&nbsp;: <strong>1&nbsp;125&nbsp;$</strong> gagnés sur les petites, <strong>1&nbsp;601&nbsp;$</strong> perdus sur les grosses. Surtout, le dispositif se déclenche sur 90&nbsp;% des positions&nbsp;: «&nbsp;sortir tôt, toujours&nbsp;», et un critère qui se déclenche partout n'est pas un critère — la règle sert le jour même contre une famille populaire dont le signal apparaît une bougie sur cinq. Trois idées endormies «&nbsp;faute de données&nbsp;» rouvrent, à <strong>958</strong> transactions par bougie au lieu de zéro&nbsp;; une seule reste hors de portée, celle qui exige le carnet d'ordres, jamais archivé — 139&nbsp;440 tentatives. Quatre erreurs propres sont attrapées, dont une sans témoin&nbsp;: une idée déclarée «&nbsp;autorisée&nbsp;» le matin avait été réfutée trois jours plus tôt dans le journal du laboratoire.</p>
+  <p><strong>La dernière ligne, à cinq heures du matin.</strong> Le cumul des achats et ventes agressifs — l'indicateur le plus enseigné de l'analyse du flux — est calculé sur vingt-deux mois et <strong>34,8 millions de contrats</strong>&nbsp;: l'or a doublé (+111&nbsp;%) pendant que ce cumul perdait <strong>628&nbsp;629 contrats</strong>. La lecture la plus enseignée aurait conseillé de vendre, sans interruption, un marché qui doublait. Les trois idées rouvertes sont refermées, mais mieux&nbsp;: «&nbsp;on n'a pas pu mesurer&nbsp;» devient «&nbsp;mesuré sur quinze mille observations&nbsp;». Puis la toute dernière&nbsp;: acheter la cassure des cinq premières minutes d'une séance, viser dix fois le risque. Sans frais, il faut réussir <strong>9,09&nbsp;%</strong> du temps&nbsp;; mesuré, 9,59&nbsp;% puis 9,16&nbsp;%. Les frais déplacent la barre à <strong>10,5&nbsp;%</strong>, et l'idée tombe dans l'intervalle sur les deux périodes&nbsp;: elle ne meurt pas de son signal, elle meurt de son péage, au dixième de point.</p>
+  <div class="pull">
+    <p>Le registre est vide. Aucune idée ne produit un avantage exploitable&nbsp;; celle qui s'en approche le plus est à l'équilibre exact avant frais. Ce n'est pas décevant&nbsp;: c'est la réponse, obtenue sans risquer un euro.</p>
+    <p><strong>Ce qui protège le compte vaut mieux que ce qui prétend prédire le marché. Ce qui reste de vendable n'est pas un signal&nbsp;: c'est la méthode qui a permis d'en écarter cent dix sans se ruiner.</strong></p>
+  </div>
+
+  <!-- ============================== CORRECTIONS ============================== -->
+  <h3>Ce que la relecture a corrigé</h3>
+  <p>Un récit qui tait ses corrections n'est pas un récit fiable. Voici ce qui a été écrit puis retiré ou reformulé — le plus souvent par une relecture adverse, parfois par l'auteur seul, une fois sans aucun témoin.</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>Quand</th><th>Ce qui était écrit</th><th>Ce que la relecture a établi</th></tr></thead>
+      <tbody>
+        <tr><td>Juillet</td><td>Une idée classée mauvaise.</td><td>Mal mesurée&nbsp;: l'outil de test créait le problème qu'il croyait observer. Revenue parmi les bonnes après correction.</td></tr>
+        <tr><td>30 juillet</td><td>«&nbsp;Le filtre de régime est la découverte du programme.&nbsp;»</td><td>Son bon réglage sur une période est le pire sur la suivante&nbsp;: du bruit pris pour un signal. Classé, trace laissée.</td></tr>
+        <tr><td>Début août</td><td>«&nbsp;Acheter l'or et attendre rapportait deux fois plus que le seul système sérieux trouvé.&nbsp;»</td><td>Un gain brut comparé à un rapport gain/chute. Au mieux 3,2 contre 3,7&nbsp;: le système l'emporte. Retirée en dix minutes.</td></tr>
+        <tr><td>Début août</td><td>«&nbsp;Le trading à la minute est arithmétiquement impossible.&nbsp;»</td><td>Vrai à une minute, faux dès cinq (76,6&nbsp;% contre 52,9&nbsp;% requis). Une propriété de l'horizon, pas de l'idée.</td></tr>
+        <tr><td>18 août</td><td>«&nbsp;Le repère 2,15 vient d'un mélange de deux signaux.&nbsp;»</td><td>Il vient d'un seul&nbsp;: trois preuves, dont une décomposition exacte au centime.</td></tr>
+        <tr><td>18 août</td><td>Une note désignait une «&nbsp;source de vérité&nbsp;» à une adresse précise.</td><td>L'adresse n'existait plus&nbsp;; on continuait de mémoire. On vérifie l'existence et le contenu avant de citer.</td></tr>
+        <tr><td>18 août</td><td>«&nbsp;Les opérations multipliées par quatre venaient d'une entrée mal placée.&nbsp;»</td><td>Le code d'origine dit&nbsp;: une boucle entre couche de sortie et ré-entrée. Un fait cité sans son dispositif n'est plus le même fait.</td></tr>
+        <tr><td>27 août</td><td>Huit jours consacrés au péage, «&nbsp;le poste qui décide&nbsp;».</td><td>Une fiche antérieure disait déjà 1,5&nbsp;% à 5,7&nbsp;%. Une estimation «&nbsp;d'un tiers&nbsp;» pour le vrai poste avait été citée comme mesurée&nbsp;: c'était une hypothèse.</td></tr>
+        <tr><td>27 août</td><td>Cinq affirmations sur un seuil, marquées vérifiées.</td><td>Quatre tombent devant onze relecteurs&nbsp;: un «&nbsp;total avant frais&nbsp;» fabriqué par une addition, un calcul revenu à l'ancienne base le lendemain de la règle qui l'interdisait.</td></tr>
+        <tr><td>27 août</td><td>«&nbsp;L'effet de l'arrondi (0,4211) est sous le bruit du décalage (0,4299)&nbsp;: l'idée meurt.&nbsp;»</td><td>Pas la même mesure. Avec le même instrument, 0,8965 — puis le juge apparié la refuse de toute façon.</td></tr>
+        <tr><td>27 août</td><td>Le programme imprime deux fois «&nbsp;non mécaniste&nbsp;».</td><td>Sur un écart de 86 centimes, la clause était vide (−1&nbsp;100&nbsp;% puis +3&nbsp;500&nbsp;%). Écartée et déclarée telle.</td></tr>
+        <tr><td>31 août</td><td>Un module «&nbsp;intraday&nbsp;» réduit à +3,5 points par trade une fois les nuits comptées.</td><td>Le chiffrage supposait la garde de fin de journée désactivée, hors réglage par défaut. Avec la garde&nbsp;: +11,5 points.</td></tr>
+        <tr><td>31 août – 1er sept.</td><td>Dix conclusions marquées vérifiées.</td><td>Huit retournées ou corrigées par le relecteur adverse&nbsp;: seuil double, contrôle non appliqué, tirage trop facile, chiffre cent fois trop petit.</td></tr>
+        <tr><td>1er septembre</td><td>«&nbsp;Il manque un facteur 4 de données, et rien d'autre.&nbsp;»</td><td>Un seul obstacle sur cinq relancé et rapporté comme l'ensemble. Recomposé&nbsp;: facteur 44.</td></tr>
+        <tr><td>4 septembre</td><td>Une idée déclarée «&nbsp;autorisée&nbsp;», premier chantier de construction.</td><td>Réfutée trois jours plus tôt dans le journal du laboratoire&nbsp;: ses contrôles vérifiaient qu'elle était différente, aucun qu'elle prédisait. Trouvée sans témoin, en relisant la spécification avant de coder.</td></tr>
+        <tr><td>4 septembre</td><td>«&nbsp;Le disjoncteur journalier est le livrable.&nbsp;» (juillet)</td><td>Sur la configuration la plus performante du banc, serré à 40&nbsp;$ par jour, il fait tomber le rapport gain/risque de 2,68 à 0,86 et monter la chute de 15,0&nbsp;% à 26,5&nbsp;%. Un instrument de chute, pas de rendement&nbsp;: neutre sans avantage, destructeur avec.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============================== LEXIQUE ============================== -->
+  <h3>Lexique</h3>
+  <p>Les termes du récit, dans les mots du laboratoire.</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>Terme</th><th>Ce que ça veut dire</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Edge (avantage)</strong></td><td>Une vraie capacité à gagner plus souvent que le hasard, après tous les frais.</td></tr>
+        <tr><td><strong>Chute (drawdown)</strong></td><td>La pire baisse du compte entre un sommet et le creux qui suit. La mesure du danger.</td></tr>
+        <tr><td><strong>Hors échantillon</strong></td><td>Sur des données que l'idée n'a jamais vues. Le seul test qui compte vraiment.</td></tr>
+        <tr><td><strong>Réserve scellée (50 / 25 / 25)</strong></td><td>Le temps coupé en trois à l'avance&nbsp;: la moitié la plus ancienne pour régler l'idée, un quart pour la vérifier, le quart le plus récent sous scellés, ouvert une seule fois. Y toucher «&nbsp;pour voir&nbsp;», c'est brûler le juge.</td></tr>
+        <tr><td><strong>Témoin au hasard</strong></td><td>Des entrées tirées à pile ou face, dans les mêmes conditions. Une idée qui ne les bat pas a eu de la chance, pas raison.</td></tr>
+        <tr><td><strong>Test du sens</strong></td><td>Rejouer l'idée aux mêmes instants en tirant la direction au hasard. Si le hasard fait aussi bien, l'idée profitait d'un marché qui montait.</td></tr>
+        <tr><td><strong>Acheter et garder</strong></td><td>Acheter et ne plus rien faire. Sur un actif qui monte, l'étalon qu'une stratégie doit battre — un instrument de mesure, pas un conseil de placement.</td></tr>
+        <tr><td><strong>Suiveur de tendance</strong></td><td>Une stratégie qui parie que ce qui monte va continuer. Gagne en tendance, souffre en marché plat.</td></tr>
+        <tr><td><strong>EWMAC</strong></td><td>Le suiveur de tendance du banc&nbsp;: il compare une moyenne rapide et une moyenne lente des prix et suit le sens de l'écart. Le seul signal à avoir passé le test du sens — sur l'or seulement.</td></tr>
+        <tr><td><strong>Retour à la moyenne</strong></td><td>L'inverse&nbsp;: parier que ce qui a trop bougé va revenir. Gagne en marché calme, souffre en tendance.</td></tr>
+        <tr><td><strong>Disjoncteur</strong></td><td>Une règle qui arrête de trader dès qu'on a trop perdu, pour protéger le compte. Il coupe la journée qui dérape&nbsp;; il ne voit pas le mois qui grignote.</td></tr>
+        <tr><td><strong>Surapprentissage</strong></td><td>Quand une règle «&nbsp;colle&nbsp;» trop au passé et ne marche plus sur l'avenir. L'ennemi numéro un.</td></tr>
+        <tr><td><strong>Indicateur de qualité</strong></td><td>Le rapport entre ce qu'une idée gagne et le risque qu'elle prend, pour comparer les idées entre elles. Négatif, c'est une perte&nbsp;; comparable seulement à convention égale.</td></tr>
+        <tr><td><strong>Péage (spread)</strong></td><td>L'écart entre le prix d'achat et le prix de vente, payé à chaque aller-retour. Son palier dépend de l'heure.</td></tr>
+        <tr><td><strong>Frais de nuit</strong></td><td>Le frais prélevé par le courtier quand une position est gardée d'un jour sur l'autre. Rarement compté, et plusieurs fois le péage sur l'or.</td></tr>
+        <tr><td><strong>Contrat pour différence (CFD)</strong></td><td>L'instrument des courtiers de détail et des sociétés de financement. Ses transactions ne portent ni sens ni volume réel, et il n'expose aucun carnet d'ordres.</td></tr>
+        <tr><td><strong>Contrat à terme</strong></td><td>L'instrument coté sur une bourse centralisée&nbsp;: chaque transaction porte un sens et une quantité réellement échangée.</td></tr>
+        <tr><td><strong>Carnet d'ordres</strong></td><td>La liste des ordres d'achat et de vente en attente à chaque prix. Diffusé en direct seulement, jamais archivé.</td></tr>
+        <tr><td><strong>Tick / barre</strong></td><td>Un tick est une transaction ou un changement de prix élémentaire&nbsp;; une barre résume une tranche de temps. Le banc travaille en barres de quinze minutes.</td></tr>
+        <tr><td><strong>Module</strong></td><td>Sur le banc, une idée devenue un bloc de code qu'on allume seul et qu'on mesure seul, avec au plus trois réglages.</td></tr>
+        <tr><td><strong>Convention non écrite</strong></td><td>Un choix de calcul que personne n'a noté et qui change le résultat — compter ou non un trade sorti après la fenêtre, par exemple.</td></tr>
+        <tr><td><strong>Contre-expertise adverse</strong></td><td>Un relecteur chargé de démolir une conclusion, pas de la confirmer, avec ordre de conclure «&nbsp;réfuté&nbsp;» au moindre doute.</td></tr>
+        <tr><td><strong>Société de financement (prop firm)</strong></td><td>Une société qui prête un capital à trader contre une part des gains, avec des limites de perte strictes.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="panel" id="p-limites" role="tabpanel" aria-labelledby="t-limites">
+  <div class="panel-head">
+    <p class="kicker">SECTION 09</p>
+    <h2>Limites</h2>
+    <p class="lede">Cette section vaut autant que les précédentes. Les limites qui suivent sont <strong>auto-déclarées</strong>&nbsp;: personne ne les a demandées, aucun relecteur ne les a exigées. C'est précisément ce qui leur donne leur valeur — un travail qui n'énonce que les limites qu'on lui impose n'a pas encore cherché les siennes.</p>
+  </div>
+
+  <div class="warn">
+    <p><strong>La limite la plus sérieuse&nbsp;: les chiffres de référence ne sont pas adossés à des pièces hachées.</strong> Les rapports de simulation détaillés, trade par trade, sont <strong>introuvables sur disque pour 41 des 42 dossiers concernés</strong>. Les performances phares de ce travail vivent dans des tableaux de synthèse, pas dans des artefacts vérifiables.</p>
+    <p>Un lecteur qui demanderait la pièce ne l'obtiendrait pas. Cette limite porte précisément sur les nombres qu'on aurait envie de citer.</p>
+  </div>
+
+  <div class="grid g4">
+    <div class="stat">
+      <div class="stat-k">Dossiers sans pièce détaillée</div>
+      <div class="stat-v">41&nbsp;/&nbsp;42</div>
+      <p class="stat-n">Rapports trade par trade introuvables sur disque.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Lectures de la fenêtre de vérification</div>
+      <div class="stat-v">11</div>
+      <p class="stat-n">Chaque lecture supplémentaire affaiblit la garantie hors échantillon.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Hausse de l'actif, première moitié</div>
+      <div class="stat-v">+59,9&nbsp;%</div>
+      <p class="stat-n">Un seul instrument, une seule période, fortement en tendance.</p>
+    </div>
+    <div class="stat">
+      <div class="stat-k">Taux de service mesuré à la barre</div>
+      <div class="stat-v">90&nbsp;%</div>
+      <p class="stat-n">Pour un ordre à cours limité. Non crédible&nbsp;: l'instrument ne pouvait pas trancher.</p>
+    </div>
+  </div>
+
+  <h3>Les autres limites</h3>
+
+  <div class="grid g2">
+    <div class="card">
+      <h4>Un seul instrument, une seule période</h4>
+      <p>L'essentiel porte sur l'or au comptant (XAU/USD), en barres de quinze minutes, sur 2024-2025 — une période de forte tendance, <strong>+59,9&nbsp;%</strong> sur la première moitié. Une règle mesurée sur une tendance ne dit rien d'un marché sans direction, et cela a été vérifié&nbsp;: le réglage optimal d'un frein <strong>s'inverse</strong> selon le régime.</p>
+    </div>
+    <div class="card">
+      <h4>Une fenêtre de vérification lue onze fois</h4>
+      <p>Chaque lecture supplémentaire affaiblit la garantie hors échantillon. La réserve vierge a été consommée en une seule lecture et déclarée brûlée&nbsp;; il n'en reste aucune.</p>
+    </div>
+    <div class="card">
+      <h4>La granularité de barre</h4>
+      <p>Les reconstructions hors simulation travaillent à la barre, pas au tick. C'est explicitement insuffisant pour tout ce qui touche à l'exécution&nbsp;: une mesure d'ordre à cours limité y affichait un taux de service de <strong>90&nbsp;%</strong>, ce qui n'est pas crédible et prouve que l'instrument ne pouvait pas trancher.</p>
+    </div>
+    <div class="card">
+      <h4>Des verdicts sans contre-expertise</h4>
+      <p>Le relecteur adverse n'était pas disponible sur les dernières séries. Ces verdicts sont <strong>révocables sur pièce</strong>, et c'est écrit dans chacun d'eux.</p>
+    </div>
+  </div>
+
+  <div class="pull">
+    <p><strong>Ce n'est pas une preuve d'impossibilité.</strong> 110 idées testées, ce n'est pas «&nbsp;les marchés sont efficients&nbsp;». C'est&nbsp;: <strong>ces 110 idées-là, mesurées ainsi, sur ces données-là, ne montrent pas d'avantage.</strong> Une idée absente de la liste n'est pas réfutée par ce travail.</p>
+  </div>
+
+  <h3>Ce qui n'est pas publié, et pourquoi</h3>
+  <p>Par souci de transparence sur la transparence même.</p>
+
+  <div class="grid g3">
+    <div class="card">
+      <h4>Les données de marché</h4>
+      <p>Absentes. Elles proviennent de fournisseurs dont les conditions d'utilisation interdisent la redistribution, et les données de contrats à terme relèvent d'une licence de place de marché. <strong>Les empreintes cryptographiques des jeux gelés existent</strong> et permettent de vérifier qu'un jeu n'a pas bougé — sans redistribuer les prix.</p>
+    </div>
+    <div class="card">
+      <h4>Le code de stratégie</h4>
+      <p>Non publié. La méthode se publie&nbsp;; les réglages retenus, non.</p>
+    </div>
+    <div class="card">
+      <h4>Les données personnelles</h4>
+      <p>Aucune donnée personnelle, aucun identifiant de compte, aucun chemin de machine n'apparaît ici. Ce document a été <strong>rédigé de zéro</strong>, pas extrait d'archives internes, précisément pour cette raison.</p>
+    </div>
+  </div>
+
+  <h3>En un paragraphe</h3>
+
+  <div class="pull">
+    <p>J'ai testé cent dix idées de trading en m'obligeant à écrire d'avance ce qui les tuerait. <strong>Aucune n'a survécu.</strong> Ce n'est pas le résultat que j'espérais, mais c'est un résultat&nbsp;: il a coûté zéro euro de capital risqué, il est daté et horodaté idée par idée, et il a produit vingt et une règles de décision qui, elles, tiennent. La plus utile tient en une ligne — <strong>votre objectif à dix fois le risque exige 10,5&nbsp;% de réussite, pas 9,1&nbsp;%</strong> — et la plus dure aussi&nbsp;: <strong>une seule convention non écrite suffit à inverser un verdict déjà rendu.</strong></p>
+    <p>Si un seul point de ce rapport devait être retenu&nbsp;: <strong>un protocole qui n'a jamais rien tué ne prouve rien.</strong> Celui-ci a tué cent dix idées, dont deux que déplacer un seuil de trois centièmes aurait sauvées.</p>
+  </div>
+
+  <div class="note">
+    <p>Document publié à titre informatif. Ceci n'est pas un conseil en investissement, ni une recommandation, ni une offre. Les performances passées, mesurées ou simulées, ne préjugent pas des performances futures. Le trading à effet de levier comporte un risque de perte totale du capital.</p>
+  </div>
+</section>
+</main>
+
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>Ce document a été rédigé de zéro</strong>, et non extrait d'archives internes. Il ne contient aucune donnée de marché, aucun code de stratégie, aucun réglage retenu, aucune donnée personnelle et aucun identifiant de compte.</p>
+    <p>Les données de marché employées proviennent de fournisseurs dont les conditions d'utilisation interdisent la redistribution ; les données de contrats à terme relèvent d'une licence de place de marché. <strong>Les empreintes cryptographiques des jeux gelés existent</strong> et permettent de vérifier qu'un jeu n'a pas bougé — sans redistribuer les prix.</p>
+    <p class="legal">Publié à titre informatif. <strong>Ceci n'est pas un conseil en investissement</strong>, ni une recommandation, ni une offre. Les performances passées, mesurées ou simulées, ne préjugent pas des performances futures. Le trading à effet de levier comporte un risque de perte totale du capital. &mdash; Texte sous licence CC&nbsp;BY&nbsp;4.0. J. Razavi, septembre 2026.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  /* ---------- thème ---------- */
+  var root=document.documentElement, btn=document.getElementById('theme');
+  try{ var s=localStorage.getItem('sb-theme'); if(s==='dark'||s==='light') root.setAttribute('data-theme',s); }catch(e){}
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme'), dark;
+    if(cur==='dark'||cur==='light'){ dark = cur!=='dark'; }
+    else { dark = !window.matchMedia('(prefers-color-scheme:dark)').matches; }
+    var next = dark?'dark':'light';
+    root.setAttribute('data-theme',next);
+    try{ localStorage.setItem('sb-theme',next); }catch(e){}
+  });
+
+  /* ---------- onglets ---------- */
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var panels=[].slice.call(document.querySelectorAll('.panel'));
+  function show(id,push){
+    tabs.forEach(function(t){
+      var on = t.getAttribute('aria-controls')===id;
+      t.setAttribute('aria-selected',on?'true':'false');
+      t.tabIndex = on?0:-1;
+    });
+    panels.forEach(function(p){ p.classList.toggle('on', p.id===id); });
+    if(push){
+      var slug=id.replace(/^p-/,'');
+      if(history.replaceState) history.replaceState(null,'','#'+slug);
+      window.scrollTo({top:0,behavior:'auto'});
+    }
+    var at=document.querySelector('.tab[aria-selected="true"]');
+    if(at&&at.scrollIntoView) at.scrollIntoView({block:'nearest',inline:'nearest'});
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){ show(t.getAttribute('aria-controls'),true); });
+    t.addEventListener('keydown',function(e){
+      var i=tabs.indexOf(t), n=null;
+      if(e.key==='ArrowRight') n=tabs[(i+1)%tabs.length];
+      else if(e.key==='ArrowLeft') n=tabs[(i-1+tabs.length)%tabs.length];
+      else if(e.key==='Home') n=tabs[0];
+      else if(e.key==='End') n=tabs[tabs.length-1];
+      if(n){ e.preventDefault(); n.focus(); show(n.getAttribute('aria-controls'),true); }
+    });
+  });
+  var h=(location.hash||'').replace(/^#/,'');
+  if(h && document.getElementById('p-'+h)) show('p-'+h,false); else show('p-synthese',false);
+  window.addEventListener('hashchange',function(){
+    var x=(location.hash||'').replace(/^#/,'');
+    if(x && document.getElementById('p-'+x)) show('p-'+x,false);
+  });
+
+  /* ---------- registre : recherche, filtres, tri ---------- */
+  var tb=document.getElementById('reg-body');
+  if(tb){
+    var rows=[].slice.call(tb.querySelectorAll('tr'));
+    var q=document.getElementById('reg-q');
+    var chips=[].slice.call(document.querySelectorAll('.chip[data-etat]'));
+    var out=document.getElementById('reg-count');
+    var active='';
+    function norm(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+    function apply(){
+      var term=norm(q?q.value:''), n=0;
+      rows.forEach(function(r){
+        var okE = !active || r.getAttribute('data-etat')===active;
+        var okQ = !term || norm(r.textContent).indexOf(term)>-1;
+        var ok = okE&&okQ;
+        r.style.display = ok?'':'none';
+        if(ok) n++;
+      });
+      if(out) out.innerHTML = '<strong>'+n+'</strong> idée'+(n>1?'s':'')+' affichée'+(n>1?'s':'')+' sur <strong>110</strong>';
+    }
+    if(q) q.addEventListener('input',apply);
+    chips.forEach(function(c){
+      c.addEventListener('click',function(){
+        var v=c.getAttribute('data-etat');
+        active = (active===v)?'':v;
+        chips.forEach(function(x){ x.setAttribute('aria-pressed', x.getAttribute('data-etat')===active?'true':'false'); });
+        apply();
+      });
+    });
+    var ths=[].slice.call(document.querySelectorAll('#reg-tbl th.sortable'));
+    ths.forEach(function(th){
+      th.addEventListener('click',function(){
+        var k=th.getAttribute('data-k');
+        var asc = th.getAttribute('aria-sort')!=='ascending';
+        ths.forEach(function(x){ x.removeAttribute('aria-sort'); });
+        th.setAttribute('aria-sort', asc?'ascending':'descending');
+        rows.sort(function(a,b){
+          var x=a.getAttribute('data-'+k), y=b.getAttribute('data-'+k);
+          if(k==='num'){ x=+x; y=+y; return asc?x-y:y-x; }
+          return asc ? String(x).localeCompare(String(y),'fr') : String(y).localeCompare(String(x),'fr');
+        });
+        rows.forEach(function(r){ tb.appendChild(r); });
+      });
+    });
+    apply();
+  }
+})();
+</script>
+</body>
+</html>
