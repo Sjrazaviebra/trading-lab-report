@@ -1,52 +1,56 @@
-# 110 idées de trading, zéro survivant
+# 110 trading ideas, no survivors
 
-> **Un compte rendu de méthode.** J'ai instruit 110 idées de trading sur deux ans de données d'or,
-> avec une règle : la spécification **et le critère de rejet** sont écrits et horodatés dans `git`
-> **avant** la première mesure.
+> **A report on method.** I examined 110 trading ideas across two years of gold data, under one
+> rule: the specification **and the kill criterion** are written and timestamped in `git` **before**
+> the first measurement.
 >
-> **Aucune n'a démontré d'avantage.** Ce qui reste, ce ne sont pas des stratégies — ce sont
-> **21 règles de décision mesurées**, et **22 erreurs de ma part que le protocole a rattrapées**.
+> **Not one demonstrated an edge.** What is left is not a set of strategies — it is **21 measured
+> decision rules**, and **22 errors of mine that the protocol caught**.
 
-## 🔎 [**Ouvrir le rapport interactif →**](https://sjrazaviebra.github.io/trading-lab-report/)
+<sub>**English** &nbsp;·&nbsp; [Français](README.fr.md)</sub>
 
-*Neuf onglets, le registre des 110 idées avec recherche et filtres, les 21 règles et leurs
-mesures, la chronique du laboratoire. Thème clair et sombre. Rien à installer.*
+## 🔎 [**Open the interactive report →**](https://sjrazaviebra.github.io/trading-lab-report/)
 
-<sub>Vous préférez un seul fichier texte ? → [**RAPPORT.md**](RAPPORT.md)</sub>
+*Nine tabs. **The register of all 110 ideas expands row by row** — what each one did, its family,
+where it came from, and the reason it was closed. Search, filters, sorting. The 21 rules with the
+measurement behind each. The chronicle of the lab. Light and dark theme. Nothing to install.*
 
----
-
-### Trois choses qu'on y trouve et qu'on ne lit pas ailleurs
-
-**La correction de rentabilité que personne n'affiche**
-`p* = (R + c) / ((n + 1) × R)` — votre objectif à dix fois le risque n'exige pas 9,1 % de réussite,
-**il en exige 10,5 % une fois le spread payé**. Sur les échelles courtes, cette seule correction
-décide du signe du résultat.
-
-**L'indicateur de flux qui aurait dit de vendre pendant que l'or doublait**
-Sur **22 mois** et **34,8 millions de contrats** à terme, avec le sens de l'agresseur donné par la
-place de marché : **le prix monte de 111 %, le déséquilibre cumulé perd 628 629 contrats.**
-
-**`iATR` de MetaTrader 5 n'est pas l'ATR de Wilder**
-C'est une moyenne simple glissante des *true ranges*. **Écart médian 8,9 %, 90ᵉ centile 25 %.**
-Si vous calculez des seuils avec, ils ne sont pas ceux que vous croyez.
+<sub>Prefer a single text file? → [**RAPPORT.md**](RAPPORT.md) (French)</sub>
 
 ---
 
-### Ce que ce dépôt contient — et ce qu'il ne contient pas
+### Three things you will find here and nowhere else
 
-| ✅ contient | ⛔ ne contient pas |
+**The break-even correction nobody displays**
+`p* = (R + c) / ((n + 1) × R)` — your 10× reward target does not need a 9.1% hit rate,
+**it needs 10.5% once the spread is paid.** On short horizons, this single correction decides the
+sign of the result.
+
+**The order-flow indicator that would have said "sell" while gold doubled**
+Across **22 months** and **34.8 million futures contracts**, with the aggressor side supplied by
+the exchange rather than inferred: **price rose 111%, cumulative delta lost 628,629 contracts.**
+
+**MetaTrader 5's `iATR` is not Wilder's ATR**
+It is a simple moving average of true ranges. **Median gap 8.9%, 90th percentile 25%.**
+If you set thresholds with it, they are not the thresholds you think they are.
+
+---
+
+### What this repository contains — and what it does not
+
+| ✅ contains | ⛔ does not contain |
 |---|---|
-| le rapport complet, rédigé de zéro | aucune donnée de marché *(redistribution interdite par les fournisseurs et les places de marché)* |
-| les 21 règles, chacune avec son chiffre | aucun code de stratégie, aucun réglage retenu |
-| les limites, auto-déclarées | aucune donnée personnelle, aucun identifiant de compte |
+| the full report, written from scratch | no market data *(redistribution forbidden by the providers and by the exchange licence)* |
+| the 110-idea register, each with what it did and why it closed | no strategy code, no retained settings, no parameter values |
+| the 21 rules, each with the number that established it | no performance figures presented as backed evidence |
+| the limits, self-declared and unprompted | no personal data, no account identifiers, no machine paths |
 
-### ⚠️ Avertissement
-Ceci **n'est pas un conseil en investissement**, ni une recommandation, ni une offre. Les performances
-passées, mesurées ou simulées, ne préjugent pas des performances futures. Le trading à effet de levier
-comporte un **risque de perte totale du capital**.
+### ⚠️ Disclaimer
+This is **not investment advice**, nor a recommendation, nor an offer. Past performance, whether
+measured or simulated, is not a reliable indicator of future results. Leveraged trading carries a
+**risk of total loss of capital**.
 
 ### Licence
-Le texte est publié sous **[CC BY 4.0](LICENSE)** — réutilisable avec attribution.
+The text is published under **[CC BY 4.0](LICENSE)** — reusable with attribution.
 
-*J. Razavi — septembre 2026*
+*J. Razavi — September 2026*
